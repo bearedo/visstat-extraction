@@ -1,5 +1,5 @@
 
-GetDataPrice <- function(Cstart=tstart, Cstop=tstop, Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size) {
+GetDataPrice <- function(Cstart=tstart, Cstop=tstop) {
 
 # This function extracts landings data from VISSTAT by species, time interval and mesh size range.
 # If meshes are null or void you get -1 in the output file
@@ -13,7 +13,7 @@ GetDataPrice <- function(Cstart=tstart, Cstop=tstop, Cmeshmin=min_mesh_size, Cme
   visstat <- odbcConnect(dsn="visstatp", uid="",pwd="")
 
 
-  Cspec  <-WriteSQLString(Cspec)
+
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)
 
@@ -36,3 +36,11 @@ query <-paste("
 value <-sqlQuery(visstat,query);
 
 }
+
+###############################################################################
+##################             Example of DATA EXTRACTION        #########################
+###############################################################################
+
+
+value <- GetDataPrice(Cstart="01-jan-2004",Cstop="31-jan-2004")
+
