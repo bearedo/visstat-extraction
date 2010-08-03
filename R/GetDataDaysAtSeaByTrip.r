@@ -63,7 +63,7 @@ WHERE  catches.rgn_trp_arrivel_date between ",Cstart," and ",Cstop,"
 dasbytrip <-sqlQuery(visstat,query);
 
 # attach level 5 metier variables ??!!
-dasbytrip$LEVEL5 <- substr(catches$METIER,start=1,stop=7);
+dasbytrip$LEVEL5 <- substr(dasbytrip$METIER,start=1,stop=7);
 
 #sum(as.numeric(is.na(dasbytrip$POWER)))
 #dasbytrip$LENGTH[is.na(dasbytrip$POWER)]
@@ -85,4 +85,4 @@ dasbytrip$KWDAS <- dasbytrip$POWER*dasbytrip$DAS;
 ###############################################################################
 
 
-# dasbytrip <- GetDataDaysAtSeaByTrip(Cspec=c("PLE"),Cstart="01-jan-2004",Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
+dasbytrip <- GetDataDaysAtSeaByTrip(Cspec=c("PLE"),Cstart="01-jan-2008",Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
