@@ -1,27 +1,11 @@
-# REMOVE OLD OBJECTS
-#rm(list=(ls()))       
 
 
-# FOR THIS STEP YOU NEED AN ACCOUNT AND LOGIN NAME (PROVIDED BY PETER VD KAMP)
 
+GetDataLandings <- function(Cspec=species,Cstart=tstart, Cstop=tstop, Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size) {
 
-###############################################################################
-##################                SELECTION 1         #########################
-###############################################################################
+# This function extracts landings data from VISSTAT by species, time interval and mesh size range. 
+# If meshes are null or void you get -1 in the output file
 
-#tstart <- "01-jan-2004"
-#tstop  <- "31-mar-2004"
-#
-#species <- c("PLE")
-#
-#min_mesh_size <- -1
-#max_mesh_size <- 1000
-#
-###############################################################################
-##################                QUERY               #########################
-###############################################################################
-
-GetDataLandings <- function(Cspec=species,Cstart=tstart, Cstop=tstop) {
 # Load required R libraries 
   library(RODBC)
   library(reshape)
@@ -89,7 +73,7 @@ GetDataLandings <- function(Cspec=species,Cstart=tstart, Cstop=tstop) {
 
 
 #landings <- GetDataCatches(Cspec=c("PLE"),Cstart="01-jan-2004",
- #          Cstop="31-jan-2008",Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size)
+ #          Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
  
 
 
