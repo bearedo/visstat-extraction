@@ -14,8 +14,8 @@
 #
 #species <- c("PLE")
 #
-#min_mesh_size <- -1
-#max_mesh_size <- 1000
+min_mesh_size <- -1
+max_mesh_size <- 1000
 #
 ###############################################################################
 ##################                QUERY               #########################
@@ -73,7 +73,7 @@ GetDataLandings <- function(Cspec=species,Cstart=tstart, Cstop=tstop) {
     and nvl(platform_properties.END_DATE,sysdate))
     WHERE catches.txn_ices_code IN ",Cspec," 
        and registrations.trp_arrivel_date between ",Cstart," and ",Cstop,"
-     
+       and nvl(registrations.MESHSIZE,-1) BETWEEN ",Cmeshmin," AND ",Cmeshmax,"
        
        ")
     
@@ -88,8 +88,8 @@ GetDataLandings <- function(Cspec=species,Cstart=tstart, Cstop=tstop) {
 ###############################################################################
 
 
-#landings <- GetDataCatches(Cspec=c("PLE","SOL"),Cstart="01-jan-2004",
-           Cstop="31-jan-2004")
+#landings <- GetDataCatches(Cspec=c("PLE"),Cstart="01-jan-2004",
+ #          Cstop="31-jan-2008",Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size)
  
 
 # create length classes from vessel lengths
