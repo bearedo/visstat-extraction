@@ -92,53 +92,6 @@ GetDataLandings <- function(Cspec=species,Cstart=tstart, Cstop=tstop) {
  #          Cstop="31-jan-2008",Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size)
  
 
-# create length classes from vessel lengths
-#Note: we don't want this here. We should have functions that calculate length categories. They are always changing too so we'd need options
-#TheData$LENGTHCLASS <- TheData$VESSEL_LENGTH
-#TheData$LENGTHCLASS[TheData$VESSEL_LENGTH < 15] <- "<15"
-#TheData$LENGTHCLASS[TheData$VESSEL_LENGTH >= 15 & TheData$LENGTH < 30] <- "15-29"
-#TheData$LENGTHCLASS[TheData$VESSEL_LENGTH >= 30] <- ">=30"
-#TheData$LENGTHCLASS[is.na(TheData$VESSEL_LENGTH)] <- "unknown"
-#
-# 
-# create power classes from vessel power
-#Note: we don't want this here. We should have functions that calculate length categories. They are always changing too so we'd need options
-#TheData$POWERCLASS <- TheData$POWER
-#TheData$POWERCLASS[TheData$POWER < 1000] <- "<1000"
-#TheData$POWERCLASS[TheData$POWER >= 1000 & TheData$POWER < 2000] <- "1000-2000"
-#TheData$POWERCLASS[TheData$POWER >= 2000] <- ">=2000"
-#TheData$POWERCLASS[is.na(TheData$POWER)] <- "unknown"  
-#
-###############################################################################
-##################                SELECTION 2         #########################
-###############################################################################
-
-# Select from: "ICES_AREA", "ICES_SUBAREA", "ICES_QUADRANT",
-#"YEAR", "QUARTER", "MONTH", "GEAR", "COUNTRY", "SPECIES", "POWERCLASS",
-#"LENGTHCLASS" and "METIER", see table1
-
-#selection <- c("ICES_AREA", "ICES_SUBAREA", "YEAR",  "GEAR", "QUARTER", "COUNTRY", "SPECIES", "METIER")
-#
-#selection_table <- aggregate(TheData$WEIGHT,TheData[,selection],sum)
-#names(selection_table)[length(selection)+1] <- "LANDED_WEIGHT"
-#                           
-#
-##############################################################################
-###################         Write data to Files         #########################
-################################################################################
-#
-## WARNING!!!, these file overwrite the existing file. 
-## To prevent loosing the existing file, change file name
-#
-#setwd("M:/My Documents/VisstatRaising/")
-#
-##write.csv(TheData, "VisstatCatches_Total.csv")
-#write.csv(selection_table, "VisstatCatches_selection.csv")
-#
-##show the first 6 rows of boths tables in your R window
-#  head(TheData)
-#  head(selection_table)
-# 
 
 ###############################################################################
 ##################              END                   #########################
