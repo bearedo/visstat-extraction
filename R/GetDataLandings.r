@@ -72,7 +72,7 @@ GetDataLandings <- function(Cspec=species,Cstart=tstart, Cstop=tstop, Cmeshmin=m
 ###############################################################################
 
 
-#landings <- GetDataCatches(Cspec=c("PLE"),Cstart="01-jan-2004",
+#landings <- GetDataCatches(Cspec=c("PLE"),Cstart="01-jan-2008",
  #          Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
  
 
