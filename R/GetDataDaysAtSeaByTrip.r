@@ -1,3 +1,6 @@
+  
+  
+  
   GetDataDaysAtSeaByTrip <- function(Cstart=tstart,Cstop=tstop, Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size) {
 
 # This function extracts landings and effort (days at sea, kw days at sea) data from VISSTAT by species, time interval and mesh size range.
@@ -86,4 +89,4 @@ dasbytrip
 ###############################################################################
 
 
-dasbytrip <- GetDataDaysAtSeaByTrip(Cstart="01-jan-2008",Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
+#dasbytrip <- GetDataDaysAtSeaByTrip(Cstart="01-jan-2008",Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
