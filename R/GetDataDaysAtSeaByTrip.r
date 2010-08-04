@@ -1,4 +1,4 @@
-  GetDataDaysAtSeaByTrip <- function(Cspec=species,Cstart=tstart,Cstop=tstop, Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size) {
+  GetDataDaysAtSeaByTrip <- function(Cstart=tstart,Cstop=tstop, Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size) {
 
 # This function extracts landings and effort (days at sea, kw days at sea) data from VISSTAT by species, time interval and mesh size range.
 # If meshes are null or void you get -1 in the output file
@@ -12,7 +12,7 @@
   visstat <- odbcConnect(dsn="visstatp", uid="",pwd="")
 
 
-  Cspec  <-WriteSQLString(Cspec)
+  
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)
 
@@ -86,4 +86,4 @@ dasbytrip
 ###############################################################################
 
 
-dasbytrip <- GetDataDaysAtSeaByTrip(Cspec=c("PLE"),Cstart="01-jan-2008",Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
+dasbytrip <- GetDataDaysAtSeaByTrip(Cstart="01-jan-2008",Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
