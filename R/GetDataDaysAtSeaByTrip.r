@@ -1,7 +1,7 @@
   
   
   
-  GetDataDaysAtSeaByTrip <- function(Cstart=tstart,Cstop=tstop, Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size) {
+GetDataDaysAtSeaByTrip <- function(Cstart=tstart,Cstop=tstop, Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size) {
 
 # This function extracts landings and effort (days at sea, kw days at sea) data from VISSTAT by species, time interval and mesh size range.
 # If meshes are null or void you get -1 in the output file
@@ -19,6 +19,10 @@ SELECT
     trips.trip_number
 ,   trips.prt_code
 ,   trips.prt_code_departed_from 
+,   trips.arrivel_date
+,   trips.arrivel_time
+,   trips.departure_date
+,   trips.departure_time
 ,   TO_CHAR(catches.rgn_trp_arrivel_date,'J') AS julianday
 ,   TO_CHAR(catches.rgn_trp_arrivel_date,'WW') AS week
 ,   TO_CHAR(catches.rgn_trp_arrivel_date,'MM') AS month
