@@ -7,12 +7,11 @@ GetDataLandings <- function(Cspec=species,Cstart=tstart, Cstop=tstop, Cmeshmin=m
 # If meshes are null or void you get -1 in the output file
 
 # Load required R libraries 
-  library(RODBC)
+
   library(reshape)
-# Close any old odbc connections
-  odbcCloseAll()
+
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
-  #visstat <- odbcConnect(dsn="visstatp", uid="",pwd="")
+  visstat <- dBConnect(which.database="visstat")
 
 
   Cspec  <-WriteSQLString(Cspec)
@@ -72,7 +71,7 @@ GetDataLandings <- function(Cspec=species,Cstart=tstart, Cstop=tstop, Cmeshmin=m
 ###############################################################################
 
 
-#landings <- GetDataCatches(Cspec=c("PLE"),Cstart="01-jan-2008",
+#landings <- GetDataLandings(Cspec=c("PLE"),Cstart="01-jan-2008",
  #          Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
  
 
