@@ -75,6 +75,7 @@ dasbytrip$POWER[is.na(dasbytrip$POWER)] <- median(na.omit(dasbytrip$POWER));
 
 dasbytrip$KWDAS <- dasbytrip$POWER*dasbytrip$DAS;
 
+dasbytrip
 
 }
 
