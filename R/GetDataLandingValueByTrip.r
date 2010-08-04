@@ -66,8 +66,8 @@ valuebytrip <- merge(dasbytrip,sp1,all.x=T)
 ###############################################################################
 
  
- valuebytrip <- GetDataLandingValueByTrip(Cstart="01-jan-2008",
-          Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
+# valuebytrip <- GetDataLandingValueByTrip(Cstart="01-jan-2008",
+#         Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
 
 
 
