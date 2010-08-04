@@ -40,5 +40,5 @@ value <-sqlQuery(visstat,query);
 ###############################################################################
 
 
-#value <- GetDataPrice(Cstart="01-jan-2008",Cstop="31-jan-2008")
+#value <- GetDataPrice(Cstart="01-jan-08",Cstop="31-jan-08")
 
