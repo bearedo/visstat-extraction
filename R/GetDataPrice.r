@@ -8,7 +8,7 @@ GetDataPrice <- function(Cstart=tstart, Cstop=tstop) {
   library(reshape)
 
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
-  visstat <- dbConnect(which.database="visstat")
+  visstat <- dBConnect(which.database="visstat")
 
 
 
@@ -40,5 +40,5 @@ value <-sqlQuery(visstat,query);
 ###############################################################################
 
 
-#value <- GetDataPrice(Cstart="01-jan-2004",Cstop="31-jan-2004")
+#value <- GetDataPrice(Cstart="01-jan-2008",Cstop="31-jan-2008")
 
