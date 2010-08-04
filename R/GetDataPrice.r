@@ -5,12 +5,10 @@ GetDataPrice <- function(Cstart=tstart, Cstop=tstop) {
 # If meshes are null or void you get -1 in the output file
 
 # Load required R libraries
-  library(RODBC)
   library(reshape)
-# Close any old odbc connections
-  odbcCloseAll()
+
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
-  visstat <- odbcConnect(dsn="visstatp", uid="",pwd="")
+  visstat <- dbConnect(which.database="visstat")
 
 
 
@@ -42,5 +40,5 @@ value <-sqlQuery(visstat,query);
 ###############################################################################
 
 
-value <- GetDataPrice(Cstart="01-jan-2004",Cstop="31-jan-2004")
+#value <- GetDataPrice(Cstart="01-jan-2004",Cstop="31-jan-2004")
 
