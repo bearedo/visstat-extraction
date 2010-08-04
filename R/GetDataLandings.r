@@ -12,7 +12,7 @@ GetDataLandings <- function(Cspec=species,Cstart=tstart, Cstop=tstop, Cmeshmin=m
 # Close any old odbc connections
   odbcCloseAll()
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
-  visstat <- odbcConnect(dsn="visstatp", uid="",pwd="")
+  #visstat <- odbcConnect(dsn="visstatp", uid="",pwd="")
 
 
   Cspec  <-WriteSQLString(Cspec)
