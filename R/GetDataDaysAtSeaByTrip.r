@@ -6,16 +6,9 @@
 # This function extracts landings and effort (days at sea, kw days at sea) data from VISSTAT by species, time interval and mesh size range.
 # If meshes are null or void you get -1 in the output file
 
-# Load required R libraries
-  library(RODBC)
-  library(reshape)
-# Close any old odbc connections
-  odbcCloseAll()
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
-  visstat <- odbcConnect(dsn="visstatp", uid="",pwd="")
+  visstat <- dBConnect(which.database="visstat")
 
-
-  
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)
 
@@ -24,6 +17,8 @@
   query <-paste("
 SELECT
     trips.trip_number
+,   trips.prt_code
+,   trips.prt_code_departed_from 
 ,   TO_CHAR(catches.rgn_trp_arrivel_date,'J') AS julianday
 ,   TO_CHAR(catches.rgn_trp_arrivel_date,'WW') AS week
 ,   TO_CHAR(catches.rgn_trp_arrivel_date,'MM') AS month
