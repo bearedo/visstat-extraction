@@ -19,6 +19,8 @@ SELECT
     trips.trip_number
 ,   trips.prt_code
 ,   trips.prt_code_departed_from 
+,   trips.prt_cny_code
+,   trips.prt_cny_code_departed_from
 ,   trips.arrivel_date
 ,   trips.arrivel_time
 ,   trips.departure_date
