@@ -1,6 +1,6 @@
 
 
-ReFormatDate<- function(datestring=datestring)
+ReformatDate<- function(datestring=datestring)
  {
 #Convert from YYYY-MM-DD
 #datestring <- vms$RGN_UTC_DATE
