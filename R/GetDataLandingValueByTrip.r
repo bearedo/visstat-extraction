@@ -2,7 +2,7 @@
 #tstop  <- "31-jan-2008"
 
 
-GetDataLandingValueByTrip <- function(Cstart=tstart,Cstop=tstop,Cmeshmin=Cmeshmin,Cmeshmax=Cmeshmax) {
+GetDataLandingValueByTrip <- function(Cstart=Cstart,Cstop=Cstop,Cmeshmin=Cmeshmin,Cmeshmax=Cmeshmax) {
 
 # This function gets the value of each component of the landings
 
@@ -10,9 +10,13 @@ GetDataLandingValueByTrip <- function(Cstart=tstart,Cstop=tstop,Cmeshmin=Cmeshmi
 
 dasbytrip <- GetDataDaysAtSeaByTrip(Cstart=Cstart,Cstop=Cstop,Cmeshmin= Cmeshmin, Cmeshmax= Cmeshmax)
 
+print ("Got days at sea by trip")
+
 # Get the price data
 
 prices <- GetDataPrice(Cstart=Cstart,Cstop=Cstop)
+
+print ("Got prices")
 
 sv <- tapply(prices$VALUE,list(as.factor(prices$WEEK),as.factor(prices$TXN_ICES_CODE)),sum);
 sw <- tapply(prices$WEIGHT,list(as.factor(prices$WEEK),as.factor(prices$TXN_ICES_CODE)),sum);
