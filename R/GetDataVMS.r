@@ -36,7 +36,7 @@ to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time
 ,   vms.heading
 ,   vms.speed
 ,   vms.permission
-,   vms.qpy_ICES_AREA
+,   vms.QPY_ICES_AREA
 ,   vms.unique_flag
 FROM registrations
     LEFT OUTER JOIN platform_properties ON (platform_properties.id = registrations.trp_ppy_id
@@ -58,4 +58,4 @@ vms
 
 #Example: extract all vms data for January 2010
 
-#vms <- GetDataVMS(Cstart="01-jan-2010",Cstop="31-jan-2010")
+#  vms <- GetDataVMS(Cstart="01-jan-2010",Cstop="10-jan-2010")
