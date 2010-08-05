@@ -18,7 +18,6 @@ valuebytrip$ARRIVEL_DATE <- ReformatDate( valuebytrip$ARRIVEL_DATE)
 valuebytrip$ARRIVEL_DATE <- ReformatDate( valuebytrip$DEPARTURE_DATE)
 
 
-
 # Transform the data frame into the crappy 'matrix' format required by eflalo.
 
 mm<-paste(valuebytrip$TRIP_NUMBER,valuebytrip$TRP_PPY_PLM_CODE,valuebytrip$LEVEL5,valuebytrip$RGN_TRP_PPY_PLM_CNY_CODE,valuebytrip$PRT_CNY_CODE,
