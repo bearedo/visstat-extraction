@@ -33,8 +33,10 @@ to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time
 ,   vms.rgn_utc_time
 ,   vms.rgn_local_date
 ,   vms.utc_year
+,   vms.heading
 ,   vms.speed
 ,   vms.permission
+,   vms.qpy_ICES_AREA
 ,   vms.unique_flag
 FROM registrations
     LEFT OUTER JOIN platform_properties ON (platform_properties.id = registrations.trp_ppy_id
