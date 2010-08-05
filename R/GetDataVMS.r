@@ -7,8 +7,8 @@ GetDataVMS <- function(Cstart=tstart, Cstop=tstop) {
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
   visstat <- dBConnect(which.database="visstat")
 
-  Cstop  <-WriteSQLString(tstop)
-  Cstart <-WriteSQLString(tstart)
+  Cstop  <-WriteSQLString(Cstop)
+  Cstart <-WriteSQLString(Cstart)
   
   query <- paste("
 SELECT
