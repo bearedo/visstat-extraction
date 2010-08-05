@@ -1,5 +1,5 @@
   
-  
+#Cstart="01-jan-2010";Cstop="31-jan-2010"  
   
 GetDataDaysAtSeaByTrip <- function(Cstart=tstart,Cstop=tstop, Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size) {
 
@@ -97,4 +97,4 @@ dasbytrip
 ###############################################################################
 
 
-#dasbytrip <- GetDataDaysAtSeaByTrip(Cstart="01-jan-2009",Cstop="31-jan-2009",Cmeshmin= -1, Cmeshmax= 200)
+#dasbytrip <- GetDataDaysAtSeaByTrip(Cstart="01-jan-2010",Cstop="31-jan-2010",Cmeshmin= -1, Cmeshmax= 200)
