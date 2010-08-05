@@ -79,6 +79,13 @@ dasbytrip$POWER[is.na(dasbytrip$POWER)] <- median(na.omit(dasbytrip$POWER));
 
 dasbytrip$KWDAS <- dasbytrip$POWER*dasbytrip$DAS;
 
+#Replace 2 letter country codes (make this into a function)
+
+countries <- data.frame(old=c('be','de','dk','eng','fr','gb','nl','nld','scd'),new=c("BEL","DEU","DNK","GBR","FRA","GBR","NLD","NLD","GBR"))
+
+dasbytrip$PRT_CNY_CODE <- countries$new[match(dasbytrip$PRT_CNY_CODE,countries$old)]
+dasbytrip$PRT_CNY_CODE_DEPARTED_FROM <- countries$new[match(dasbytrip$PRT_CNY_CODE_DEPARTED_FROM,countries$old)]
+dasbytrip$RGN_TRP_PPY_PLM_CNY_CODE <- countries$new[match(dasbytrip$RGN_TRP_PPY_PLM_CNY_CODE,countries$old)]
 dasbytrip
 
 }
@@ -90,4 +97,4 @@ dasbytrip
 ###############################################################################
 
 
-#dasbytrip <- GetDataDaysAtSeaByTrip(Cstart="01-jan-2008",Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
+#dasbytrip <- GetDataDaysAtSeaByTrip(Cstart="01-jan-2009",Cstop="31-jan-2009",Cmeshmin= -1, Cmeshmax= 200)
