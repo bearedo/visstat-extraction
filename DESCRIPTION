@@ -9,3 +9,4 @@ License: GPL (>= 2)
 Depends: R (>= 2.9.1),RODBC,reshape 
 Suggests: mapdata
 LazyLoad: Yes
+ZipData: Yes
