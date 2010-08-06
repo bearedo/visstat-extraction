@@ -2,7 +2,7 @@
 #Cstart="01-jan-2009";Cstop="31-jan-2009"  
 
 
-GetDataEflalo <- function(Cstart=tstart,Cstop=tstop,Cmeshmin=Cmeshmin,Cmeshmax=Cmeshmax) 
+GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop) 
 
 {
 
