@@ -1,7 +1,7 @@
   
 #Cstart="01-jan-2010";Cstop="31-jan-2010"  
   
-GetDataDaysAtSeaByTrip <- function(Cstart=tstart,Cstop=tstop) {
+GetDataDaysAtSeaByTrip <- function(Cstart=Cstart,Cstop=Cstop) {
 
 # This function extracts landings and effort (days at sea, kw days at sea) data from VISSTAT by species, time interval and mesh size range.
 # If meshes are null or void you get -1 in the output file
