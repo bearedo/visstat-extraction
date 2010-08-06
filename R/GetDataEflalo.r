@@ -122,10 +122,9 @@ eflalo2
 
 #######################Example##################
 
-##  source("GetDataDaysAtSeaByTrip.r")
-##  source("GetDataLandingValueByTrip.r")
-##  source("GetDataEflalo.r")
-##  source("GetDataPrice.r")
+# Quick way to load a load of r-files in a directory 
+
+# lapply(list.files(),source)
 
 ## eflalo2 <- GetDataEflalo(Cstart='01-jan-2009',Cstop='31-jan-2009')  
 
@@ -134,5 +133,7 @@ eflalo2
 ## Make vessel anon first
 
 ##  eflalo2$VE_REF <- matrix(unlist(strsplit(as.character(eflalo2$VE_REF),":")),ncol=2,byrow=T)[,2]
+
+## save(eflalo2,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.rda",compress=T)
 
 ##  write.table (eflalo2, file='eflalo2.csv',sep=",",row.names=F)
