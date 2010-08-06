@@ -1,5 +1,5 @@
 
-GetDataPrice <- function(Cstart=tstart, Cstop=tstop) {
+GetDataPrice <- function(Cstart=Cstart, Cstop=Cstop) {
 
 # This function extracts landings data from VISSTAT by species, time interval and mesh size range.
 # If meshes are null or void you get -1 in the output file
