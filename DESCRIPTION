@@ -1,4 +1,4 @@
-Package: visstat-extraction
+Package: visstatExtraction
 Title: For generic code to extract data from the visstat database
 Version: 0.01
 Date: 2010-07-28
