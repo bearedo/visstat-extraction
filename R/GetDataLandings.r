@@ -1,7 +1,7 @@
 
 
 
-GetDataLandings <- function(Cspec=species,Cstart=tstart, Cstop=tstop, Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size) {
+GetDataLandings <- function(Cspec=species,Cstart=Cstart, Cstop=Cstop, Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size) {
 
 # This function extracts landings data from VISSTAT by species, time interval and mesh size range. 
 # If meshes are null or void you get -1 in the output file
