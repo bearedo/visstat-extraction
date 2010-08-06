@@ -19,12 +19,13 @@ SELECT
 ,   registrations.GPY_code
 ,   registrations.MESHSIZE
 ,   registrations.trp_ppy_plm_code
+,   registrations.trp_ppy_id as vessel_id1
 ,   nvl(Quadrant_properties.ICES_QUADRANT,'UNKNOWN') AS quadrant
 ,   nvl(Quadrant_properties.ICES_AREA,'UNKNOWN') AS ices_area
 ,   nvl(Quadrant_properties.ICES_SUBAREA,'UNKNOWN') AS ices_subarea
 ,   platform_properties.length
 ,   platform_properties.power
-,   platform_properties.id as vessel_id
+,   platform_properties.id as vessel_id2
 ,   ROUND(to_date(to_char(arrivel_date,'yyyy.mm.dd')||' '||substr(to_char(arrivel_time,'0999'),2,2)||'.'||substr(to_char(arrivel_time,'0999'),4,2),'yyyy.mm.dd hh24.mi') -
 to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time,'0999'),2,2)||'.'||substr(to_char(departure_time,'0999'),4,2),'yyyy.mm.dd hh24.mi'),2) AS das
 ,   vms.latitude
@@ -59,4 +60,4 @@ vms
 
 #Example: extract all vms data for January 2010
 
-#  vms <- GetDataVMS(Cstart="01-jan-2010",Cstop="10-jan-2010")
+#  vms <- GetDataVMS(Cstart="01-jan-2010",Cstop="31-jan-2010")
