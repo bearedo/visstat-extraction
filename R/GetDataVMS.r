@@ -24,6 +24,7 @@ SELECT
 ,   nvl(Quadrant_properties.ICES_SUBAREA,'UNKNOWN') AS ices_subarea
 ,   platform_properties.length
 ,   platform_properties.power
+,   platform_properties.id
 ,   ROUND(to_date(to_char(arrivel_date,'yyyy.mm.dd')||' '||substr(to_char(arrivel_time,'0999'),2,2)||'.'||substr(to_char(arrivel_time,'0999'),4,2),'yyyy.mm.dd hh24.mi') -
 to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time,'0999'),2,2)||'.'||substr(to_char(departure_time,'0999'),4,2),'yyyy.mm.dd hh24.mi'),2) AS das
 ,   vms.latitude
