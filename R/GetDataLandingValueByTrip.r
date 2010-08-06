@@ -70,9 +70,42 @@ valuebytrip <- merge(dasbytrip,sp1,all.x=T)
 ###############################################################################
 
  
-# valuebytrip <- GetDataLandingValueByTrip(Cstart="01-jan-2008",
-#         Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
+# valuebytrip <- GetDataLandingValueByTrip(Cstart="01-jan-2009",Cstop="31-jan-2009")
 
 
+# take out data for a trip 
+
+# here we try and develop the code partition the effort among the statistical rectangles 
+v <- valuebytrip[valuebytrip$TRIP_NUMBER == 447863,]
+
+tres <- NULL;
+                                             
+ptab <- tapply(valuebytrip$VALUE,list(as.factor(valuebytrip$QUADRANT), as.factor(valuebytrip$TRIP_NUMBER)),sum.na);
+ptab[is.na(ptab)] <- 0;
+sum.na<-function(x) { x<-sum(x[!is.na(x)]);x}
+mean.na<-function(x) { x<-mean(x[!is.na(x)]);x}
+
+ptab <- prop.table(ptab,margin=2);
+tab2 <- tapply(valuebytrip$DAS,as.factor(valuebytrip$TRIP_NUMBER),mean.na);  
+tab3 <- tapply(valuebytrip$KWDAS,as.factor(valuebytrip$TRIP_NUMBER),mean.na);  
+
+DAS <- ptab%*%tab2;
+DAS <- DAS[DAS!=0,];
+
+KWDAS <- ptab%*%tab3;
+KWDAS <- KWDAS[KWDAS!=0,];
+
+# number of trips: at least an occurrence in a quadrant
+ntab <- ptab;
+ntab[ntab!=0] <- 1
+ntrips1 <- rowSums(ntab);
+
+# number of trips: proportional allocation according to effort
+ntrips2 <- rowSums(ptab);
 
 
+tempres <- data.frame(country=rep("ned",length(KWDAS)),year=rep(2009,length(KWDAS)),
+metier=rep("TBB_DEM",length(KWDAS)),quadrant=names(DAS),month=rep(qq,length(KWDAS)),das=DAS,kwdas=KWDAS, 
+ntrips1=ntrips1[ntrips1!=0], ntrips2=ntrips2[ntrips2!=0]);
+tres <- rbind(tres,tempres);
+};
