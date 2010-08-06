@@ -2,13 +2,13 @@
 #tstop  <- "31-jan-2008"
 
 
-GetDataLandingValueByTrip <- function(Cstart=Cstart,Cstop=Cstop,Cmeshmin=Cmeshmin,Cmeshmax=Cmeshmax) {
+GetDataLandingValueByTrip <- function(Cstart=Cstart,Cstop=Cstop) {
 
 # This function gets the value of each component of the landings
 
 # Get the total days at sea by trip:
 
-dasbytrip <- GetDataDaysAtSeaByTrip(Cstart=Cstart,Cstop=Cstop,Cmeshmin= Cmeshmin, Cmeshmax= Cmeshmax)
+dasbytrip <- GetDataDaysAtSeaByTrip(Cstart=Cstart,Cstop=Cstop)
 
 print ("Got days at sea by trip")
 
