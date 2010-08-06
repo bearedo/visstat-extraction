@@ -37,3 +37,5 @@ tacsat
 #   tacsat$VE_REF <- matrix(unlist(strsplit(as.character(tacsat$VE_REF),":")),ncol=2,byrow=T)[,2]
 
 #  write.table (tacsat, file='tacsat.csv',sep=",",row.names=F)
+
+#  save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat.rda",compress=T)
