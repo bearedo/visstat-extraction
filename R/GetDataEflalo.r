@@ -1,11 +1,14 @@
 
+#Cstart="01-jan-2009";Cstop="31-jan-2009"  
+
+
 GetDataEflalo <- function(Cstart=tstart,Cstop=tstop,Cmeshmin=Cmeshmin,Cmeshmax=Cmeshmax) 
 
 {
 
 # Get data 
 
-valuebytrip <- GetDataLandingValueByTrip(Cstart=Cstart, Cstop=Cstop,Cmeshmin= -1, Cmeshmax= 200)
+valuebytrip <- GetDataLandingValueByTrip(Cstart=Cstart, Cstop=Cstop)
 
 #Reformat time strings
 
@@ -15,12 +18,13 @@ valuebytrip$DEPARTURE_TIME <- ReformatTime(valuebytrip$DEPARTURE_TIME)
 #Reformat date strings
 
 valuebytrip$ARRIVEL_DATE <- ReformatDate( valuebytrip$ARRIVEL_DATE)
-valuebytrip$ARRIVEL_DATE <- ReformatDate( valuebytrip$DEPARTURE_DATE)
+valuebytrip$DEPARTURE_DATE <- ReformatDate( valuebytrip$DEPARTURE_DATE)
 
 
 # Transform the data frame into the crappy 'matrix' format required by eflalo.
 
-mm<-paste(valuebytrip$TRIP_NUMBER,valuebytrip$TRP_PPY_PLM_CODE,valuebytrip$LEVEL5,valuebytrip$RGN_TRP_PPY_PLM_CNY_CODE,valuebytrip$PRT_CNY_CODE,
+mm<-paste(valuebytrip$TRIP_NUMBER,paste(valuebytrip$TRP_PPY_PLM_CODE,valuebytrip$VESSEL_ID1,sep=":"),
+valuebytrip$LEVEL5,valuebytrip$RGN_TRP_PPY_PLM_CNY_CODE,valuebytrip$PRT_CNY_CODE,
 valuebytrip$PRT_CNY_CODE_DEPARTED_FROM,
 valuebytrip$GPY_CODE,valuebytrip$MESHSIZE,valuebytrip$QUADRANT,
 valuebytrip$PRT_CODE_DEPARTED_FROM,valuebytrip$PRT_CODE,valuebytrip$DEPARTURE_DATE,valuebytrip$DEPARTURE_TIME,
@@ -118,8 +122,17 @@ eflalo2
 
 #######################Example##################
 
-## eflalo2 <- GetDataEflalo(Cstart='01-dec-2009',Cstop='30-dec-2009',Cmeshmin= -1 ,Cmeshmax= 1000)  
+##  source("GetDataDaysAtSeaByTrip.r")
+##  source("GetDataLandingValueByTrip.r")
+##  source("GetDataEflalo.r")
+##  source("GetDataPrice.r")
+
+## eflalo2 <- GetDataEflalo(Cstart='01-jan-2009',Cstop='31-jan-2009')  
 
 ## Write out the data 
+
+## Make vessel anon first
+
+##  eflalo2$VE_REF <- matrix(unlist(strsplit(as.character(eflalo2$VE_REF),":")),ncol=2,byrow=T)[,2]
 
 ##  write.table (eflalo2, file='eflalo2.csv',sep=",",row.names=F)
