@@ -22,7 +22,7 @@ vms$RGN_LOCAL_TIME <- ReformatTime(vms$RGN_LOCAL_TIME)
 
 vms$RGN_UTC_DATE <- ReformatDate(vms$RGN_UTC_DATE)
 
-tacsat <- data.frame(VE_REF=vms$TRP_PPY_PLM_CODE,SI_LATI=vms$LATITUDE,SI_LONG=vms$LONGITUDE,
+tacsat <- data.frame(VE_REF=paste(vms$TRP_PPY_PLM_CODE,vms$VESSEL_ID,sep=":"),SI_LATI=vms$LATITUDE,SI_LONG=vms$LONGITUDE,
 SI_DATE=vms$RGN_UTC_DATE,SI_TIME=vms$RGN_UTC_TIME,SI_SP = vms$SPEED,SI_HE=vms$HEADING)
 
 tacsat
