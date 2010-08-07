@@ -35,6 +35,7 @@ SELECT
 ,   registrations.MESHSIZE
 ,   registrations.trp_ppy_plm_code
 ,   registrations.trp_ppy_id as vessel_id1
+,   registrations.
 ,   nvl(Quadrant_properties.ICES_QUADRANT,'UNKNOWN') AS quadrant
 ,   nvl(Quadrant_properties.ICES_AREA,'UNKNOWN') AS ices_area
 ,   nvl(Quadrant_properties.ICES_SUBAREA,'UNKNOWN') AS ices_subarea
