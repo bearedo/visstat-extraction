@@ -111,6 +111,28 @@ ef4$LE_EFF <- as.numeric(as.vector(ef4$LE_EFF))
 ef4$VE_LEN <- as.numeric(as.vector(ef4$VE_LEN))
 ef4$VE_KW  <- as.numeric(as.vector(ef4$VE_KW))
 
+#Get original dimensions of ef4
+
+dd <- dim(ef4)
+
+#Partition the effort among the statistical rectangles
+
+ctotals<-apply(ef4[27:dim(ef4)[2]],1,sum.na)
+
+ptab <- tapply(ctotals,list(as.factor(ef4$LE_RECT), as.factor(ef4$FT_REF)),sum.na);
+
+ptab[is.na(ptab)] <- 0;
+
+ptab <- vectorise(prop.table(ptab,margin=2));
+dimnames(ptab)[[2]] <- c("P","LE_RECT","FT_REF")
+
+ef4<-merge(ef4,ptab,all.x=T)
+
+ef4$LE_EFF <- ef4$LE_EFF * ef4$P
+
+ef4<- ef4[,1:dd[2]]
+
+
 #Combine the weights and values into a single dataframe
 
 eflalo2 <- cbind(ef3,ef4[,27:dim(ef4)[2]])
