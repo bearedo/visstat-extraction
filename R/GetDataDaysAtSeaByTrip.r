@@ -1,5 +1,5 @@
   
-#Cstart="01-jan-2010";Cstop="31-jan-2010"  
+#Cstart="01-jan-2009";Cstop="31-jan-2009"  
   
 GetDataDaysAtSeaByTrip <- function(Cstart=Cstart,Cstop=Cstop) {
 
@@ -35,7 +35,7 @@ SELECT
 ,   registrations.MESHSIZE
 ,   registrations.trp_ppy_plm_code
 ,   registrations.trp_ppy_id as vessel_id1
-,   registrations.
+,   registrations.sre_code
 ,   nvl(Quadrant_properties.ICES_QUADRANT,'UNKNOWN') AS quadrant
 ,   nvl(Quadrant_properties.ICES_AREA,'UNKNOWN') AS ices_area
 ,   nvl(Quadrant_properties.ICES_SUBAREA,'UNKNOWN') AS ices_subarea
@@ -45,6 +45,10 @@ SELECT
 ,   metiers.metier
 ,   ROUND(to_date(to_char(arrivel_date,'yyyy.mm.dd')||' '||substr(to_char(arrivel_time,'0999'),2,2)||'.'||substr(to_char(arrivel_time,'0999'),4,2),'yyyy.mm.dd hh24.mi') -
 to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time,'0999'),2,2)||'.'||substr(to_char(departure_time,'0999'),4,2),'yyyy.mm.dd hh24.mi'),2) AS das
+
+,   arrivel_date - departure_date AS coarse_das
+
+
 FROM registrations
     LEFT OUTER JOIN platform_properties ON (platform_properties.id = registrations.trp_ppy_id
                                            and registrations.TRP_ARRIVEL_DATE between platform_properties.START_DATE and nvl(platform_properties.END_DATE,sysdate))
@@ -68,6 +72,8 @@ WHERE  catches.rgn_trp_arrivel_date between ",Cstart," and ",Cstop,"
 ")
 
 dasbytrip <-sqlQuery(visstat,query);
+
+dasbytrip$COARSE_DAS <- ifelse(dasbytrip$COARSE_DAS==0,1,dasbytrip$COARSE_DAS)
 
 # attach level 5 metier variables ??!!
 dasbytrip$LEVEL5 <- substr(dasbytrip$METIER,start=1,stop=7);
@@ -100,4 +106,6 @@ dasbytrip
 ###############################################################################
 
 
-#dasbytrip <- GetDataDaysAtSeaByTrip(Cstart="01-jan-2009",Cstop="31-jan-2009")
+# dasbytrip <- GetDataDaysAtSeaByTrip(Cstart="01-jan-2009",Cstop="31-jan-2009")
+
+#
