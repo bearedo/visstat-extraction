@@ -148,7 +148,7 @@ eflalo2
 
 # lapply(list.files(),source)
 
-## eflalo2 <- GetDataEflalo(Cstart='01-jan-2009',Cstop='31-jan-2009')  
+## eflalo2 <- GetDataEflalo(Cstart='01-jan-2009',Cstop='31-dec-2009')  
 
 ## Write out the data 
 
