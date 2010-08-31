@@ -27,10 +27,9 @@ data <- qtr.f(data)
 
 data <- DCFGearCodes(data=data)
 
-#Pasive or static
+#Pasive or static?
 
 data <- PassiveOrStatic(data)
-
 
 #Vessel length category
 
@@ -54,11 +53,18 @@ data$species[ww] <- paste(data$species[ww],as.character(data$NEPFU[ww]),sep="")
 data$narea <- as.character(data$ICES_SUBAREA)
 
 data$narea[data$narea %in% c('IVa','IVb','IVc')] <- "4"
+data$narea[data$narea %in% 'VIIa'] <- "7a"
+data$narea[data$narea %in% 'VIIc'] <- "7c"
+data$narea[data$narea %in% 'VIIb'] <- "7b"
 data$narea[data$narea %in% 'VIId'] <- "7d"
 data$narea[data$narea %in% 'VIIe'] <- "7e"
 data$narea[data$narea %in% 'VIIh'] <- "7h"
 data$narea[data$narea %in% 'VIIj'] <- "7j"
-
+data$narea[data$narea %in% 'IIa'] <- "2a"
+data$narea[data$narea %in% 'VIIIb'] <- "8b"
+data$narea[data$narea %in% 'IIIa'] <- "3a"
+data$narea[data$narea %in% 'Vb'] <- "5b"
+data$narea[data$narea %in% 'VIa'] <- "6a"
 
 data$narea[data$narea %in% 'UNK'] <- NA
 
