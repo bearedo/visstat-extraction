@@ -130,11 +130,9 @@ else {
 
 
 
-  #tabA <- read.table('tabA.csv',sep=",",header=T)
 
   #save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat.rda",compress=T)
 
 
 
 
-valuebytrip <- GetDataLandingValueByTrip(Cstart="01-jan-2003",Cstop="31-jan-2009")
