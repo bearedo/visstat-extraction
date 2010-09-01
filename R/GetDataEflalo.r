@@ -148,14 +148,18 @@ eflalo2
 
 # lapply(list.files(),source)
 
-## eflalo2 <- GetDataEflalo(Cstart='01-jan-2009',Cstop='31-dec-2009')  
+## eflalo2 <- GetDataEflalo(Cstart='01-jan-2009',Cstop='31-dec-2009')
 
-## Write out the data 
+## print(dim(eflalo2))  
+
+## Write out the data for the vmstools library 
 
 ## Make vessel anon first
 
 ##  eflalo2$VE_REF <- matrix(unlist(strsplit(as.character(eflalo2$VE_REF),":")),ncol=2,byrow=T)[,2]
 
-## save(eflalo2,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.rda",compress=T)
+##  eflalo2 <- formatEflalo2(eflalo2) 
 
-##  write.table (eflalo2, file='eflalo2.csv',sep=",",row.names=F)
+##  save(eflalo2,file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//eflalo2.rda",compress=T)
+
+##  write.table (eflalo2, file='D://bearedo//Projects//visstat-raising//eflalo2.csv',sep=",",row.names=F)
