@@ -163,3 +163,5 @@ eflalo2
 ##  save(eflalo2,file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//eflalo2.rda",compress=T)
 
 ##  write.table (eflalo2, file='D://bearedo//Projects//visstat-raising//eflalo2.csv',sep=",",row.names=F)
+
+## eflalo2 <- read.table (file='D://bearedo//Projects//visstat-raising//eflalo2.csv',header=T,sep=",")
