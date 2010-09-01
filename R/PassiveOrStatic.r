@@ -12,5 +12,6 @@ data$FISHERY_TYPE[data$GEAR == 'LONGLINE'] <- 'passive'
 data$FISHERY_TYPE[data$GEAR == 'POTS'] <- 'passive'
 data$FISHERY_TYPE[data$GEAR == 'PEL_TRAWL'] <- 'mobile'
 data$FISHERY_TYPE[data$GEAR == 'PEL_SEINE'] <- 'mobile'
+data$FISHERY_TYPE <- ifelse(is.na(data$FISHERY_TYPE), 'unknown', data$FISHERY_TYPE)
 data
 }
