@@ -1,10 +1,10 @@
 DCFMeshCategory<-
-function(data=data)
+function(input=eflalo2)
 {
 #NB. We need a FISHERY_TYPE column to say whether it is mobile or static
 
-mob <- data[data$FISHERY_TYPE == 'mobile',]
-
+mob <- input[input$FISHERY_TYPE == 'mobile',]
+print(dim(mob))
 
 mesh_cat<-rep(NA,length(mob[,1]))
 
@@ -21,8 +21,8 @@ mesh_cat[mob$MESHSIZE >=120] <- '>120'
 
 mob$MESH_SIZE_RANGE <- mesh_cat
 
-pass <- data[data$FISHERY_TYPE == 'passive',]
-
+pass <- input[input$FISHERY_TYPE %in% c('unknown','passive'),]
+print(dim(pass))
 
 mesh_cat<-rep(NA,length(pass[,1]))
 
@@ -40,7 +40,7 @@ mesh_cat[pass$MESHSIZE >=150 & pass$MESHSIZE < 219] <- '150-219'
 mesh_cat[pass$MESHSIZE >=220] <- '>=220'
 pass$MESH_SIZE_RANGE <- mesh_cat
 
-data <- rbind(mob,pass)
-
-data
+out <- rbind(mob,pass)
+print(dim(out))
+out
 }
