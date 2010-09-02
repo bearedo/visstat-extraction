@@ -106,6 +106,27 @@ dasbytrip
 ###############################################################################
 
 
-# dasbytrip <- GetDataDaysAtSeaByTrip(Cstart="01-jan-2009",Cstop="31-jan-2009")
-
+#dasbytrip <- GetDataDaysAtSeaByTrip(Cstart="01-jan-2009",Cstop="31-dec-2009")
 #
+##Add on approximate lats and longs
+#
+#dasbytrip$lat <-convert.statsq.lat.lon(dasbytrip$QUADRANT)$lat
+#
+#dasbytrip <- GetMissingMeshSize(data=dasbytrip,latitude.name="lat")
+#table(dasbytrip$MESHSIZE)
+#
+#
+#library(visstatExtraction)
+#dasbytrip <- DCFGearCodes(dasbytrip);
+#dasbytrip <- PassiveOrStatic(dasbytrip)
+#dasbytrip <- DCFMeshCategory(dasbytrip)
+#dasbytrip <- CodRegsGearCodes(dasbytrip)
+
+
+#u <- unique(paste(dasbytrip$TRIP_NUMBER,dasbytrip$REG_GEAR,dasbytrip$DAS,dasbytrip$COARSE_DAS,dasbytrip$KWDAS,sep="|"))
+#xx <- data.frame(matrix(unlist(strsplit(u,"\\|")),ncol=5,byrow=T))
+#dimnames(xx)[[2]] <- c("TRIP_NUMBER","REG_GEAR","DAS","COARSE_DAS","KWDAS")
+#for(i in 3:5){xx[,i] <- as.numeric(as.character(xx[,i])) }
+#tapply(xx$COARSE_DAS,list(xx$REG_GEAR),sum.na)
+#tapply(xx$DAS,list(xx$REG_GEAR),sum.na)
+#tapply(xx$KWDAS,list(xx$REG_GEAR),sum.na)
