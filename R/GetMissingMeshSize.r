@@ -8,7 +8,7 @@ GetMissingMeshSize <- function(data=tacsat,latitude.name="SI_LATI")
 #If a beamer is fishing south of 55 and mesh size is 0 then it gets to be 80mm (sole)
 
 data$MESHSIZE[data$MESHSIZE==0 & data$GPY_CODE == "TBB" & data[,latitude.name] <= 55] <-80
-
+#
 #If a beamer is fishing north of 55 and south of 56 and mesh size is NA then it gets to be 100mm (plaice)
 
 data$MESHSIZE[data$MESHSIZE==0 & data$GPY_CODE == "TBB" & data[,latitude.name] >55 & data[,latitude.name] <=56] <- 100
