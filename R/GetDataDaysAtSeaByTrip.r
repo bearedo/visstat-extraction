@@ -3,7 +3,8 @@
   
 GetDataDaysAtSeaByTrip <- function(Cstart=Cstart,Cstop=Cstop) {
 
-# This function extracts landings and effort (days at sea, kw days at sea) data from VISSTAT by species, time interval and mesh size range.
+# This function extracts effort (days at sea, kw days at sea) data from VISSTAT by trip.
+# Some trips have different gears used on the trip which is why sometimes you get the data repeated.
 # If meshes are null or void you get -1 in the output file
 
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
@@ -12,7 +13,7 @@ GetDataDaysAtSeaByTrip <- function(Cstart=Cstart,Cstop=Cstop) {
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)
 
-  # Right let's hit the database
+  
   
   query <-paste("
 SELECT
@@ -25,20 +26,11 @@ SELECT
 ,   trips.arrivel_time
 ,   trips.departure_date
 ,   trips.departure_time
-,   TO_CHAR(catches.rgn_trp_arrivel_date,'J') AS julianday
-,   TO_CHAR(catches.rgn_trp_arrivel_date,'WW') AS week
-,   TO_CHAR(catches.rgn_trp_arrivel_date,'MM') AS month
-,   catches.txn_ices_code
-,   catches.weight
-,   catches.rgn_trp_ppy_plm_cny_code
 ,   registrations.GPY_code
 ,   registrations.MESHSIZE
 ,   registrations.trp_ppy_plm_code
 ,   registrations.trp_ppy_id as vessel_id1
 ,   registrations.sre_code
-,   nvl(Quadrant_properties.ICES_QUADRANT,'UNKNOWN') AS quadrant
-,   nvl(Quadrant_properties.ICES_AREA,'UNKNOWN') AS ices_area
-,   nvl(Quadrant_properties.ICES_SUBAREA,'UNKNOWN') AS ices_subarea
 ,   platform_properties.length
 ,   platform_properties.power
 ,   platform_properties.id as vessel_id2
@@ -51,24 +43,17 @@ to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time
 
 FROM registrations
     LEFT OUTER JOIN platform_properties ON (platform_properties.id = registrations.trp_ppy_id
-                                           and registrations.TRP_ARRIVEL_DATE between platform_properties.START_DATE and nvl(platform_properties.END_DATE,sysdate))
-    INNER JOIN catches ON (registrations.sre_code  = catches.rgn_sre_code
-             and registrations.trp_ppy_plm_cny_code = catches.rgn_trp_ppy_plm_cny_code
-             and registrations.trp_prt_code = catches.rgn_trp_prt_code
-             and registrations.trp_prt_cny_code = catches.rgn_trp_prt_cny_code
-             and registrations.trp_arrivel_date = catches.rgn_trp_arrivel_date
-             and registrations.trp_arrivel_time = catches.rgn_trp_arrivel_time
-             and registrations.trp_ppy_id = catches.rgn_trp_ppy_id
-             and registrations.trp_ppy_plm_code = catches.rgn_trp_ppy_plm_code
-             and registrations.rgn_date = catches.rgn_rgn_date )
+                                           and registrations.TRP_ARRIVEL_DATE between platform_properties.START_DATE 
+                                           and nvl(platform_properties.END_DATE,sysdate))
+    
     INNER JOIN trips ON (trips.arrivel_date = registrations.trp_arrivel_date
              and trips.arrivel_time = registrations.trp_arrivel_time
              and trips.ppy_plm_code = registrations.trp_ppy_plm_code
              and trips.prt_code = registrations.trp_prt_code)
     INNER JOIN metiers ON (trips.trip_number = metiers.trip_number)
-    LEFT OUTER join Quadrant_properties ON (registrations.QPY_ICES_QUADRANT = Quadrant_properties.ICES_QUADRANT)
-WHERE  catches.rgn_trp_arrivel_date between ",Cstart," and ",Cstop,"
-       and catches.RGN_TRP_PPY_PLM_CNY_CODE IN ('nld')
+    
+WHERE  registrations.trp_arrivel_date between ",Cstart," and ",Cstop,"
+       and registrations.TRP_PPY_PLM_CNY_CODE IN ('nld')
 ")
 
 dasbytrip <-sqlQuery(visstat,query);
@@ -94,7 +79,7 @@ countries <- data.frame(old=c('be','de','dk','eng','fr','gb','nl','nld','scd'),n
 
 dasbytrip$PRT_CNY_CODE <- countries$new[match(dasbytrip$PRT_CNY_CODE,countries$old)]
 dasbytrip$PRT_CNY_CODE_DEPARTED_FROM <- countries$new[match(dasbytrip$PRT_CNY_CODE_DEPARTED_FROM,countries$old)]
-dasbytrip$RGN_TRP_PPY_PLM_CNY_CODE <- countries$new[match(dasbytrip$RGN_TRP_PPY_PLM_CNY_CODE,countries$old)]
+
 dasbytrip
 
 }
