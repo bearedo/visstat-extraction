@@ -13,8 +13,7 @@ GetDataDaysAtSeaByTrip <- function(Cstart=Cstart,Cstop=Cstop) {
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)
 
-  
-  
+ 
   query <-paste("
 SELECT
     trips.trip_number
