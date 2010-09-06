@@ -8,7 +8,7 @@ GetDataLandingValueByTrip <- function(Cstart=Cstart,Cstop=Cstop) {
 
 # Get the total days at sea by trip:
 
-dasbytrip <- GetDataDaysAtSeaByTrip(Cstart=Cstart,Cstop=Cstop)
+dasbytrip <- GetDataDaysAtSeaWithLandingsByTrip(Cstart=Cstart,Cstop=Cstop)
 
 print ("Got days at sea by trip")
 
