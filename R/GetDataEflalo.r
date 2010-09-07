@@ -137,7 +137,7 @@ ef4<- ef4[,1:dd[2]]
 
 eflalo2 <- cbind(ef3,ef4[,27:dim(ef4)[2]])
 
-eflalo2
+eflalo2 <- formatEflalo2(eflalo2)
 
 }
 
@@ -148,20 +148,23 @@ eflalo2
 
 # lapply(list.files(),source)
 
-## eflalo2 <- GetDataEflalo(Cstart='01-jan-2009',Cstop='31-dec-2009')
-
+ #eflalo2.10 <- GetDataEflalo(Cstart='01-jan-2010',Cstop='31-aug-2010')
+# eflalo2 <- GetDataEflalo(Cstart='01-jan-2009',Cstop='31-dec-2009')
+# eflalo2.08 <- GetDataEflalo(Cstart='01-jan-2008',Cstop='31-dec-2008')
+# eflalo2.07 <- GetDataEflalo(Cstart='01-jan-2007',Cstop='31-dec-2007')
+# eflalo2.6 <- GetDataEflalo(Cstart='01-jan-2006',Cstop='31-dec-2006')
+#
 ## print(dim(eflalo2))  
 
-## Write out the data for the vmstools library 
+# Write out the data for the vmstools library 
 
-## Make vessel anon first
+# Make vessel anon first
 
-##  eflalo2$VE_REF <- matrix(unlist(strsplit(as.character(eflalo2$VE_REF),":")),ncol=2,byrow=T)[,2]
+#  eflalo2$VE_REF <- matrix(unlist(strsplit(as.character(eflalo2$VE_REF),":")),ncol=2,byrow=T)[,2]
 
-##  eflalo2 <- formatEflalo2(eflalo2) 
 
-##  save(eflalo2,file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//eflalo2.rda",compress=T)
+#  save(eflalo2,file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//eflalo2.rda",compress=T)
 
-##  write.table (eflalo2, file='D://bearedo//Projects//visstat-raising//eflalo2.csv',sep=",",row.names=F)
+#  write.table (eflalo2, file='D://bearedo//Projects//visstat-raising//eflalo2.csv',sep=",",row.names=F)
 
-## eflalo2 <- read.table (file='D://bearedo//Projects//visstat-raising//eflalo2.csv',header=T,sep=",")
+# eflalo2 <- read.table (file='D://bearedo//Projects//visstat-raising//eflalo2.csv',header=T,sep=",")
