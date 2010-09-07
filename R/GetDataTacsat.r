@@ -5,11 +5,8 @@
 GetDataTacsat <- function(Cstart=Cstart,Cstop=Cstop)
 
 {
-
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
   
- 
-
 print(paste("Start at", Cstart, "and end at", Cstop))
 
 vms <- GetDataVMS(Cstart=Cstart,Cstop=Cstop)
@@ -28,13 +25,11 @@ vms$RGN_UTC_DATE <- ReformatDate(vms$RGN_UTC_DATE)
 
 #Read in platform properties to get a more anonymous ID for the TACSAT table
 
-
-
-pp <- sqlQuery(dBConnect(which.database="visstat"),"SELECT * from PLATFORM_PROPERTIES;")
-vms$VESSEL_ID1 <- pp$ID[match(vms$PPY_PLM_CODE,pp$PLM_CODE)]
-
-tacsat <- data.frame(VE_REF=paste(vms$TRP_PPY_PLM_CODE,vms$VESSEL_ID1,sep=":"),SI_LATI=vms$LATITUDE,SI_LONG=vms$LONGITUDE,
+tacsat <- data.frame(VE_REF=paste(vms$TRP_PPY_PLM_CODE,vms$PPY_ID,sep=":"),SI_LATI=vms$LATITUDE,SI_LONG=vms$LONGITUDE,
 SI_DATE=vms$RGN_UTC_DATE,SI_TIME=vms$RGN_UTC_TIME,SI_SP = vms$SPEED,SI_HE=vms$HEADING)
+
+library(vmstools)
+tacsat <- formatTacsat(tacsat)
 
 tacsat
 
@@ -78,5 +73,18 @@ tacsat
 #  tacsat <- read.table('tacsat.csv',sep=",",header=T)
 #  
 #save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat.rda",compress=T)
+
+#tacsat$VE_REF <- matrix(unlist(strsplit(as.character(tacsat$VE_REF),":")),ncol=2,byrow=T)[,2]
+#
+#save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat07.rda",compress=T)
+#
+#save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat08.rda",compress=T)
+#
+#save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat.rda",compress=T)
+#
+#
+#
 #
 #save(tacsat,file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//tacsat.rda",compress=T)
+#
+#
