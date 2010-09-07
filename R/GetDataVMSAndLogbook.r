@@ -42,8 +42,9 @@ to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time
 ,   vms.QPY_ICES_AREA
 ,   vms.unique_flag
 FROM registrations
-    LEFT OUTER JOIN platform_properties ON (platform_properties.id = registrations.trp_ppy_id
-                                           and registrations.TRP_ARRIVEL_DATE between platform_properties.START_DATE and nvl(platform_properties.END_DATE,sysdate))
+    LEFT OUTER JOIN platform_properties ON 
+    (platform_properties.id = registrations.trp_ppy_id
+    and registrations.TRP_ARRIVEL_DATE between platform_properties.START_DATE and nvl(platform_properties.END_DATE,sysdate))
     INNER JOIN trips ON (trips.arrivel_date = registrations.trp_arrivel_date
              and trips.arrivel_time = registrations.trp_arrivel_time
              and trips.ppy_plm_code = registrations.trp_ppy_plm_code
