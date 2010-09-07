@@ -1,4 +1,5 @@
 
+# Cstart="01-jan-2009";Cstop="31-jan-2009"  
 
 GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop) {
 
@@ -9,12 +10,27 @@ GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop) {
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)
 #Set up the Query
-  query <- paste("SELECT * from vms WHERE vms.rgn_local_date between ",Cstart," and ",Cstop,"")
+  query <- paste("SELECT vms.*, platform_properties.id FROM vms, platform_properties 
+  WHERE vms.rgn_local_date between ",Cstart," and ",Cstop,"")
+  
+  #WHERE vms.RGN_LOCAL_DATE between platform_properties.START_DATE AND nvl(platform_properties.END_DATE,sysdate))
+
 #Attach to DB and get the data out according to query
   vms <- sqlQuery(visstat,query);
-  vms
+  
+#Get date-time string
 
-}
+vms$ntim <- ReformatTime(vms$RGN_LOCAL_TIME)
+vms$date <- as.POSIXct(paste(vms$RGN_LOCAL_DATE,vms$ntim),tz="CET")
+
+#Put on the platform id 
+
+#Make sure vms data are ordered in time
+oo <- order(vms$date)
+vms <- vms[oo,]
+
+  vms
+  }
 
 #Example: extract all vms data for January 2010
 
