@@ -23,13 +23,14 @@ vms$RGN_LOCAL_TIME <- ReformatTime(vms$RGN_LOCAL_TIME)
 
 vms$RGN_UTC_DATE <- ReformatDate(vms$RGN_UTC_DATE)
 
+
 #Read in platform properties to get a more anonymous ID for the TACSAT table
 
-tacsat <- data.frame(VE_REF=paste(vms$TRP_PPY_PLM_CODE,vms$PPY_ID,sep=":"),SI_LATI=vms$LATITUDE,SI_LONG=vms$LONGITUDE,
+
+tacsat <- data.frame(VE_REF=paste(vms$PPY_PLM_CODE,vms$PPY_ID,sep=":"),SI_LATI=vms$LATITUDE,SI_LONG=vms$LONGITUDE,
 SI_DATE=vms$RGN_UTC_DATE,SI_TIME=vms$RGN_UTC_TIME,SI_SP = vms$SPEED,SI_HE=vms$HEADING)
 
-library(vmstools)
-tacsat <- formatTacsat(tacsat)
+print(head(tacsat))
 
 tacsat
 
@@ -56,8 +57,11 @@ tacsat
 #
 #tacsat2 <- GetDataTacsat(Cstart=dats$start.date[i],Cstop=dats$end.date[i])
 #
-#tacsat2$VE_REF <- matrix(unlist(strsplit(as.character(tacsat2$VE_REF),":")),ncol=2,byrow=T)[,2]
-#
+ #library(vmstools)
+# 
+#tacsat$VE_REF <- matrix(unlist(strsplit(as.character(tacsat$VE_REF),":")),ncol=2,byrow=T)[,2]
+#tacsat <- formatTacsat(tacsat)
+##
 #if (i == 1){
 #
 #  write.table (tacsat2, file = 'tacsat.csv',col.names=TRUE, sep=",",row.names=F) 
