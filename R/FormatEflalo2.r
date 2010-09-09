@@ -1,5 +1,5 @@
 formatEflalo2 <- function(x){
-  x$VE_REF        <- an(x$VE_REF)
+  x$VE_REF        <- an(ac(x$VE_REF))
   x$VE_FLT        <- ac(x$VE_FLT)
   x$VE_COU        <- ac(x$VE_COU)
   x$VE_LEN        <- an(ac(x$VE_LEN))
