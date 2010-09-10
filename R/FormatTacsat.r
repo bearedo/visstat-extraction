@@ -1,5 +1,5 @@
 formatTacsat <- function(x){
-  x$VE_REF    <- an(ac(x$VE_REF))
+  x$VE_REF    <- ac(x$VE_REF)
   x$SI_LATI   <- an(x$SI_LATI)
   x$SI_LONG   <- an(x$SI_LONG)
   x$SI_DATE   <- ac(x$SI_DATE)
