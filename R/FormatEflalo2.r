@@ -25,7 +25,7 @@ formatEflalo2 <- function(x){
   x$LE_UNIT       <- ac(x$LE_UNIT)
   x$LE_EFF        <- an(ac(x$LE_EFF))
   x$LE_EFF_VMS    <- an(ac(x$LE_EFF_VMS))
-  for(i in c(grep("_KG_",colnames(eflalo2)),grep("_EURO_",colnames(eflalo2)))) x[,i] <- an(ac(x[,i]))
+  for(i in c(grep("_KG_",colnames(x)),grep("_EURO_",colnames(x)))) x[,i] <- an(ac(x[,i]))
   return(x)
 }
 
