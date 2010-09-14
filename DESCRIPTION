@@ -1,6 +1,6 @@
 Package: visstatExtraction
 Title: For generic code to extract data from the visstat database
-Version: 0.01
+Version: 0.02
 Date: 2010-07-28
 Author: Stijn Bierman (stijn.bierman@wur.nl), Tessa van der Hammen (tessa.vanderhammen@wur.nl), Doug Beare  (douglas.beare@wur.nl)
 Maintainer: Doug Beare <douglas.beare@wur.nl>
