@@ -26,7 +26,6 @@ vms$RGN_UTC_DATE <- ReformatDate(vms$RGN_UTC_DATE)
 
 #Read in platform properties to get a more anonymous ID for the TACSAT table
 
-
 tacsat <- data.frame(VE_REF=paste(vms$PPY_PLM_CODE,vms$PPY_ID,sep=":"),SI_LATI=vms$LATITUDE,SI_LONG=vms$LONGITUDE,
 SI_DATE=vms$RGN_UTC_DATE,SI_TIME=vms$RGN_UTC_TIME,SI_SP = vms$SPEED,SI_HE=vms$HEADING)
 
@@ -76,7 +75,6 @@ tacsat
 #  
 #  tacsat <- read.table('tacsat.csv',sep=",",header=T)
 #  
-#save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat.rda",compress=T)
 
 #tacsat$VE_REF <- matrix(unlist(strsplit(as.character(tacsat$VE_REF),":")),ncol=2,byrow=T)[,2]
 #
@@ -85,9 +83,6 @@ tacsat
 #save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat08.rda",compress=T)
 #
 #save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat.rda",compress=T)
-#
-#
-#
 #
 #save(tacsat,file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//tacsat.rda",compress=T)
 #
