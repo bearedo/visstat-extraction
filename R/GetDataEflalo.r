@@ -137,7 +137,20 @@ ef4<- ef4[,1:dd[2]]
 
 eflalo2 <- cbind(ef3,ef4[,27:dim(ef4)[2]])
 
+#Put on the metier
 
+#Get the metier data from the database
+
+metiers <- sqlQuery(dBConnect("visstat"),"SELECT * from METIERS WHERE CODE = 'DCF';")
+
+#Get rid of the \r
+metiers$METIER <- as.character(metiers$METIER)
+
+metiers$METIER <- gsub("\r","",metiers$METIER)
+
+eflalo2$LE_MET_level6 <- metiers$METIER[match(eflalo2$FT_REF,metiers$TRIP_NUMBER)]
+
+eflalo2
 
 }
 
@@ -148,11 +161,23 @@ eflalo2 <- cbind(ef3,ef4[,27:dim(ef4)[2]])
 
 # lapply(list.files(),source)
 
- #eflalo2.10 <- GetDataEflalo(Cstart='01-jan-2010',Cstop='31-aug-2010')
-# eflalo2 <- GetDataEflalo(Cstart='01-jan-2009',Cstop='31-dec-2009')
+# #eflalo2.10 <- GetDataEflalo(Cstart='01-jan-2010',Cstop='31-aug-2010')
+# eflalo2 <-    GetDataEflalo(Cstart='01-jan-2009',Cstop='31-dec-2009')
+#  save(eflalo2,    file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//eflalo2.rda",compress=T)
+#  save(eflalo2,    file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.rda",compress=T) 
+# 
 # eflalo2.08 <- GetDataEflalo(Cstart='01-jan-2008',Cstop='31-dec-2008')
+#   save(eflalo2.08, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.08.rda",compress=T)
+#  
 # eflalo2.07 <- GetDataEflalo(Cstart='01-jan-2007',Cstop='31-dec-2007')
+#   save(eflalo2.07, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.07.rda",compress=T)
+#
 # eflalo2.06 <- GetDataEflalo(Cstart='01-jan-2006',Cstop='31-dec-2006')
+#    save(eflalo2.06, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.06.rda",compress=T)
+#
+#  eflalo2.05 <- GetDataEflalo(Cstart='01-jan-2005',Cstop='31-dec-2005')
+#    save(eflalo2.05, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.05.rda",compress=T)
+#
 #
 ## print(dim(eflalo2))  
 
@@ -160,14 +185,13 @@ eflalo2 <- cbind(ef3,ef4[,27:dim(ef4)[2]])
 
 # Make vessel anon first
 
-#  eflalo2.07$VE_REF <- matrix(unlist(strsplit(as.character(eflalo2.07$VE_REF),":")),ncol=2,byrow=T)[,2]
-   eflalo2.08$VE_REF <- matrix(unlist(strsplit(as.character(eflalo2.08$VE_REF),":")),ncol=2,byrow=T)[,2]
-eflalo2 <- formatEflalo2(eflalo2)
-
-#  save(eflalo2,file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//eflalo2.rda",compress=T)
-
-#  write.table (eflalo2, file='D://bearedo//Projects//visstat-raising//eflalo2.csv',sep=",",row.names=F)
-
-save(eflalo2.08, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.08.rda",compress=T)
-
-# eflalo2 <- read.table (file='D://bearedo//Projects//visstat-raising//eflalo2.csv',header=T,sep=",")
+#  
+   #eflalo2$VE_REF    <- matrix(unlist(strsplit(as.character(eflalo2$VE_REF),":")),ncol=2,byrow=T)[,2]
+   #eflalo2.07$VE_REF <- matrix(unlist(strsplit(as.character(eflalo2.07$VE_REF),":")),ncol=2,byrow=T)[,2]
+   #eflalo2.08$VE_REF <- matrix(unlist(strsplit(as.character(eflalo2.08$VE_REF),":")),ncol=2,byrow=T)[,2]
+   
+   #          library(vmstools)
+   #eflalo2    <- formatEflalo2(eflalo2)
+   #eflalo2.08 <- formatEflalo2(eflalo2.08)
+   #eflalo2.07 <- formatEflalo2(eflalo2.07)
+   
