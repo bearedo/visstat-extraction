@@ -33,33 +33,33 @@ data$activity[data$LE_MET_level6 == "TBB_DEM_UND_0_0"  & data$SI_SP > 6] <- "ste
 data$activity[data$LE_MET_level6 == "OTB_DEM_>=120_0_0" & data$SI_SP >=2 & data$SI_SP <=6] <- "fishing"
 data$activity[data$LE_MET_level6 == "OTB_DEM_>=120_0_0"  & data$SI_SP > 6] <- "steaming"
 
-data$activity[data$LE_MET_level6 == "OTB_DEM_100-119_0_0" & data$SI_SP >=2 & data$SI_SP <=4] <- "fishing"
-data$activity[data$LE_MET_level6 == "OTB_DEM_100-119_0_0"  & data$SI_SP > 4] <- "steaming"
+data$activity[data$LE_MET_level6 == "OTB_DEM_100-119_0_0" & data$SI_SP >=2 & data$SI_SP <=6] <- "fishing"
+data$activity[data$LE_MET_level6 == "OTB_DEM_100-119_0_0"  & data$SI_SP > 6] <- "steaming"
 
-data$activity[data$LE_MET_level6 == "OTB_DEM_70-99_0_0" & data$SI_SP >=2 & data$SI_SP <=4] <- "fishing"
-data$activity[data$LE_MET_level6 == "OTB_DEM_70-99_0_0"  & data$SI_SP > 4] <- "steaming"
+data$activity[data$LE_MET_level6 == "OTB_DEM_70-99_0_0" & data$SI_SP >=2 & data$SI_SP <=6] <- "fishing"
+data$activity[data$LE_MET_level6 == "OTB_DEM_70-99_0_0"  & data$SI_SP > 6] <- "steaming"
 
-data$activity[data$LE_MET_level6 == "OTB_MCD_70-99_0_0" & data$SI_SP >=3 & data$SI_SP <=4] <- "fishing"
-data$activity[data$LE_MET_level6 == "OTB_MCD_70-99_0_0"  & data$SI_SP > 4] <- "steaming"
+data$activity[data$LE_MET_level6 == "OTB_MCD_70-99_0_0" & data$SI_SP >=2 & data$SI_SP <=6] <- "fishing"
+data$activity[data$LE_MET_level6 == "OTB_MCD_70-99_0_0"  & data$SI_SP > 6] <- "steaming"
 
 #OTT - otter twin trawls
 
-data$activity[data$LE_MET_level6 == "OTT_DEM_>=120_0_0" & data$SI_SP >=2 & data$SI_SP <=4] <- "fishing"
-data$activity[data$LE_MET_level6 == "OTT_DEM_>=120_0_0"  & data$SI_SP > 4] <- "steaming"
+data$activity[data$LE_MET_level6 == "OTT_DEM_>=120_0_0" & data$SI_SP >=2 & data$SI_SP <=6] <- "fishing"
+data$activity[data$LE_MET_level6 == "OTT_DEM_>=120_0_0"  & data$SI_SP > 6] <- "steaming"
 
-data$activity[data$LE_MET_level6 == "OTT_DEM_100-119_0_0" & data$SI_SP >=2 & data$SI_SP <=4] <- "fishing"
-data$activity[data$LE_MET_level6 == "OTT_DEM_100-119_0_0"  & data$SI_SP > 4] <- "steaming"
+data$activity[data$LE_MET_level6 == "OTT_DEM_100-119_0_0" & data$SI_SP >=2 & data$SI_SP <=6] <- "fishing"
+data$activity[data$LE_MET_level6 == "OTT_DEM_100-119_0_0"  & data$SI_SP > 6] <- "steaming"
 
-data$activity[data$LE_MET_level6 == "OTT_DEM_70-99_0_0" & data$SI_SP >=2 & data$SI_SP <=4] <- "fishing"
-data$activity[data$LE_MET_level6 == "OTT_DEM_70-99_0_0"  & data$SI_SP > 4] <- "steaming"
+data$activity[data$LE_MET_level6 == "OTT_DEM_70-99_0_0" & data$SI_SP >=2 & data$SI_SP <=6] <- "fishing"
+data$activity[data$LE_MET_level6 == "OTT_DEM_70-99_0_0"  & data$SI_SP > 6] <- "steaming"
 
-data$activity[data$LE_MET_level6 == "OTT_MCD_70-99_0_0" & data$SI_SP >=2 & data$SI_SP <=4] <- "fishing"
-data$activity[data$LE_MET_level6 == "OTT_MCD_70-99_0_0"  & data$SI_SP > 4] <- "steaming"
+data$activity[data$LE_MET_level6 == "OTT_MCD_70-99_0_0" & data$SI_SP >=2 & data$SI_SP <=6] <- "fishing"
+data$activity[data$LE_MET_level6 == "OTT_MCD_70-99_0_0"  & data$SI_SP > 6] <- "steaming"
 
 #OTM - otter mid-water trawls
 
-data$activity[data$LE_MET_level6 == "OTM_SPF_>=120_0_0" & data$SI_SP >=2 & data$SI_SP <=5] <- "fishing"
-data$activity[data$LE_MET_level6 == "OTM_SPF_>=120_0_0"  & data$SI_SP > 5] <- "steaming"
+data$activity[data$LE_MET_level6 == "OTM_SPF_>=120_0_0" & data$SI_SP >=2 & data$SI_SP <=6] <- "fishing"
+data$activity[data$LE_MET_level6 == "OTM_SPF_>=120_0_0"  & data$SI_SP > 6] <- "steaming"
 
 data$activity[data$LE_MET_level6 == "OTM_SPF_16_31_0_0" & data$SI_SP >=.1 & data$SI_SP <=2] <- "fishing"
 data$activity[data$LE_MET_level6 == "OTM_SPF_16_31_0_0"  & data$SI_SP > 2] <- "steaming"
@@ -70,7 +70,7 @@ data$activity[data$LE_MET_level6 == "OTM_SPF_32-54_0_0"  & data$SI_SP > 6] <- "s
 data$activity[data$LE_MET_level6 == "OTM_SPF_32-69_0_0" & data$SI_SP >=2 & data$SI_SP <=6] <- "fishing"
 data$activity[data$LE_MET_level6 == "OTM_SPF_32-69_0_0"  & data$SI_SP > 6] <- "steaming"
 
-data$activity[data$LE_MET_level6 == "OTM_SPF_UND_0_0" & data$SI_SP >=4 & data$SI_SP <=6] <- "fishing"
+data$activity[data$LE_MET_level6 == "OTM_SPF_UND_0_0" & data$SI_SP >=2 & data$SI_SP <=6] <- "fishing"
 data$activity[data$LE_MET_level6 == "OTM_SPF_UND_0_0"  & data$SI_SP > 6] <- "steaming"
 
 
