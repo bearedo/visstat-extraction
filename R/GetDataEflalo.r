@@ -160,7 +160,6 @@ eflalo2
 # Quick way to load a load of r-files in a directory 
 
 # lapply(list.files(),source)
-
 # #eflalo2.10 <- GetDataEflalo(Cstart='01-jan-2010',Cstop='31-aug-2010')
 # eflalo2 <-    GetDataEflalo(Cstart='01-jan-2009',Cstop='31-dec-2009')
 #  save(eflalo2,    file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//eflalo2.rda",compress=T)
