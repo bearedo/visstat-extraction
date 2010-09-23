@@ -31,6 +31,19 @@ data$activity[data$VE_KW <= 221 & data$LE_MET_level6 == "TBB_DEM_>=120_0_0" & da
 data$activity[data$VE_KW <= 221 & data$LE_MET_level6 == "TBB_DEM_>=120_0_0" & data$SI_SP > 6]  <- "steaming"
 data$activity[data$VE_KW <= 221 & data$LE_MET_level6 == "TBB_DEM_>=120_0_0" & data$SI_SP > 6] <- "steaming"
 
+####################
+
+data$activity[data$VE_KW > 221 & data$LE_MET_level6 == "TBB_DEM_100-119_0_0" & data$SI_SP >= 3 & data$SI_SP <= 6] <- "fishing"
+data$activity[data$VE_KW > 221 & data$LE_MET_level6 == "TBB_DEM_100-119_0_0" & data$SI_SP >= 3 & data$SI_SP <= 6] <- "fishing"
+data$activity[data$VE_KW > 221 & data$LE_MET_level6 == "TBB_DEM_100-119_0_0" & data$SI_SP > 6]  <- "steaming"
+data$activity[data$VE_KW > 221 & data$LE_MET_level6 == "TBB_DEM_100-119_0_0" & data$SI_SP > 6] <- "steaming"
+
+data$activity[data$VE_KW <= 221 & data$LE_MET_level6 == "TBB_DEM_100-119_0_0" & data$SI_SP >= 2 & data$SI_SP <= 6] <- "fishing"
+data$activity[data$VE_KW <= 221 & data$LE_MET_level6 == "TBB_DEM_100-119_0_0" & data$SI_SP >= 2 & data$SI_SP <= 6] <- "fishing"
+data$activity[data$VE_KW <= 221 & data$LE_MET_level6 == "TBB_DEM_100-119_0_0" & data$SI_SP > 6]  <- "steaming"
+data$activity[data$VE_KW <= 221 & data$LE_MET_level6 == "TBB_DEM_100-119_0_0" & data$SI_SP > 6] <- "steaming"
+
+####
 
 data$activity[data$LE_MET_level6 == "TBB_MCD_70-99_0_0" & data$SI_SP >= 2 & data$SI_SP <= 6] <- "fishing"
 data$activity[data$LE_MET_level6 == "TBB_MCD_70-99_0_0" & data$SI_SP >= 2 & data$SI_SP <= 6] <- "fishing"
@@ -43,6 +56,11 @@ data$activity[data$LE_MET_level6 == "TBB_MCD_70-99_0_0" & data$SI_SP > 6] <- "st
 
 data$activity[data$LE_MET_level6 == "TBB_DEM_16-31_0_0" & data$SI_SP >=2 & data$SI_SP <=4] <- "fishing"
 data$activity[data$LE_MET_level6 == "TBB_DEM_16-31_0_0" & data$SI_SP > 4] <- "steaming"
+
+data$activity[data$LE_MET_level6 == "TBB_DEM_<16_0_0" & data$SI_SP >=2 & data$SI_SP <=4] <- "fishing"
+data$activity[data$LE_MET_level6 == "TBB_DEM_<16_0_0" & data$SI_SP > 4] <- "steaming"
+
+
 
 #Undefined beamers assume they are fishing between 1 and 6 knots
 
