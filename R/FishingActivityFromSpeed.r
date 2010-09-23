@@ -8,8 +8,8 @@ data$activity = rep(NA,length(data[,1]))
 
 #Beamers targeting demersal finfish > 221 kW and working mesh between 70 and 119mm
 #Larger than 221
-data$activity[data$VE_KW > 221 & data$LE_MET_level6 == "TBB_DEM_70-99_0_0" & data$SI_SP >= 5 & data$SI_SP <= 8] <- "fishing"
-data$activity[data$VE_KW > 221 & data$LE_MET_level6 == "TBB_DEM_90-119_0_0" & data$SI_SP >= 5 & data$SI_SP <= 8] <- "fishing"
+data$activity[data$VE_KW > 221 & data$LE_MET_level6 == "TBB_DEM_70-99_0_0" & data$SI_SP >= 4 & data$SI_SP <= 8] <- "fishing"
+data$activity[data$VE_KW > 221 & data$LE_MET_level6 == "TBB_DEM_90-119_0_0" & data$SI_SP >= 4 & data$SI_SP <= 8] <- "fishing"
 data$activity[data$VE_KW > 221 & data$LE_MET_level6 == "TBB_DEM_70-99_0_0" & data$SI_SP > 8] <- "steaming"
 data$activity[data$VE_KW > 221 & data$LE_MET_level6 == "TBB_DEM_90-119_0_0" & data$SI_SP > 8] <- "steaming"
 
@@ -19,7 +19,6 @@ data$activity[data$VE_KW <= 221 & data$LE_MET_level6 == "TBB_DEM_70-99_0_0" & da
 data$activity[data$VE_KW <= 221 & data$LE_MET_level6 == "TBB_DEM_90-119_0_0" & data$SI_SP >= 2 & data$SI_SP <= 6] <- "fishing"
 data$activity[data$VE_KW <= 221 & data$LE_MET_level6 == "TBB_DEM_70-99_0_0" & data$SI_SP > 6]  <- "steaming"
 data$activity[data$VE_KW <= 221 & data$LE_MET_level6 == "TBB_DEM_90-119_0_0" & data$SI_SP > 6] <- "steaming"
-
 
 data$activity[data$VE_KW > 221 & data$LE_MET_level6 == "TBB_DEM_>=120_0_0" & data$SI_SP >= 3 & data$SI_SP <= 6] <- "fishing"
 data$activity[data$VE_KW > 221 & data$LE_MET_level6 == "TBB_DEM_>=120_0_0" & data$SI_SP >= 3 & data$SI_SP <= 6] <- "fishing"
