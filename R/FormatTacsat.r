@@ -6,5 +6,8 @@ formatTacsat <- function(x){
   x$SI_TIME   <- ac(x$SI_TIME)
   x$SI_SP     <- an(x$SI_SP)
   x$SI_HE     <- an(x$SI_HE)
+  #Get rid of NAs in the long and lats
+  x <- x[!is.na(x$SI_LATI),]
+  x <- x[!is.na(x$SI_LONG),]
   return(x)
 }
