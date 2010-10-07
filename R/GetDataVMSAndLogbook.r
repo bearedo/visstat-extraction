@@ -1,6 +1,6 @@
 
 
-GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop) {
+GetDataVMSAndLogbook <- function(Cstart=Cstart, Cstop=Cstop) {
 
 # This function extracts all raw VMS data from VISSTAT by time interval and matches the VMS with some useful
 # information in the logbook data
