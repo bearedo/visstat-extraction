@@ -1,5 +1,5 @@
 
-CodRegsGearCodes <- function(data=data) {
+CodRegsGearCodes <- function(input=data) {
 #NB run DCFCodes and DCFMeshCategory first
 data$REG_GEAR <- rep(NA,length(data[,1]))
 data$REG_GEAR[data$GEAR == "BEAM" & data$MESH_SIZE_RANGE %in% c(">120")] <- 'BT1'
