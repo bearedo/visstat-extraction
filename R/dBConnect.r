@@ -10,3 +10,4 @@ dBConnect<-function(which.database="visstat"){
 	conn
 }
 
+ #
