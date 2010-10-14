@@ -1,17 +1,17 @@
 
-PassiveOrStatic <- function(data=data) {
+PassiveOrStatic <- function(input=tacsat1) {
 
-data$FISHERY_TYPE <- rep(NA,length(data[,1]))
-data$FISHERY_TYPE[data$GEAR == 'BEAM'] <- 'mobile'
-data$FISHERY_TYPE[data$GEAR == 'OTTER'] <- 'mobile'
-data$FISHERY_TYPE[data$GEAR == 'DREDGE'] <- 'mobile'
-data$FISHERY_TYPE[data$GEAR == 'DEM_SEINE'] <- 'mobile'
-data$FISHERY_TYPE[data$GEAR == 'GILL'] <- 'passive'
-data$FISHERY_TYPE[data$GEAR == 'TRAMMEL'] <- 'passive'
-data$FISHERY_TYPE[data$GEAR == 'LONGLINE'] <- 'passive'
-data$FISHERY_TYPE[data$GEAR == 'POTS'] <- 'passive'
-data$FISHERY_TYPE[data$GEAR == 'PEL_TRAWL'] <- 'mobile'
-data$FISHERY_TYPE[data$GEAR == 'PEL_SEINE'] <- 'mobile'
-data$FISHERY_TYPE <- ifelse(is.na(data$FISHERY_TYPE), 'unknown', data$FISHERY_TYPE)
-data
+input$FISHERY_TYPE <- rep(NA,length(input[,1]))
+input$FISHERY_TYPE[input$GEAR == 'BEAM'] <- 'mobile'
+input$FISHERY_TYPE[input$GEAR == 'OTTER'] <- 'mobile'
+input$FISHERY_TYPE[input$GEAR == 'DREDGE'] <- 'mobile'
+input$FISHERY_TYPE[input$GEAR == 'DEM_SEINE'] <- 'mobile'
+input$FISHERY_TYPE[input$GEAR == 'GILL'] <- 'passive'
+input$FISHERY_TYPE[input$GEAR == 'TRAMMEL'] <- 'passive'
+input$FISHERY_TYPE[input$GEAR == 'LONGLINE'] <- 'passive'
+input$FISHERY_TYPE[input$GEAR == 'POTS'] <- 'passive'
+input$FISHERY_TYPE[input$GEAR == 'PEL_TRAWL'] <- 'mobile'
+input$FISHERY_TYPE[input$GEAR == 'PEL_SEINE'] <- 'mobile'
+input$FISHERY_TYPE <- ifelse(is.na(input$FISHERY_TYPE), 'unknown', input$FISHERY_TYPE)
+input
 }
