@@ -9,5 +9,5 @@ input$REG_GEAR[input$GEAR %in% c("OTTER","DEM_SEINE") & input$MESH_SIZE_RANGE %i
 input$REG_GEAR[input$GEAR %in% c("GILL") ] <- 'GN'
 input$REG_GEAR[input$GEAR %in% c("TRAMMEL") ] <- 'GN'
 input$REG_GEAR[input$GEAR %in% c("LONGLINE") ] <- 'LL'
-data
+input
 }
