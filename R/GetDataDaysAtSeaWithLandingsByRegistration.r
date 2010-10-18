@@ -92,6 +92,7 @@ dasbyreg$POWER[!is.na(dasbyreg$POWER) & dasbyreg$POWER == 0] <- NA
 #Replace length categories using parameters from linear models between length and engine power categories
 
 ll <- log(dasbyreg$LENGTH+1)
+lp <- log(dasbyreg$POWER+1)
 m1 <- lm(ll ~ lp,na.action='na.omit')
 
 dasbyreg$LENGTH[is.na(dasbyreg$LENGTH)] <- exp(coef(m1)[1]+coef(m1)[2]*log(dasbyreg$POWER[is.na(dasbyreg$LENGTH) ]))
