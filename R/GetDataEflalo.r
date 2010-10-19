@@ -3,32 +3,29 @@
 
 
 GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop) 
-
 {
-
 # Get data 
-
-valuebytrip <- GetDataLandingValueByTrip(Cstart=Cstart, Cstop=Cstop)
+valuebyreg <- GetDataLandingValueByRegistration(Cstart=Cstart, Cstop=Cstop)
 
 #Reformat time strings
 
-valuebytrip$ARRIVEL_TIME <- ReformatTime(valuebytrip$ARRIVEL_TIME)
-valuebytrip$DEPARTURE_TIME <- ReformatTime(valuebytrip$DEPARTURE_TIME)
+valuebyreg$ARRIVEL_TIME <- ReformatTime(valuebyreg$ARRIVEL_TIME)
+valuebyreg$DEPARTURE_TIME <- ReformatTime(valuebyreg$DEPARTURE_TIME)
 
 #Reformat date strings
 
-valuebytrip$ARRIVEL_DATE <- ReformatDate( valuebytrip$ARRIVEL_DATE)
-valuebytrip$DEPARTURE_DATE <- ReformatDate( valuebytrip$DEPARTURE_DATE)
+valuebyreg$ARRIVEL_DATE <- ReformatDate( valuebyreg$ARRIVEL_DATE)
+valuebyreg$DEPARTURE_DATE <- ReformatDate( valuebyreg$DEPARTURE_DATE)
 
 
 # Transform the data frame into the crappy 'matrix' format required by eflalo.
 
-mm<-paste(valuebytrip$TRIP_NUMBER,paste(valuebytrip$TRP_PPY_PLM_CODE,valuebytrip$VESSEL_ID1,sep=":"),
-valuebytrip$LEVEL5,valuebytrip$RGN_TRP_PPY_PLM_CNY_CODE,valuebytrip$PRT_CNY_CODE,
-valuebytrip$PRT_CNY_CODE_DEPARTED_FROM,
-valuebytrip$GPY_CODE,valuebytrip$MESHSIZE,valuebytrip$QUADRANT,
-valuebytrip$PRT_CODE_DEPARTED_FROM,valuebytrip$PRT_CODE,valuebytrip$DEPARTURE_DATE,valuebytrip$DEPARTURE_TIME,
-valuebytrip$ARRIVEL_DATE,valuebytrip$ARRIVEL_TIME,valuebytrip$POWER,valuebytrip$LENGTH,valuebytrip$KWDAS,sep=",")
+mm<-paste(valuebyreg$TRIP_NUMBER,paste(valuebyreg$TRP_PPY_PLM_CODE,valuebyreg$VESSEL_ID1,sep=":"),
+valuebyreg$LEVEL5,valuebyreg$RGN_TRP_PPY_PLM_CNY_CODE,valuebyreg$PRT_CNY_CODE,
+valuebyreg$PRT_CNY_CODE_DEPARTED_FROM,
+valuebyreg$GPY_CODE,valuebyreg$MESHSIZE,valuebyreg$QUADRANT,
+valuebyreg$PRT_CODE_DEPARTED_FROM,valuebyreg$PRT_CODE,valuebyreg$DEPARTURE_DATE,valuebyreg$DEPARTURE_TIME,
+valuebyreg$ARRIVEL_DATE,valuebyreg$ARRIVEL_TIME,valuebyreg$POWER,valuebyreg$LENGTH,valuebyreg$KWDAS,sep=",")
 
 col.labels<-c("TRIP_NUMBER","TRP_PPY_PLM_CODE","LEVEL5","RGN_TRP_PPY_PLM_CNY_CODE","PRT_CNY_CODE",
 "PRT_CNY_CODE_DEPARTED_FROM",
@@ -42,7 +39,7 @@ sum.na <- function(x) { x<-sum(x[!is.na(x)]);x}
 # First by weight of landings 
 ####################################
 
-ef0<-tapply(valuebytrip$WEIGHT,list(mm,valuebytrip$TXN_ICES_CODE),sum.na)
+ef0<-tapply(valuebyreg$WEIGHT,list(mm,valuebyreg$TXN_ICES_CODE),sum.na)
 mm1<-dimnames(ef0)[[1]]
 
  #Get the number of variables selected
@@ -79,7 +76,7 @@ ef3$VE_KW  <- as.numeric(as.vector(ef3$VE_KW))
 # Now by value of landings##
 ############################
 
-ef0<-tapply(valuebytrip$VALUE,list(mm,valuebytrip$TXN_ICES_CODE),sum.na)
+ef0<-tapply(valuebyreg$VALUE,list(mm,valuebyreg$TXN_ICES_CODE),sum.na)
 mm1<-dimnames(ef0)[[1]]
 
  #Get the number of variables selected
