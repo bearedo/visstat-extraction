@@ -11,8 +11,7 @@ GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop) {
   Cstart <-WriteSQLString(Cstart)
 #Set up the Query
   
-   query <- paste("SELECT vms.* FROM vms                   
-  WHERE vms.rgn_local_date between ",Cstart," and ",Cstop,"")
+   query <- paste("SELECT vms.* FROM vms WHERE vms.rgn_local_date between ",Cstart," and ",Cstop,"")
   
  
   #WHERE vms.RGN_LOCAL_DATE between platform_properties.START_DATE AND nvl(platform_properties.END_DATE,sysdate))
