@@ -9,7 +9,7 @@ dats <- data.frame(start.date=paste('1','Jan',syear:eyear,sep="-"), end.date= pa
 for (i in 1:7) {
 
 print(dats$start.date[i])
-data <- GetDataLandingValueByTrip(Cstart=dats$start.date[i],Cstop=dats$end.date[i])
+data <- GetDataLandingValueByRegistration(Cstart=dats$start.date[i],Cstop=dats$end.date[i])
 
 #Just species required
 
