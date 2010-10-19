@@ -73,10 +73,6 @@ WHERE  catches.rgn_trp_arrivel_date between ",Cstart," and ",Cstop,"
 ")
 
 
-
-
-
-
 dasbyreg <-sqlQuery(visstat,query);
 
 dasbyreg$COARSE_DAS <- ifelse(dasbyreg$COARSE_DAS==0,1,dasbyreg$COARSE_DAS)
