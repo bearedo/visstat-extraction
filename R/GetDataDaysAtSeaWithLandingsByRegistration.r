@@ -13,8 +13,7 @@ GetDataDaysAtSeaWithLandingsByRegistration <- function(Cstart=Cstart,Cstop=Cstop
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)
 
-  
-  
+
   query <-paste("
 SELECT
     trips.trip_number
@@ -92,14 +91,14 @@ dasbyreg$POWER[!is.na(dasbyreg$POWER) & dasbyreg$POWER == 0] <- NA
 
 #Replace length categories using parameters from linear models between length and engine power categories
 
-ll <- log(dasbyreg$LENGTH+1)
-lp <- log(dasbyreg$POWER+1)
+ll <- log(dasbyreg$LENGTH)
+lp <- log(dasbyreg$POWER)
 m1 <- lm(ll ~ lp,na.action='na.omit')
 
 dasbyreg$LENGTH[is.na(dasbyreg$LENGTH)] <- exp(coef(m1)[1]+coef(m1)[2]*log(dasbyreg$POWER[is.na(dasbyreg$LENGTH) ]))
 
-ll <- log(dasbyreg$LENGTH+1)
-lp <- log(dasbyreg$POWER+1)
+ll <- log(dasbyreg$LENGTH)
+lp <- log(dasbyreg$POWER)
 m2 <- lm(lp ~ ll,na.action='na.omit')
 
 dasbyreg$POWER[is.na(dasbyreg$POWER)] <- exp(coef(m2)[1]+coef(m2)[2]*log(dasbyreg$POWER[is.na(dasbyreg$POWER) ]))
@@ -115,6 +114,7 @@ countries <- data.frame(old=c('be','de','dk','eng','fr','gb','nl','nld','scd'),n
 dasbyreg$PRT_CNY_CODE <- countries$new[match(dasbyreg$PRT_CNY_CODE,countries$old)]
 dasbyreg$PRT_CNY_CODE_DEPARTED_FROM <- countries$new[match(dasbyreg$PRT_CNY_CODE_DEPARTED_FROM,countries$old)]
 dasbyreg$RGN_TRP_PPY_PLM_CNY_CODE <- countries$new[match(dasbyreg$RGN_TRP_PPY_PLM_CNY_CODE,countries$old)]
+
 dasbyreg
 
 }
@@ -126,7 +126,7 @@ dasbyreg
 ###############################################################################
 
 
-#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart="01-jan-2009",Cstop="31-dec-2009")
+#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart="01-jan-2009",Cstop="31-jan-2009")
 #
 ##Add on approximate lats and longs
 #
