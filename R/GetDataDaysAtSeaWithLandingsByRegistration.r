@@ -51,8 +51,8 @@ to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time
 
 
 FROM registrations
-    LEFT OUTER JOIN platform_properties ON (platform_properties.id = registrations.trp_ppy_id
-                                           and registrations.TRP_ARRIVEL_DATE between platform_properties.START_DATE and nvl(platform_properties.END_DATE,sysdate))
+    LEFT OUTER JOIN platform_properties ON (platform_properties.PLM_CODE = registrations.trp_ppy_plm_code
+    and registrations.TRP_ARRIVEL_DATE between platform_properties.START_DATE and nvl(platform_properties.END_DATE,sysdate))
     INNER JOIN catches ON (registrations.sre_code  = catches.rgn_sre_code
              and registrations.trp_ppy_plm_cny_code = catches.rgn_trp_ppy_plm_cny_code
              and registrations.trp_prt_code = catches.rgn_trp_prt_code
@@ -71,6 +71,11 @@ FROM registrations
 WHERE  catches.rgn_trp_arrivel_date between ",Cstart," and ",Cstop,"
        and catches.RGN_TRP_PPY_PLM_CNY_CODE IN ('nld')
 ")
+
+
+
+
+
 
 dasbyreg <-sqlQuery(visstat,query);
 
