@@ -42,42 +42,42 @@ tacsat
 
 #Create a vector of dates to loop over
 
-syear <- 2009
-eyear <- 2010
-yrs<-paste(rep(syear:eyear,rep(12,length(syear:eyear))))
-mths<-rep(month.abb,length(syear:eyear))
-dys1 <- 1
-dys2 <- c(31,28,31,30,31,30,31,31,30,31,30,31)
-
-dats <- data.frame(start.date=paste(dys1,mths,yrs,sep="-"), end.date= paste(dys2,mths,yrs,sep="-"))
-
-setwd("D://bearedo//Projects//visstat-raising//")
-
-for (i in 1:12) {
-
-tacsat2 <- GetDataTacsat(Cstart=dats$start.date[i],Cstop=dats$end.date[i])
-
- 
-#tacsat$VE_REF <- matrix(unlist(strsplit(as.character(tacsat$VE_REF),":")),ncol=2,byrow=T)[,2]
-tacsat <- formatTacsat(tacsat)
+#syear <- 2009
+#eyear <- 2010
+#yrs<-paste(rep(syear:eyear,rep(12,length(syear:eyear))))
+#mths<-rep(month.abb,length(syear:eyear))
+#dys1 <- 1
+#dys2 <- c(31,28,31,30,31,30,31,31,30,31,30,31)
 #
-if (i == 1){
-
-  write.table (tacsat2, file = 'tacsat.csv',col.names=TRUE, sep=",",row.names=F) 
-  
-  }
-  
-else {
-
-  write.table (tacsat2, file = 'tacsat.csv', col.names=FALSE, sep=",", row.names =F,append=T)}
-
-}  
-  
-
-
-tacsat <- read.table('tacsat.csv',sep=",",header=T)
-  
-
+#dats <- data.frame(start.date=paste(dys1,mths,yrs,sep="-"), end.date= paste(dys2,mths,yrs,sep="-"))
+#
+#setwd("D://bearedo//Projects//visstat-raising//")
+#
+#for (i in 1:12) {
+#
+#tacsat2 <- GetDataTacsat(Cstart=dats$start.date[i],Cstop=dats$end.date[i])
+#
+# 
+##tacsat$VE_REF <- matrix(unlist(strsplit(as.character(tacsat$VE_REF),":")),ncol=2,byrow=T)[,2]
+#tacsat <- formatTacsat(tacsat)
+##
+#if (i == 1){
+#
+#  write.table (tacsat2, file = 'tacsat.csv',col.names=TRUE, sep=",",row.names=F) 
+#  
+#  }
+#  
+#else {
+#
+#  write.table (tacsat2, file = 'tacsat.csv', col.names=FALSE, sep=",", row.names =F,append=T)}
+#
+#}  
+#  
+#
+#
+#tacsat <- read.table('tacsat.csv',sep=",",header=T)
+#  
+#
 #tacsat$VE_REF <- matrix(unlist(strsplit(as.character(tacsat$VE_REF),":")),ncol=2,byrow=T)[,2]
 #
 #save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat07.rda",compress=T)
