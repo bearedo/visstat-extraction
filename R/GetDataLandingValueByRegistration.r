@@ -37,7 +37,7 @@ CTAB[is.na(CTAB)] <- 0;
   
  # Merge the price data with the landings and effort data
 
-valuebytrip <- merge(dasbyreg,sp1,all.x=T)
+valuebyregistration <- merge(dasbyreg,sp1,all.x=T)
 
  # For missing prices take the mean for that species
 
@@ -46,22 +46,22 @@ valuebytrip <- merge(dasbyreg,sp1,all.x=T)
  sp2 <- vectorise(tapply(sp1$PRICE,sp1$TXN_ICES_CODE,mean.na))
  dimnames(sp2)[[2]] <- c("PRICE","TXN_ICES_CODE")
  
- # Where are the prices missing in valuebytrip ?
+ # Where are the prices missing in valuebyregistration ?
  
- ww <- (1:length(valuebytrip[,1]))[is.na(valuebytrip$PRICE)]
+ ww <- (1:length(valuebyregistration[,1]))[is.na(valuebyregistration$PRICE)]
  
  # Insert the averages
  
- valuebytrip$PRICE[ww] <- sp2$PRICE[match(as.character(valuebytrip$TXN_ICES_CODE[ww]),sp2$TXN_ICES_CODE)]
+ valuebyregistration$PRICE[ww] <- sp2$PRICE[match(as.character(valuebyregistration$TXN_ICES_CODE[ww]),sp2$TXN_ICES_CODE)]
 
  # Note: some species do not seem to be in the prices table ("FBM","HER","POA","RAZ","RJB","RJH","SBR","SBX","SYC")
  # For the time-being I will make these equal to 1
  
- valuebytrip$PRICE[is.na(valuebytrip$PRICE)] <- 1
+ valuebyregistration$PRICE[is.na(valuebyregistration$PRICE)] <- 1
  
- valuebytrip$VALUE <- valuebytrip$WEIGHT*valuebytrip$PRICE
+ valuebyregistration$VALUE <- valuebyregistration$WEIGHT*valuebyregistration$PRICE
  
- valuebytrip
+ valuebyregistration
  
  }
  
@@ -70,5 +70,5 @@ valuebytrip <- merge(dasbyreg,sp1,all.x=T)
 ###############################################################################
 
  
-# valuebytrip <- GetDataLandingValueByTrip(Cstart="01-jan-2009",Cstop="31-jan-2009")
+# valuebyregistration <- GetDataLandingValueByRegistration(Cstart="01-jan-2009",Cstop="31-jan-2009")
 #xx
