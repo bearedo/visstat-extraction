@@ -26,7 +26,7 @@ data <- qtr.f(data)
 
 #Add on gear category
 
-data <- DCFGearCodes(data=data)
+data <- DCFGearCodes(data=data,data.type="visstat")
 
 #Pasive or static?
 
@@ -38,7 +38,7 @@ data <- WGMixFishLengthCats(data)
 
 #Mesh size category
 
-data <- DCFMeshCategory(data)
+data <- DCFMeshCategory(data,data.type="visstat")
 
 #Nephrops function groups
 
