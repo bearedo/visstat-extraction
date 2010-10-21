@@ -5,6 +5,7 @@
 GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop) 
 {
 # Get data 
+
 valuebyreg <- GetDataLandingValueByRegistration(Cstart=Cstart, Cstop=Cstop)
 
 #Reformat time strings
@@ -25,13 +26,13 @@ valuebyreg$LEVEL5,valuebyreg$RGN_TRP_PPY_PLM_CNY_CODE,valuebyreg$PRT_CNY_CODE,
 valuebyreg$PRT_CNY_CODE_DEPARTED_FROM,
 valuebyreg$GPY_CODE,valuebyreg$MESHSIZE,valuebyreg$QUADRANT,
 valuebyreg$PRT_CODE_DEPARTED_FROM,valuebyreg$PRT_CODE,valuebyreg$DEPARTURE_DATE,valuebyreg$DEPARTURE_TIME,
-valuebyreg$ARRIVEL_DATE,valuebyreg$ARRIVEL_TIME,valuebyreg$POWER,valuebyreg$LENGTH,valuebyreg$KWDAS,sep=",")
+valuebyreg$ARRIVEL_DATE,valuebyreg$ARRIVEL_TIME,valuebyreg$ICES_SUBAREA,valuebyreg$POWER,valuebyreg$LENGTH,valuebyreg$KWDAS,sep=",")
 
 col.labels<-c("TRIP_NUMBER","TRP_PPY_PLM_CODE","LEVEL5","RGN_TRP_PPY_PLM_CNY_CODE","PRT_CNY_CODE",
 "PRT_CNY_CODE_DEPARTED_FROM",
 "GPY_CODE","MESHSIZE","QUADRANT",
 "PRT_CODE_DEPARTED_FROM","PRT_CODE","DEPARTURE_DATE","DEPARTURE_TIME",
-"ARRIVEL_DATE","ARRIVEL_TIME","POWER","LENGTH","KWDAS")
+"ARRIVEL_DATE","ARRIVEL_TIME","ICES_SUBAREA","POWER","LENGTH","KWDAS")
 
 sum.na <- function(x) { x<-sum(x[!is.na(x)]);x}
 
@@ -55,17 +56,27 @@ ef2 <- data.frame(VE_REF=ef1[,"TRP_PPY_PLM_CODE"],VE_FLT=ef1[,"LEVEL5"],VE_COU =
 VE_KW= ef1[,"POWER"],VE_TON=rep(NA,dim(ef1)[1]),
 FT_REF=ef1[,"TRIP_NUMBER"],FT_DCOU=ef1[,"PRT_CNY_CODE_DEPARTED_FROM"],FT_DHAR=ef1[,"PRT_CODE_DEPARTED_FROM"],
 FT_DDAT=ef1[,"DEPARTURE_DATE"],FT_DTIME=ef1[,"DEPARTURE_TIME"],FT_LCOU = ef1[,"PRT_CNY_CODE"],
-FT_LHAR = ef1[,"PRT_CODE"], FT_LDAT = ef1[,"ARRIVEL_DATE"], FT_LTIME=ef1[,"ARRIVEL_TIME"],LE_CDAT=rep(NA,dim(ef1)[1]),LE_STIME=rep(NA,dim(ef1)[1]), 
+FT_LHAR = ef1[,"PRT_CODE"], FT_LDAT = ef1[,"ARRIVEL_DATE"], FT_LTIME=ef1[,"ARRIVEL_TIME"],
+LE_ID = paste(ef1[,"TRIP_NUMBER"],ef1[,"GPY_CODE"],ef1[,"QUADRANT"],sep="-"),
+LE_CDAT=rep(NA,dim(ef1)[1]),
+LE_STIME=rep(NA,dim(ef1)[1]), 
 LE_ETIME =rep(NA,dim(ef1)[1]),
-LE_SEQNUM=rep(NA,dim(ef1)[1]),LE_GEAR =  ef1[,"GPY_CODE"], LE_MSZ = ef1[,"MESHSIZE"], LE_RECT = ef1[,"QUADRANT"], LE_MET_level6=rep(NA,dim(ef1)[1]),
+LE_SLAT=rep(NA,dim(ef1)[1]),
+LE_SLON=rep(NA,dim(ef1)[1]),
+LE_ELAT=rep(NA,dim(ef1)[1]),
+LE_ELON=rep(NA,dim(ef1)[1]),
+LE_GEAR =  ef1[,"GPY_CODE"], LE_MSZ = ef1[,"MESHSIZE"], LE_RECT = ef1[,"QUADRANT"], 
+LE_DIV = ef1[,"ICES_SUBAREA"], 
+LE_MET=rep(NA,dim(ef1)[1]),
 LE_UNIT=rep("KWDAYS",dim(ef1)[1]),
 LE_EFF=ef1[,"KWDAS"],LE_EFF_VMS=rep(NA,dim(ef1)[1]))
-
+                                                             
 ef3<-cbind(ef2,ef0)
-#Replace NAs with Zeros
-for(i in 27:dim(ef3)[2]){ ef3[,i] <- ifelse(is.na(ef3[,i]),0,ef3[,i])  }
 
-dimnames(ef3)[[2]][27:dim(ef3)[2]]<-paste("LE_KG_",dimnames(ef3)[[2]][27:dim(ef3)[2]],sep="")
+#Replace NAs with Zeros
+for(i in 32:dim(ef3)[2]){ ef3[,i] <- ifelse(is.na(ef3[,i]),0,ef3[,i])  }
+
+dimnames(ef3)[[2]][32:dim(ef3)[2]]<-paste("LE_KG_",dimnames(ef3)[[2]][32:dim(ef3)[2]],sep="")
 
 ef3$LE_EFF <- as.numeric(as.vector(ef3$LE_EFF))
 ef3$VE_LEN <- as.numeric(as.vector(ef3$VE_LEN))
@@ -87,22 +98,30 @@ ef1<-matrix(unlist(strsplit(mm1,",")),ncol=ll,byrow=T)
 dimnames(ef1)[[1]]<-1:dim(ef1)[1]
 dimnames(ef1)[[2]][1:ll]<-col.labels
 
-
 ef2 <- data.frame(VE_REF=ef1[,"TRP_PPY_PLM_CODE"],VE_FLT=ef1[,"LEVEL5"],VE_COU = ef1[,"RGN_TRP_PPY_PLM_CNY_CODE"], VE_LEN = ef1[,"LENGTH"], 
 VE_KW= ef1[,"POWER"],VE_TON=rep(NA,dim(ef1)[1]),
 FT_REF=ef1[,"TRIP_NUMBER"],FT_DCOU=ef1[,"PRT_CNY_CODE_DEPARTED_FROM"],FT_DHAR=ef1[,"PRT_CODE_DEPARTED_FROM"],
 FT_DDAT=ef1[,"DEPARTURE_DATE"],FT_DTIME=ef1[,"DEPARTURE_TIME"],FT_LCOU = ef1[,"PRT_CNY_CODE"],
-FT_LHAR = ef1[,"PRT_CODE"], FT_LDAT = ef1[,"ARRIVEL_DATE"], FT_LTIME=ef1[,"ARRIVEL_TIME"],LE_CDAT=rep(NA,dim(ef1)[1]),LE_STIME=rep(NA,dim(ef1)[1]), 
+FT_LHAR = ef1[,"PRT_CODE"], FT_LDAT = ef1[,"ARRIVEL_DATE"], FT_LTIME=ef1[,"ARRIVEL_TIME"],
+LE_ID = paste(ef1[,"TRIP_NUMBER"],ef1[,"GPY_CODE"],ef1[,"QUADRANT"],sep="-"),
+LE_CDAT=rep(NA,dim(ef1)[1]),
+LE_STIME=rep(NA,dim(ef1)[1]), 
 LE_ETIME =rep(NA,dim(ef1)[1]),
-LE_SEQNUM=rep(NA,dim(ef1)[1]),LE_GEAR =  ef1[,"GPY_CODE"], LE_MSZ = ef1[,"MESHSIZE"], LE_RECT = ef1[,"QUADRANT"], LE_MET_level6=rep(NA,dim(ef1)[1]),
+LE_SLAT=rep(NA,dim(ef1)[1]),
+LE_SLON=rep(NA,dim(ef1)[1]),
+LE_ELAT=rep(NA,dim(ef1)[1]),
+LE_ELON=rep(NA,dim(ef1)[1]),
+LE_GEAR =  ef1[,"GPY_CODE"], LE_MSZ = ef1[,"MESHSIZE"], LE_RECT = ef1[,"QUADRANT"], 
+LE_DIV = ef1[,"ICES_SUBAREA"], 
+LE_MET=rep(NA,dim(ef1)[1]),
 LE_UNIT=rep("KWDAYS",dim(ef1)[1]),
 LE_EFF=ef1[,"KWDAS"],LE_EFF_VMS=rep(NA,dim(ef1)[1]))
 
 ef4<-cbind(ef2,ef0)
 #Replace NAs with Zeros
-for(i in 27:dim(ef4)[2]){ ef4[,i] <- ifelse(is.na(ef4[,i]),0,ef4[,i])  }
+for(i in 32:dim(ef4)[2]){ ef4[,i] <- ifelse(is.na(ef4[,i]),0,ef4[,i])  }
 
-dimnames(ef4)[[2]][27:dim(ef4)[2]]<-paste("LE_EURO_",dimnames(ef4)[[2]][27:dim(ef4)[2]],sep="")
+dimnames(ef4)[[2]][32:dim(ef4)[2]]<-paste("LE_EURO_",dimnames(ef4)[[2]][32:dim(ef4)[2]],sep="")
 
 ef4$LE_EFF <- as.numeric(as.vector(ef4$LE_EFF))
 ef4$VE_LEN <- as.numeric(as.vector(ef4$VE_LEN))
@@ -114,7 +133,7 @@ dd <- dim(ef4)
 
 #Partition the effort among the statistical rectangles
 
-ctotals<-apply(ef4[27:dim(ef4)[2]],1,sum.na)
+ctotals<-apply(ef4[32:dim(ef4)[2]],1,sum.na)
 
 ptab <- tapply(ctotals,list(as.factor(ef4$LE_RECT), as.factor(ef4$FT_REF)),sum.na);
 
@@ -132,7 +151,7 @@ ef4<- ef4[,1:dd[2]]
 
 #Combine the weights and values into a single dataframe
 
-eflalo2 <- cbind(ef3,ef4[,27:dim(ef4)[2]])
+eflalo2 <- cbind(ef3,ef4[,32:dim(ef4)[2]])
 
 #Put on the metier
 
@@ -145,7 +164,12 @@ metiers$METIER <- as.character(metiers$METIER)
 
 metiers$METIER <- gsub("\r","",metiers$METIER)
 
-eflalo2$LE_MET_level6 <- metiers$METIER[match(eflalo2$FT_REF,metiers$TRIP_NUMBER)]
+eflalo2$LE_MET <- metiers$METIER[match(eflalo2$FT_REF,metiers$TRIP_NUMBER)]
+
+#Put on ICES area 
+
+#lon_lat <- rectangle.lon.lat(eflalo2$LE_RECT,midpoint=T)
+#eflalo2$LE_DIV <- ICESarea(long=lon_lat[,2],lat=lon_lat[,1])
 
 eflalo2
 
