@@ -20,12 +20,19 @@ query <-paste("
   SELECT
     trip_number,
        plm_code,
+       sales_date,
+       auction,
+       prt_code,
        TO_CHAR(unload_date,'J') AS julian,
        TO_CHAR(unload_date,'WW') AS week,
        TO_CHAR(unload_date,'MM') AS month,
        txn_ices_code,
+       presentation,
+       size_class,
        weight,
        price_kg,
+       valuta,
+       plm_cny_code,
        weight*price_kg AS value
   FROM size_classes
   WHERE unload_date between ",Cstart," and ",Cstop,"
