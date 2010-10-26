@@ -21,7 +21,7 @@ valuebyreg$DEPARTURE_DATE <- ReformatDate( valuebyreg$DEPARTURE_DATE)
 
 # Transform the data frame into the crappy 'matrix' format required by eflalo.
 
-mm<-paste(valuebyreg$TRIP_NUMBER,paste(valuebyreg$TRP_PPY_PLM_CODE,valuebyreg$VESSEL_ID2,sep=":"),
+mm<-paste(valuebyreg$TRIP_NUMBER,paste(valuebyreg$TRP_PPY_PLM_CODE,sep=":"),
 valuebyreg$LEVEL5,valuebyreg$RGN_TRP_PPY_PLM_CNY_CODE,valuebyreg$PRT_CNY_CODE,
 valuebyreg$PRT_CNY_CODE_DEPARTED_FROM,
 valuebyreg$GPY_CODE,valuebyreg$MESHSIZE,valuebyreg$QUADRANT,
@@ -165,6 +165,7 @@ metiers$METIER <- as.character(metiers$METIER)
 metiers$METIER <- gsub("\r","",metiers$METIER)
 
 eflalo2$LE_MET <- metiers$METIER[match(eflalo2$FT_REF,metiers$TRIP_NUMBER)]
+
 
 #Put on ICES area 
 
