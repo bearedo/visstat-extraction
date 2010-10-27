@@ -67,7 +67,7 @@ LE_ELAT=rep(NA,dim(ef1)[1]),
 LE_ELON=rep(NA,dim(ef1)[1]),
 LE_GEAR =  ef1[,"GPY_CODE"], LE_MSZ = ef1[,"MESHSIZE"], LE_RECT = ef1[,"QUADRANT"], 
 LE_DIV = ef1[,"ICES_SUBAREA"], 
-LE_MET=rep(NA,dim(ef1)[1]),
+LE_MET_level6=rep(NA,dim(ef1)[1]),
 LE_UNIT=rep("KWDAYS",dim(ef1)[1]),
 LE_EFF=ef1[,"KWDAS"],LE_EFF_VMS=rep(NA,dim(ef1)[1]))
                                                              
@@ -113,7 +113,7 @@ LE_ELAT=rep(NA,dim(ef1)[1]),
 LE_ELON=rep(NA,dim(ef1)[1]),
 LE_GEAR =  ef1[,"GPY_CODE"], LE_MSZ = ef1[,"MESHSIZE"], LE_RECT = ef1[,"QUADRANT"], 
 LE_DIV = ef1[,"ICES_SUBAREA"], 
-LE_MET=rep(NA,dim(ef1)[1]),
+LE_MET_level6=rep(NA,dim(ef1)[1]),
 LE_UNIT=rep("KWDAYS",dim(ef1)[1]),
 LE_EFF=ef1[,"KWDAS"],LE_EFF_VMS=rep(NA,dim(ef1)[1]))
 
@@ -164,13 +164,28 @@ metiers$METIER <- as.character(metiers$METIER)
 
 metiers$METIER <- gsub("\r","",metiers$METIER)
 
-eflalo2$LE_MET <- metiers$METIER[match(eflalo2$FT_REF,metiers$TRIP_NUMBER)]
-
+eflalo2$LE_MET_level6 <- metiers$METIER[match(eflalo2$FT_REF,metiers$TRIP_NUMBER)]
 
 #Put on ICES area 
 
 #lon_lat <- rectangle.lon.lat(eflalo2$LE_RECT,midpoint=T)
 #eflalo2$LE_DIV <- ICESarea(long=lon_lat[,2],lat=lon_lat[,1])
+
+departure <- as.POSIXct(paste(eflalo2$FT_DDAT, eflalo2$FT_DTIME, sep=" "), tz="GMT", format="%d/%m/%Y  %H:%M:%S")
+arrival   <- as.POSIXct(paste(eflalo2$FT_LDAT, eflalo2$FT_LTIME, sep=" "), tz="GMT", format="%d/%m/%Y  %H:%M:%S") 
+ 
+ mid.time <- rep(NA, length(departure))
+ 
+ for(r in 1:length(departure)){
+ mid.time[r] <- as.character(seq(from=departure[r], to=arrival[r], length.out = 3)[2])
+              }
+
+y <- substr(mid.time,1,4)
+m <- substr(mid.time,6,7)
+d <- substr(mid.time,9,10)
+
+eflalo2$LE_CDAT <- paste(d,m,y,sep="/")
+
 
 eflalo2
 
