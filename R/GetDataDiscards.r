@@ -1,4 +1,4 @@
-#Cstart="01-jan-2009";Cstop="31-jan-2009"
+#Cstart="01-jan-2008";Cstop="31-mar-2008"
 
 
 GetDataDiscards <- function(Cstart=Cstart,Cstop=Cstop,species="'DAB'") {
@@ -14,11 +14,11 @@ GetDataDiscards <- function(Cstart=Cstart,Cstop=Cstop,species="'DAB'") {
  qdis <- paste("select st.*, sa.*, ss.*, cl.*, ta.*, vp.*
   FROM VIS_STATIONS st, VIS_SAMPLES sa, VIS_SUBSAMPLES ss, VIS_CLASSES
 cl, VIS_TAXONS ta, VIS_POSITIONS vp
-  WHERE st.STN_DATE BETWEEN ",Cstart," and ",Cstop,"
+  WHERE ta.ICES_CODE = ",species," AND
+  st.STN_DATE BETWEEN ",Cstart," and ",Cstop,"
   AND st.PGM_CODE IN ('DISOT','DISBT','DISN','DISCRAN')
   AND st.id=sa.stn_ID AND sa.id = ss.SPE_ID  AND ss.ID = cl.SSE_ID AND cl.TXN_NODC_CODE = ta.NODC_CODE
   AND vp.stn_id = st.id AND vp.seq_no = 0
-  AND ta.ICES_CODE = ",species,"
   ")
   
   #AND
@@ -41,7 +41,13 @@ qstvp <- paste("select VIS_STATIONS.*,VIS_POSITIONS.* FROM VIS_STATIONS, VIS_POS
  
  vis_chrons <- sqlQuery(frisbe,qstvp)  
  
- discards <- merge(vis_chrons,dis,all=T)
+ #List of extras in the chrons
+ 
+ usd <- unique(dis$ID)
+ 
+ mm <- match(usd,vis_chrons$ID)
+ 
+ discards <- merge(vis_chrons[-mm,],dis,all=T)
  
  discards$QUANTITY.1[is.na(discards$QUANTITY.1)] <- 0
    
