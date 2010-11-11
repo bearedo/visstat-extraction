@@ -68,9 +68,10 @@ FROM registrations
     INNER JOIN metiers ON (trips.trip_number = metiers.trip_number)
     LEFT OUTER join Quadrant_properties ON (registrations.QPY_ICES_QUADRANT = Quadrant_properties.ICES_QUADRANT)
 WHERE  catches.rgn_trp_arrivel_date between ",Cstart," and ",Cstop,"
-       and catches.RGN_TRP_PPY_PLM_CNY_CODE IN ('nld')
+       
 ")
 
+#AND catches.RGN_TRP_PPY_PLM_CNY_CODE IN ('nld')
 
 dasbyreg <-sqlQuery(visstat,query);
 
