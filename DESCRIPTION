@@ -1,7 +1,7 @@
 Package: visstatExtraction
 Title: For generic code to extract data from the visstat database
-Version: 0.03
-Date: 2010-10-26
+Version: 0.04
+Date: 2010-11-11
 Author: Stijn Bierman (stijn.bierman@wur.nl), Tessa van der Hammen (tessa.vanderhammen@wur.nl), Doug Beare  (douglas.beare@wur.nl)
 Maintainer: Doug Beare <douglas.beare@wur.nl>
 Description: To enable standardised analysis and extractions of the Visstat database at IMARES
