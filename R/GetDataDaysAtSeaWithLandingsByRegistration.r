@@ -1,5 +1,5 @@
   
-#Cstart="01-jan-2009";Cstop="31-jan-2009"  
+#       Cstart="01-jan-2006";Cstop="31-jan-2006"  
   
 GetDataDaysAtSeaWithLandingsByRegistration <- function(Cstart=Cstart,Cstop=Cstop) {
 
@@ -43,7 +43,6 @@ SELECT
 ,   platform_properties.length
 ,   platform_properties.power
 ,   platform_properties.id as vessel_id2
-,   metiers.metier
 ,   ROUND(to_date(to_char(arrivel_date,'yyyy.mm.dd')||' '||substr(to_char(arrivel_time,'0999'),2,2)||'.'||substr(to_char(arrivel_time,'0999'),4,2),'yyyy.mm.dd hh24.mi') -
 to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time,'0999'),2,2)||'.'||substr(to_char(departure_time,'0999'),4,2),'yyyy.mm.dd hh24.mi'),2) AS das
 
@@ -66,11 +65,11 @@ FROM registrations
              and trips.arrivel_time = registrations.trp_arrivel_time
              and trips.ppy_plm_code = registrations.trp_ppy_plm_code
              and trips.prt_code = registrations.trp_prt_code)
-    INNER JOIN metiers ON (trips.trip_number = metiers.trip_number)
     LEFT OUTER join Quadrant_properties ON (registrations.QPY_ICES_QUADRANT = Quadrant_properties.ICES_QUADRANT)
 WHERE  catches.rgn_trp_arrivel_date between ",Cstart," and ",Cstop,"
        
 ")
+
 
 #AND catches.RGN_TRP_PPY_PLM_CNY_CODE IN ('nld')
 
@@ -79,7 +78,9 @@ dasbyreg <-sqlQuery(visstat,query);
 dasbyreg$COARSE_DAS <- ifelse(dasbyreg$COARSE_DAS==0,1,dasbyreg$COARSE_DAS)
 
 # attach level 5 metier variables ??!!
-dasbyreg$LEVEL5 <- substr(dasbyreg$METIER,start=1,stop=7);
+#dasbyreg$LEVEL5 <- substr(dasbyreg$METIER,start=1,stop=7);
+dasbyreg$LEVEL5 <- dasbyreg$GPY_CODE
+
 
 #sum(as.numeric(is.na(dasbyreg$POWER)))
 #dasbyreg$LENGTH[is.na(dasbyreg$POWER)]
@@ -120,7 +121,7 @@ dasbyreg$KWDAS <- dasbyreg$POWER*dasbyreg$DAS;
 dasbyreg
 
 }
-
+                                     
 
 
 ###############################################################################
@@ -128,7 +129,7 @@ dasbyreg
 ###############################################################################
 
 
-#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart="01-jan-2009",Cstop="31-jan-2009")
+#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart="01-jan-2006",Cstop="31-jan-2006")
 #
 ##Add on approximate lats and longs
 #
@@ -152,3 +153,7 @@ dasbyreg
 #tapply(xx$COARSE_DAS,list(xx$REG_GEAR),sum.na)
 #tapply(xx$DAS,list(xx$REG_GEAR),sum.na)
 #tapply(xx$KWDAS,list(xx$REG_GEAR),sum.na)
+
+
+#sqlQuery(visstat,"SELECT RGN_TRP_PPY_PLM_CNY_CODE, count(RGN_TRP_PPY_PLM_CNY_CODE) from catches WHERE catches.rgn_trp_arrivel_date > '31-dec-2005' AND 
+#catches.rgn_trp_arrivel_date < '01-jan-2007' GROUP BY RGN_TRP_PPY_PLM_CNY_CODE;")
