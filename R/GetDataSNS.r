@@ -21,7 +21,6 @@ cl, VIS_TAXONS ta, VIS_POSITIONS vp
   AND vp.stn_id = st.id AND vp.seq_no = 0
   ")
   
-
   sns <- sqlQuery(frisbe,qsns)
   
   #Take out missing values
