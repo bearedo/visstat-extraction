@@ -186,7 +186,7 @@ d <- substr(mid.time,9,10)
 
 eflalo2$LE_CDAT <- paste(d,m,y,sep="/")
 
-countries <- data.frame(old=c('bel','deu','dnk','eng','fra','gbr','nld','scd'),new=c("BEL","DEU","DNK","GBR","FRA","GBR","NLD","GBR"))
+countries <- data.frame(old=c('bel','deu','dnk','eng','irl','fra','gbr','nld','scd','swe','nor','fro','ltu'),new=c("BEL","DEU","DNK","GBR","IRL","FRA","GBR","NLD","GBR","SWE","NOR","FRO","LTU"))
 
 eflalo2$VE_COU <- countries$new[match(eflalo2$VE_COU,countries$old)]
 
