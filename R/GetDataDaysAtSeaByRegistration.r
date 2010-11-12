@@ -30,6 +30,7 @@ SELECT
 ,   registrations.trp_ppy_plm_code
 ,   registrations.trp_ppy_id as vessel_id1
 ,   registrations.sre_code
+,   registrations.TRP_PPY_PLM_CNY_CODE 
 ,   platform_properties.length
 ,   platform_properties.power
 ,   platform_properties.id as vessel_id2
@@ -52,8 +53,10 @@ FROM registrations
     INNER JOIN metiers ON (trips.trip_number = metiers.trip_number)
     
 WHERE  registrations.trp_arrivel_date between ",Cstart," and ",Cstop,"
-       and registrations.TRP_PPY_PLM_CNY_CODE IN ('nld')
+       
 ")
+
+#and registrations.TRP_PPY_PLM_CNY_CODE IN ('nld')
 
 dasbyreg <-sqlQuery(visstat,query);
 
@@ -107,7 +110,7 @@ dasbyreg
 ###############################################################################
 
 
-#dasbyreg <- GetDataDaysAtSeaByRegistration(Cstart="01-jan-2009",Cstop="31-dec-2009")
+#dasbyreg <- GetDataDaysAtSeaByRegistration(Cstart="01-jan-2009",Cstop="31-jan-2009")
 #
 ##Add on approximate lats and longs
 #
