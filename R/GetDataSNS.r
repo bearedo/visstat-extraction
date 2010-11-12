@@ -39,6 +39,9 @@ qstvp <- paste("select VIS_STATIONS.*,VIS_POSITIONS.* FROM VIS_STATIONS, VIS_POS
  
  vis_chrons <- sqlQuery(frisbe,qstvp)  
  
+ 
+ print(paste('number of distinct stations = ',dim(vis_chrons)[[1]]))
+
  #List of extras in the chrons
  
  usd <- unique(sns$ID)
@@ -54,4 +57,4 @@ qstvp <- paste("select VIS_STATIONS.*,VIS_POSITIONS.* FROM VIS_STATIONS, VIS_POS
  }
  
  
- 
+#sns <- GetDataSNS(Cstart="01-jan-2007",Cstop="31-dec-2007",species="'DAB'") 
