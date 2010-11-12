@@ -38,7 +38,7 @@ tacsat
 ############Example############
 
 
-#  tacsat <- GetDataTacsat(Cstart='01-jan-2009',Cstop='31-Dec-2009')
+#  tacsat <- GetDataTacsat(Cstart='01-jan-2006',Cstop='31-Dec-2006')
 
 #Create a vector of dates to loop over
 
@@ -78,8 +78,11 @@ tacsat
 #tacsat <- read.table('tacsat.csv',sep=",",header=T)
 #  
 #
-#tacsat$VE_REF <- matrix(unlist(strsplit(as.character(tacsat$VE_REF),":")),ncol=2,byrow=T)[,2]
+#tacsat$VE_REF <- matrix(unlist(strsplit(as.character(tacsat$VE_REF),":")),ncol=2,byrow=T)[,1]
 #
+#tacsat06 <- tacsat
+#save(tacsat06,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat06.rda",compress=T)
+
 #save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat07.rda",compress=T)
 #
 #save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat08.rda",compress=T)
@@ -89,3 +92,5 @@ tacsat
 #save(tacsat,file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//tacsat.rda",compress=T)
 #
 #
+
+tacsat$VE_COU <- eflalo2.06$VE_COU[match(eflalo2.06$VE_REF,tacsat$VE_REF)]
