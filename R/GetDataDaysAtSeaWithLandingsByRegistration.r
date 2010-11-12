@@ -109,14 +109,14 @@ dasbyreg$POWER[is.na(dasbyreg$POWER)] <- exp(coef(m2)[1]+coef(m2)[2]*log(dasbyre
 
 dasbyreg$KWDAS <- dasbyreg$POWER*dasbyreg$DAS;
 
-#Replace 2 letter country codes (make this into a function)
-
-countries <- data.frame(old=c('be','de','dk','eng','fr','gb','nl','nld','scd'),new=c("BEL","DEU","DNK","GBR","FRA","GBR","NLD","NLD","GBR"))
-
-dasbyreg$PRT_CNY_CODE <- countries$new[match(dasbyreg$PRT_CNY_CODE,countries$old)]
-dasbyreg$PRT_CNY_CODE_DEPARTED_FROM <- countries$new[match(dasbyreg$PRT_CNY_CODE_DEPARTED_FROM,countries$old)]
-dasbyreg$RGN_TRP_PPY_PLM_CNY_CODE <- countries$new[match(dasbyreg$RGN_TRP_PPY_PLM_CNY_CODE,countries$old)]
-
+##Replace 2 letter country codes (make this into a function)
+#
+#countries <- data.frame(old=c('be','de','dk','eng','fr','gb','nl','nld','scd'),new=c("BEL","DEU","DNK","GBR","FRA","GBR","NLD","NLD","GBR"))
+#
+#dasbyreg$PRT_CNY_CODE <- countries$new[match(dasbyreg$PRT_CNY_CODE,countries$old)]
+#dasbyreg$PRT_CNY_CODE_DEPARTED_FROM <- countries$new[match(dasbyreg$PRT_CNY_CODE_DEPARTED_FROM,countries$old)]
+##dasbyreg$RGN_TRP_PPY_PLM_CNY_CODE <- countries$new[match(dasbyreg$RGN_TRP_PPY_PLM_CNY_CODE,countries$old)]
+#
 dasbyreg
 
 }
