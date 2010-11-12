@@ -207,21 +207,21 @@ eflalo2
 #  save(eflalo2,    file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//eflalo2.rda",compress=T)
 #  save(eflalo2,    file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.rda",compress=T) 
 # 
- eflalo2.08 <- GetDataEflalo(Cstart='01-jan-2008',Cstop='31-jan-2008')
-   save(eflalo2.08, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.08.rda",compress=T)
-   print(eflalo2.08[1:5,])
- 
- eflalo2.07 <- GetDataEflalo(Cstart='01-jan-2007',Cstop='31-dec-2007')
-   save(eflalo2.07, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.07.rda",compress=T)
-    print(eflalo2.07[1:5,])
- 
- eflalo2.06 <- GetDataEflalo(Cstart='01-jan-2006',Cstop='31-dec-2006')
-    save(eflalo2.06, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.06.rda",compress=T)
-    print(eflalo2.06[1:5,])
-  
-  eflalo2.05 <- GetDataEflalo(Cstart='01-jan-2005',Cstop='31-dec-2005')
-    save(eflalo2.05, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.05.rda",compress=T)
-
+ #eflalo2.08 <- GetDataEflalo(Cstart='01-jan-2008',Cstop='31-dec-2008')
+#   save(eflalo2.08, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.08.rda",compress=T)
+#   print(eflalo2.08[1:5,])
+# 
+# eflalo2.07 <- GetDataEflalo(Cstart='01-jan-2007',Cstop='31-dec-2007')
+#   save(eflalo2.07, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.07.rda",compress=T)
+#    print(eflalo2.07[1:5,])
+# 
+# eflalo2.06 <- GetDataEflalo(Cstart='01-jan-2006',Cstop='31-dec-2006')
+#    save(eflalo2.06, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.06.rda",compress=T)
+#    print(eflalo2.06[1:5,])
+#  
+#  eflalo2.05 <- GetDataEflalo(Cstart='01-jan-2005',Cstop='31-dec-2005')
+#    save(eflalo2.05, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.05.rda",compress=T)
+#
 #
 ## print(dim(eflalo2))  
 
