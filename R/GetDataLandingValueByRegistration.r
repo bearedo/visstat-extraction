@@ -1,5 +1,5 @@
-Cstart <- "01-jan-2009"
-Cstop  <- "31-jan-2009"
+#Cstart <- "01-jan-2009"
+#Cstop  <- "31-jan-2009"
 
 
 GetDataLandingValueByRegistration <- function(Cstart=Cstart,Cstop=Cstop) {
