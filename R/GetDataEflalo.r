@@ -1,11 +1,12 @@
 
-#    Cstart="01-jan-2008";Cstop="31-jan-2008"  
+#    Cstart="01-jan-2006";Cstop="31-jan-2006"  
 
 
 GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop) 
 {
 # Get data 
-
+ memory.size(4000)
+ 
 valuebyreg <- GetDataLandingValueByRegistration(Cstart=Cstart, Cstop=Cstop)
 
 #Reformat time strings
@@ -164,7 +165,7 @@ metiers$METIER <- as.character(metiers$METIER)
 
 metiers$METIER <- gsub("\r","",metiers$METIER)
 
-eflalo2$LE_MET_level6 <- metiers$METIER[match(eflalo2$FT_REF,metiers$TRIP_NUMBER)]
+eflalo2$LE_MET_level6 <- as.character(metiers$METIER[match(eflalo2$FT_REF,metiers$TRIP_NUMBER)])
 
 #Put on ICES area 
 
@@ -188,7 +189,7 @@ eflalo2$LE_CDAT <- paste(d,m,y,sep="/")
 
 countries <- data.frame(old=c('bel','deu','dnk','eng','irl','fra','gbr','nld','scd','swe','nor','fro','ltu'),new=c("BEL","DEU","DNK","GBR","IRL","FRA","GBR","NLD","GBR","SWE","NOR","FRO","LTU"))
 
-eflalo2$VE_COU <- countries$new[match(eflalo2$VE_COU,countries$old)]
+eflalo2$VE_COU <- as.character(countries$new[match(eflalo2$VE_COU,countries$old)])
 
 
 
@@ -207,15 +208,20 @@ eflalo2
 #  save(eflalo2,    file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//eflalo2.rda",compress=T)
 #  save(eflalo2,    file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.rda",compress=T) 
 # 
- #eflalo2.08 <- GetDataEflalo(Cstart='01-jan-2008',Cstop='31-dec-2008')
+ #eflalo2.08 <- GetDataEflalo(Cstart='01-jan-2008',Cstop='31-Dec-2008')
 #   save(eflalo2.08, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.08.rda",compress=T)
 #   print(eflalo2.08[1:5,])
-# 
+## 
 # eflalo2.07 <- GetDataEflalo(Cstart='01-jan-2007',Cstop='31-dec-2007')
 #   save(eflalo2.07, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.07.rda",compress=T)
 #    print(eflalo2.07[1:5,])
-# 
-# eflalo2.06 <- GetDataEflalo(Cstart='01-jan-2006',Cstop='31-dec-2006')
+## 
+#      eflalo2.06.1 <- GetDataEflalo(Cstart='01-jan-2006',Cstop='30-jun-2006')
+#      eflalo2.06.2 <- GetDataEflalo(Cstart='1-jul-2006',Cstop='31-dec-2006')
+#      
+#      
+#      eflalo2.06 <- formatEflalo2(eflalo2.06)
+#     eflalo2.06$VE_FLT[eflalo2.06$VE_COU == "NLD"] <- substr(eflalo2.06$LE_MET_level6[eflalo2.06$VE_COU == "NLD"],start=1,stop=7) 
 #    save(eflalo2.06, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.06.rda",compress=T)
 #    print(eflalo2.06[1:5,])
 #  
