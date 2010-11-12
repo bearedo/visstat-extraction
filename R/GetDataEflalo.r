@@ -1,5 +1,5 @@
 
-#Cstart="01-jan-2009";Cstop="31-jan-2009"  
+#    Cstart="01-jan-2008";Cstop="31-jan-2008"  
 
 
 GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop) 
@@ -21,7 +21,7 @@ valuebyreg$DEPARTURE_DATE <- ReformatDate( valuebyreg$DEPARTURE_DATE)
 
 # Transform the data frame into the crappy 'matrix' format required by eflalo.
 
-mm<-paste(valuebyreg$TRIP_NUMBER,paste(valuebyreg$TRP_PPY_PLM_CODE,sep=":"),
+mm<-paste(valuebyreg$TRIP_NUMBER,valuebyreg$TRP_PPY_PLM_CODE,
 valuebyreg$LEVEL5,valuebyreg$RGN_TRP_PPY_PLM_CNY_CODE,valuebyreg$PRT_CNY_CODE,
 valuebyreg$PRT_CNY_CODE_DEPARTED_FROM,
 valuebyreg$GPY_CODE,valuebyreg$MESHSIZE,valuebyreg$QUADRANT,
@@ -186,6 +186,11 @@ d <- substr(mid.time,9,10)
 
 eflalo2$LE_CDAT <- paste(d,m,y,sep="/")
 
+countries <- data.frame(old=c('bel','deu','dnk','eng','fra','gbr','nld','scd'),new=c("BEL","DEU","DNK","GBR","FRA","GBR","NLD","GBR"))
+
+eflalo2$VE_COU <- countries$new[match(eflalo2$VE_COU,countries$old)]
+
+
 
 eflalo2
 
@@ -202,18 +207,21 @@ eflalo2
 #  save(eflalo2,    file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//eflalo2.rda",compress=T)
 #  save(eflalo2,    file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.rda",compress=T) 
 # 
-# eflalo2.08 <- GetDataEflalo(Cstart='01-jan-2008',Cstop='31-dec-2008')
-#   save(eflalo2.08, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.08.rda",compress=T)
-#  
-# eflalo2.07 <- GetDataEflalo(Cstart='01-jan-2007',Cstop='31-dec-2007')
-#   save(eflalo2.07, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.07.rda",compress=T)
-#
-# eflalo2.06 <- GetDataEflalo(Cstart='01-jan-2006',Cstop='31-dec-2006')
-#    save(eflalo2.06, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.06.rda",compress=T)
-#
-#  eflalo2.05 <- GetDataEflalo(Cstart='01-jan-2005',Cstop='31-dec-2005')
-#    save(eflalo2.05, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.05.rda",compress=T)
-#
+ eflalo2.08 <- GetDataEflalo(Cstart='01-jan-2008',Cstop='31-jan-2008')
+   save(eflalo2.08, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.08.rda",compress=T)
+   print(eflalo2.08[1:5,])
+ 
+ eflalo2.07 <- GetDataEflalo(Cstart='01-jan-2007',Cstop='31-dec-2007')
+   save(eflalo2.07, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.07.rda",compress=T)
+    print(eflalo2.07[1:5,])
+ 
+ eflalo2.06 <- GetDataEflalo(Cstart='01-jan-2006',Cstop='31-dec-2006')
+    save(eflalo2.06, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.06.rda",compress=T)
+    print(eflalo2.06[1:5,])
+  
+  eflalo2.05 <- GetDataEflalo(Cstart='01-jan-2005',Cstop='31-dec-2005')
+    save(eflalo2.05, file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.05.rda",compress=T)
+
 #
 ## print(dim(eflalo2))  
 
