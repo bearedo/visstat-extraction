@@ -93,4 +93,4 @@ tacsat
 #
 #
 
-tacsat$VE_COU <- eflalo2.06$VE_COU[match(eflalo2.06$VE_REF,tacsat$VE_REF)]
+#tacsat$VE_COU <- eflalo2.06$VE_COU[match(eflalo2.06$VE_REF,tacsat$VE_REF)]
