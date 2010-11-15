@@ -1,7 +1,9 @@
 
 PassiveOrStatic <- function(input=tacsat1) {
-
+#Note DCF GEAR Codes must be run first for this to work
 input$FISHERY_TYPE <- rep(NA,length(input[,1]))
+
+
 input$FISHERY_TYPE[input$GEAR == 'BEAM'] <- 'mobile'
 input$FISHERY_TYPE[input$GEAR == 'OTTER'] <- 'mobile'
 input$FISHERY_TYPE[input$GEAR == 'DREDGE'] <- 'mobile'
