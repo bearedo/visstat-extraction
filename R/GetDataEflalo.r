@@ -1,8 +1,8 @@
 
-#Cstart="01-jan-2006";Cstop="31-jan-2006"  
+#Cstart="01-jan-2009";Cstop="31-jan-2009"  
 
 
-GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = c("NLD")) 
+GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = c("nld")) 
 {
 # Get data 
  memory.size(4000)
@@ -27,14 +27,14 @@ valuebyreg <- valuebyreg[valuebyreg$RGN_TRP_PPY_PLM_CNY_CODE %in% flag_nations,]
 
 # Transform the data frame into the crappy 'matrix' format required by eflalo.
 
-mm<-paste(valuebyreg$TRIP_NUMBER,valuebyreg$TRP_PPY_PLM_CODE,
+mm<-paste(valuebyreg$TRIP_NUMBER,valuebyreg$TRP_PPY_PLM_CODE,valuebyreg$VESSEL_ID2,
 valuebyreg$LEVEL5,valuebyreg$RGN_TRP_PPY_PLM_CNY_CODE,valuebyreg$PRT_CNY_CODE,
 valuebyreg$PRT_CNY_CODE_DEPARTED_FROM,
 valuebyreg$GPY_CODE,valuebyreg$MESHSIZE,valuebyreg$QUADRANT,
 valuebyreg$PRT_CODE_DEPARTED_FROM,valuebyreg$PRT_CODE,valuebyreg$DEPARTURE_DATE,valuebyreg$DEPARTURE_TIME,
 valuebyreg$ARRIVEL_DATE,valuebyreg$ARRIVEL_TIME,valuebyreg$ICES_SUBAREA,valuebyreg$POWER,valuebyreg$LENGTH,valuebyreg$KWDAS,sep=",")
 
-col.labels<-c("TRIP_NUMBER","TRP_PPY_PLM_CODE","LEVEL5","RGN_TRP_PPY_PLM_CNY_CODE","PRT_CNY_CODE",
+col.labels<-c("TRIP_NUMBER","TRP_PPY_PLM_CODE","VESSEL_ID2","LEVEL5","RGN_TRP_PPY_PLM_CNY_CODE","PRT_CNY_CODE",
 "PRT_CNY_CODE_DEPARTED_FROM",
 "GPY_CODE","MESHSIZE","QUADRANT",
 "PRT_CODE_DEPARTED_FROM","PRT_CODE","DEPARTURE_DATE","DEPARTURE_TIME",
@@ -58,7 +58,7 @@ dimnames(ef1)[[1]]<-1:dim(ef1)[1]
 dimnames(ef1)[[2]][1:ll]<-col.labels
 
 
-ef2 <- data.frame(VE_REF=ef1[,"TRP_PPY_PLM_CODE"],VE_FLT=ef1[,"LEVEL5"],VE_COU = ef1[,"RGN_TRP_PPY_PLM_CNY_CODE"], VE_LEN = ef1[,"LENGTH"], 
+ef2 <- data.frame(VE_REF=paste(ef1[,"TRP_PPY_PLM_CODE"],ef1[,"VESSEL_ID2"],sep=":"),VE_FLT=ef1[,"LEVEL5"],VE_COU = ef1[,"RGN_TRP_PPY_PLM_CNY_CODE"], VE_LEN = ef1[,"LENGTH"], 
 VE_KW= ef1[,"POWER"],VE_TON=rep(NA,dim(ef1)[1]),
 FT_REF=ef1[,"TRIP_NUMBER"],FT_DCOU=ef1[,"PRT_CNY_CODE_DEPARTED_FROM"],FT_DHAR=ef1[,"PRT_CODE_DEPARTED_FROM"],
 FT_DDAT=ef1[,"DEPARTURE_DATE"],FT_DTIME=ef1[,"DEPARTURE_TIME"],FT_LCOU = ef1[,"PRT_CNY_CODE"],
@@ -104,7 +104,7 @@ ef1<-matrix(unlist(strsplit(mm1,",")),ncol=ll,byrow=T)
 dimnames(ef1)[[1]]<-1:dim(ef1)[1]
 dimnames(ef1)[[2]][1:ll]<-col.labels
 
-ef2 <- data.frame(VE_REF=ef1[,"TRP_PPY_PLM_CODE"],VE_FLT=ef1[,"LEVEL5"],VE_COU = ef1[,"RGN_TRP_PPY_PLM_CNY_CODE"], VE_LEN = ef1[,"LENGTH"], 
+ef2 <- data.frame(VE_REF=paste(ef1[,"TRP_PPY_PLM_CODE"],ef1[,"VESSEL_ID2"],sep=":"),VE_FLT=ef1[,"LEVEL5"],VE_COU = ef1[,"RGN_TRP_PPY_PLM_CNY_CODE"], VE_LEN = ef1[,"LENGTH"], 
 VE_KW= ef1[,"POWER"],VE_TON=rep(NA,dim(ef1)[1]),
 FT_REF=ef1[,"TRIP_NUMBER"],FT_DCOU=ef1[,"PRT_CNY_CODE_DEPARTED_FROM"],FT_DHAR=ef1[,"PRT_CODE_DEPARTED_FROM"],
 FT_DDAT=ef1[,"DEPARTURE_DATE"],FT_DTIME=ef1[,"DEPARTURE_TIME"],FT_LCOU = ef1[,"PRT_CNY_CODE"],
@@ -209,10 +209,9 @@ eflalo2
 
 # lapply(list.files(),source)
 # #eflalo2.10 <- GetDataEflalo(Cstart='01-jan-2010',Cstop='31-aug-2010')
-# eflalo2 <-    GetDataEflalo(Cstart='01-jan-2009',Cstop='31-dec-2009',flag_nations=c('NLD'))
+# eflalo2 <-    GetDataEflalo(Cstart='01-jan-2009',Cstop='15-jan-2009',flag_nations=c('nld'))
   #Just Dutch data
   
-
 #  save(eflalo2,    file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//eflalo2.rda",compress=T)
 #  save(eflalo2,    file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.rda",compress=T) 
 # 
