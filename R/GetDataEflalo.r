@@ -1,8 +1,8 @@
 
-#    Cstart="01-jan-2006";Cstop="31-jan-2006"  
+#Cstart="01-jan-2006";Cstop="31-jan-2006"  
 
 
-GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop) 
+GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = c("NLD")) 
 {
 # Get data 
  memory.size(4000)
@@ -18,6 +18,11 @@ valuebyreg$DEPARTURE_TIME <- ReformatTime(valuebyreg$DEPARTURE_TIME)
 
 valuebyreg$ARRIVEL_DATE <- ReformatDate( valuebyreg$ARRIVEL_DATE)
 valuebyreg$DEPARTURE_DATE <- ReformatDate( valuebyreg$DEPARTURE_DATE)
+
+#Select flag nations
+
+
+valuebyreg <- valuebyreg[valuebyreg$RGN_TRP_PPY_PLM_CNY_CODE %in% flag_nations,]
 
 
 # Transform the data frame into the crappy 'matrix' format required by eflalo.
@@ -204,7 +209,10 @@ eflalo2
 
 # lapply(list.files(),source)
 # #eflalo2.10 <- GetDataEflalo(Cstart='01-jan-2010',Cstop='31-aug-2010')
-# eflalo2 <-    GetDataEflalo(Cstart='01-jan-2009',Cstop='31-dec-2009')
+# eflalo2 <-    GetDataEflalo(Cstart='01-jan-2009',Cstop='31-dec-2009',flag_nations=c('NLD'))
+  #Just Dutch data
+  
+
 #  save(eflalo2,    file="D://bearedo//Projects//VMS-Tools//vmstools2//vmstools//data//eflalo2.rda",compress=T)
 #  save(eflalo2,    file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//eflalo2.rda",compress=T) 
 # 
