@@ -12,11 +12,5 @@ else {
 input$kW_cat[input$POWER <= 221] <- 'lt221kW'
 input$kW_cat[input$POWER >  221] <- 'gt221kW'
  }
-
-
-
-
-
-
 input
 }
