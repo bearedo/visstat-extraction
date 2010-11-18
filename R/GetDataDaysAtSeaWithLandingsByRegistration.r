@@ -1,5 +1,5 @@
   
-#       Cstart="01-jan-2006";Cstop="31-jan-2006"  
+#Cstart="01-jan-2010";Cstop="31-aug-2010"  
   
 GetDataDaysAtSeaWithLandingsByRegistration <- function(Cstart=Cstart,Cstop=Cstop) {
 
@@ -129,7 +129,7 @@ dasbyreg
 ###############################################################################
 
 
-#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart="01-jan-2006",Cstop="31-jan-2006")
+#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart="01-jan-2010",Cstop="31-jan-2010")
 #
 ##Add on approximate lats and longs
 #
