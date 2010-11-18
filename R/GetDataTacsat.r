@@ -2,14 +2,14 @@
 #Cstart <- '01-jan-2009'
 #Cstop  <- '31-jan-2009'
 
-GetDataTacsat <- function(Cstart=Cstart,Cstop=Cstop)
+GetDataTacsat <- function(Cstart=Cstart,Cstop=Cstop,flag_nations=c('nld'))
 
 {
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
   
 print(paste("Start at", Cstart, "and end at", Cstop))
 
-vms <- GetDataVMS(Cstart=Cstart,Cstop=Cstop)
+vms <- GetDataVMS(Cstart=Cstart,Cstop=Cstop,flag_nations=c('nld'))
 
 print('Got VMS data')
 # Extract the columns
