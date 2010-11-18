@@ -10,6 +10,7 @@ GetDataTacsat <- function(Cstart=Cstart,Cstop=Cstop)
 print(paste("Start at", Cstart, "and end at", Cstop))
 
 vms <- GetDataVMS(Cstart=Cstart,Cstop=Cstop)
+
 print('Got VMS data')
 # Extract the columns
 
