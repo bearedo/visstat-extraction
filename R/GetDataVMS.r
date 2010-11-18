@@ -1,7 +1,7 @@
 
-# Cstart="01-jan-2009";Cstop="31-jan-2009"  
+# Cstart="01-jan-2010";Cstop="15-jan-2010"  
 
-GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop) {
+GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop, flag_nations=c('nld')) {
 
 # This function extracts all raw VMS data from VISSTAT by time interval.
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
@@ -11,15 +11,16 @@ GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop) {
   Cstart <-WriteSQLString(Cstart)
 #Set up the Query
   
-   query <- paste("SELECT vms.* FROM vms WHERE vms.rgn_local_date between ",Cstart," and ",Cstop,"")
+   query <- paste("SELECT vms.* FROM vms WHERE vms.rgn_local_date BETWEEN ",Cstart," and ",Cstop,"")
   
  
   #WHERE vms.RGN_LOCAL_DATE between platform_properties.START_DATE AND nvl(platform_properties.END_DATE,sysdate))
 
 #Attach to DB and get the data out according to query
-  vms <- sqlQuery(visstat,query);
+  vms <- sqlQuery(visstat,query); 
+  vms <- vms[vms$PPY_PLM_CNY_CODE %in% flag_nations,]
   
-#Get date-time string
+  #Get date-time string
 
 vms$ntim <- ReformatTime(vms$RGN_LOCAL_TIME)
 vms$date <- as.POSIXct(paste(vms$RGN_LOCAL_DATE,vms$ntim),tz="CET")
