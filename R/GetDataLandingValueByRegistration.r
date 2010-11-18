@@ -1,5 +1,5 @@
-#Cstart <- "01-jan-2009"
-#Cstop  <- "31-jan-2009"
+#Cstart <- "01-jan-2010"
+#Cstop  <- "31-jan-2010"
 
 
 GetDataLandingValueByRegistration <- function(Cstart=Cstart,Cstop=Cstop) {
@@ -15,6 +15,10 @@ print ("Got days at sea by trip")
 # Get the price data
 
 prices <- GetDataPrice(Cstart=Cstart,Cstop=Cstop)
+
+#Fudge: if there are no price data use 2009
+
+if(dim(prices)[[1]] ==0){ prices <- GetDataPrice(Cstart='01-Jan-2009',Cstop='31-Dec-2009')}
 
 print ("Got prices")
 
