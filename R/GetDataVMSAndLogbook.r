@@ -1,6 +1,6 @@
 
 
-GetDataVMSAndLogbook <- function(Cstart=Cstart, Cstop=Cstop) {
+GetDataVMSAndLogbook <- function(Cstart=Cstart, Cstop=Cstop, flag_nations = c('nld')) {
 
 # This function extracts all raw VMS data from VISSTAT by time interval and matches the VMS with some useful
 # information in the logbook data
@@ -55,6 +55,7 @@ FROM registrations
 
 
 vms <- sqlQuery(visstat,query);
+vms <- vms[vms$PPY_PLM_CNY_CODE %in% flag_nations,]
 
 vms
 
