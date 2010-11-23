@@ -1,9 +1,9 @@
 
 #Cstart="01-jan-2010";Cstop="31-jan-2010"  
-#fn <- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
+#flag_nations <- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
 
 
-GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = fn) 
+GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = flag_nations) 
 {
 # Get data 
  memory.size(4000)
