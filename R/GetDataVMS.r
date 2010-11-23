@@ -1,7 +1,8 @@
 
 # Cstart="01-jan-2010";Cstop="15-jan-2010"  
+#fn <- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
 
-GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop, flag_nations=c('nld')) {
+GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop, flag_nations=fn) {
 
 # This function extracts all raw VMS data from VISSTAT by time interval.
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
