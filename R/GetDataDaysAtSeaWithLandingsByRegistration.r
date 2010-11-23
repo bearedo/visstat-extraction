@@ -1,5 +1,5 @@
   
-#Cstart="01-jan-2010";Cstop="31-aug-2010"  
+#Cstart="01-jan-2006";Cstop="30-dec-2006"  
   
 GetDataDaysAtSeaWithLandingsByRegistration <- function(Cstart=Cstart,Cstop=Cstop) {
 
@@ -74,6 +74,9 @@ WHERE  catches.rgn_trp_arrivel_date between ",Cstart," and ",Cstop,"
 #AND catches.RGN_TRP_PPY_PLM_CNY_CODE IN ('nld')
 
 dasbyreg <-sqlQuery(visstat,query);
+
+print(table(dasbyreg$RGN_TRP_PPY_PLM_CNY_CODE))
+print(Cstart);print(Cstop);  
 
 dasbyreg$COARSE_DAS <- ifelse(dasbyreg$COARSE_DAS==0,1,dasbyreg$COARSE_DAS)
 
