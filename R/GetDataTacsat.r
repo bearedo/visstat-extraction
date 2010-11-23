@@ -1,16 +1,16 @@
 
 #Cstart <- '01-jan-2009'
 #Cstop  <- '31-jan-2009'
-#fn <- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
+#flag_nations<- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
 
-GetDataTacsat <- function(Cstart=Cstart,Cstop=Cstop,flag_nations=fn)
+GetDataTacsat <- function(Cstart=Cstart,Cstop=Cstop,flag_nations=flag_nations)
 
 {
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
   
 print(paste("Start at", Cstart, "and end at", Cstop))
 
-vms <- GetDataVMS(Cstart=Cstart,Cstop=Cstop,flag_nations=fn)
+vms <- GetDataVMS(Cstart=Cstart,Cstop=Cstop,flag_nations=flag_nations)
 
 print('Got VMS data')
 # Extract the columns
