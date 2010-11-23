@@ -18,7 +18,7 @@ prices <- GetDataPrice(Cstart=Cstart,Cstop=Cstop)
 
 #Fudge: if there are no price data use 2009
 
-if(dim(prices)[[1]] ==0){ prices <- GetDataPrice(Cstart='01-Jan-2009',Cstop='31-Dec-2009')}
+if(dim(prices)[[1]] ==0){ print("No price data"); prices <- GetDataPrice(Cstart='01-Jan-2009',Cstop='31-Dec-2009')}
 
 print ("Got prices")
 
