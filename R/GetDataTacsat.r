@@ -1,15 +1,16 @@
 
 #Cstart <- '01-jan-2009'
 #Cstop  <- '31-jan-2009'
+#fn <- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
 
-GetDataTacsat <- function(Cstart=Cstart,Cstop=Cstop,flag_nations=c('nld'))
+GetDataTacsat <- function(Cstart=Cstart,Cstop=Cstop,flag_nations=fn)
 
 {
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
   
 print(paste("Start at", Cstart, "and end at", Cstop))
 
-vms <- GetDataVMS(Cstart=Cstart,Cstop=Cstop,flag_nations=c('nld'))
+vms <- GetDataVMS(Cstart=Cstart,Cstop=Cstop,flag_nations=fn)
 
 print('Got VMS data')
 # Extract the columns
@@ -27,7 +28,7 @@ vms$RGN_UTC_DATE <- ReformatDate(vms$RGN_UTC_DATE)
 
 #Read in platform properties to get a more anonymous ID for the TACSAT table
 
-tacsat <- data.frame(VE_REF=paste(vms$PPY_PLM_CODE,vms$PPY_ID,sep=":"),SI_LATI=vms$LATITUDE,SI_LONG=vms$LONGITUDE,
+tacsat <- data.frame(VE_COU=vms$PPY_PLM_CNY_CODE,VE_REF=paste(vms$PPY_PLM_CODE,vms$PPY_ID,sep=":"),SI_LATI=vms$LATITUDE,SI_LONG=vms$LONGITUDE,
 SI_DATE=vms$RGN_UTC_DATE,SI_TIME=vms$RGN_UTC_TIME,SI_SP = vms$SPEED,SI_HE=vms$HEADING)
 
 print(head(tacsat))
