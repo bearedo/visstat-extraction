@@ -6,89 +6,70 @@ function(input=eflalo2,data.type="visstat")
 
 if(data.type=="visstat"){
 
-mob <- input[input$FISHERY_TYPE == 'mobile',]
-print(dim(mob))
+ww <- (1:length(input[,1]))[input$FISHERY_TYPE == 'mobile']
+input$MESH_SIZE_RANGE<-rep(NA,length(input[,1]))
 
-mesh_cat<-rep(NA,length(mob[,1]))
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww][ww]>=1 & input$MESHSIZE[ww][ww] < 15] <- '<16'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=16 & input$MESHSIZE[ww] < 31] <- '16-31'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=32 & input$MESHSIZE[ww] < 54] <- '32-54'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=55 & input$MESHSIZE[ww] < 69] <- '55-69'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=70 & input$MESHSIZE[ww] < 79] <- '70-79'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=80 & input$MESHSIZE[ww] < 89] <- '80-89'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=90 & input$MESHSIZE[ww] < 99] <- '90-99'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=100 & input$MESHSIZE[ww] < 119] <- '100-119'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=120] <- '>120'
 
+print(length(ww))
 
-mesh_cat[mob$MESHSIZE>=1 & mob$MESHSIZE < 15] <- '<16'
-mesh_cat[mob$MESHSIZE >=16 & mob$MESHSIZE < 31] <- '16-31'
-mesh_cat[mob$MESHSIZE >=32 & mob$MESHSIZE < 54] <- '32-54'
-mesh_cat[mob$MESHSIZE >=55 & mob$MESHSIZE < 69] <- '55-69'
-mesh_cat[mob$MESHSIZE >=70 & mob$MESHSIZE < 79] <- '70-79'
-mesh_cat[mob$MESHSIZE >=80 & mob$MESHSIZE < 89] <- '80-89'
-mesh_cat[mob$MESHSIZE >=90 & mob$MESHSIZE < 99] <- '90-99'
-mesh_cat[mob$MESHSIZE >=100 & mob$MESHSIZE < 119] <- '100-119'
-mesh_cat[mob$MESHSIZE >=120] <- '>120'
+ww <- (1:length(input[,1]))[input$FISHERY_TYPE %in% c('unknown','passive')]
+input$MESH_SIZE_RANGE<-rep(NA,length(input[,1]))
 
-mob$MESH_SIZE_RANGE <- mesh_cat
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww][ww]>=1 & input$MESHSIZE[ww][ww] < 15] <- '<16'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=16 & input$MESHSIZE[ww] < 31] <- '16-31'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=32 & input$MESHSIZE[ww] < 54] <- '32-54'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=55 & input$MESHSIZE[ww] < 69] <- '55-69'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=70 & input$MESHSIZE[ww] < 79] <- '70-79'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=80 & input$MESHSIZE[ww] < 89] <- '80-89'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=90 & input$MESHSIZE[ww] < 99] <- '90-99'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=100 & input$MESHSIZE[ww] < 119] <- '100-119'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=120] <- '>120'
 
-pass <- input[input$FISHERY_TYPE %in% c('unknown','passive'),]
-print(dim(pass))
-
-mesh_cat<-rep(NA,length(pass[,1]))
-
-mesh_cat[pass$MESHSIZE >=1 & pass$MESHSIZE < 31] <- '10-30'
-mesh_cat[pass$MESHSIZE >=31 & pass$MESHSIZE < 50] <- '31-49'
-mesh_cat[pass$MESHSIZE >=50 & pass$MESHSIZE < 60] <- '50-59'
-mesh_cat[pass$MESHSIZE >=60 & pass$MESHSIZE < 70] <- '60-69'
-mesh_cat[pass$MESHSIZE >=70 & pass$MESHSIZE < 80] <- '70-79'
-mesh_cat[pass$MESHSIZE >=80 & pass$MESHSIZE < 90] <- '80-89'
-mesh_cat[pass$MESHSIZE >=90 & pass$MESHSIZE < 100] <- '90-99'
-mesh_cat[pass$MESHSIZE >=100 & pass$MESHSIZE < 110] <- '100-109'
-mesh_cat[pass$MESHSIZE >=110 & pass$MESHSIZE < 150] <- '110-149'
-mesh_cat[pass$MESHSIZE >=150 & pass$MESHSIZE < 219] <- '150-219'
-mesh_cat[pass$MESHSIZE >=220] <- '>=220'
-pass$MESH_SIZE_RANGE <- mesh_cat
-
-out <- rbind(mob,pass)
-print(dim(out))
+print(length(ww))
 
 }
 
 if(data.type=="eflalo"){
 
-mob <- input[input$FISHERY_TYPE == 'mobile',]
-print(dim(mob))
+ww <- (1:length(input[,1]))[input$FISHERY_TYPE == 'mobile']
+input$MESH_SIZE_RANGE<-rep(NA,length(input[,1]))
 
-mesh_cat<-rep(NA,length(mob[,1]))
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww][ww]>=1 & input$LE_MSZ[ww][ww] < 15] <- '<16'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=16 & input$LE_MSZ[ww] < 31] <- '16-31'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=32 & input$LE_MSZ[ww] < 54] <- '32-54'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=55 & input$LE_MSZ[ww] < 69] <- '55-69'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=70 & input$LE_MSZ[ww] < 79] <- '70-79'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=80 & input$LE_MSZ[ww] < 89] <- '80-89'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=90 & input$LE_MSZ[ww] < 99] <- '90-99'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=100 & input$LE_MSZ[ww] < 119] <- '100-119'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=120] <- '>120'
 
+print(length(ww))
 
-mesh_cat[mob$LE_MSZ>=1 & mob$LE_MSZ < 15] <- '<16'
-mesh_cat[mob$LE_MSZ >=16 & mob$LE_MSZ < 31] <- '16-31'
-mesh_cat[mob$LE_MSZ >=32 & mob$LE_MSZ < 54] <- '32-54'
-mesh_cat[mob$LE_MSZ >=55 & mob$LE_MSZ < 69] <- '55-69'
-mesh_cat[mob$LE_MSZ >=70 & mob$LE_MSZ < 79] <- '70-79'
-mesh_cat[mob$LE_MSZ >=80 & mob$LE_MSZ < 89] <- '80-89'
-mesh_cat[mob$LE_MSZ >=90 & mob$LE_MSZ < 99] <- '90-99'
-mesh_cat[mob$LE_MSZ >=100 & mob$LE_MSZ < 119] <- '100-119'
-mesh_cat[mob$LE_MSZ >=120] <- '>120'
+ww <- (1:length(input[,1]))[input$FISHERY_TYPE %in% c('unknown','passive')]
+input$MESH_SIZE_RANGE<-rep(NA,length(input[,1]))
 
-mob$MESH_SIZE_RANGE <- mesh_cat
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww][ww]>=1 & input$LE_MSZ[ww][ww] < 15] <- '<16'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=16 & input$LE_MSZ[ww] < 31] <- '16-31'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=32 & input$LE_MSZ[ww] < 54] <- '32-54'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=55 & input$LE_MSZ[ww] < 69] <- '55-69'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=70 & input$LE_MSZ[ww] < 79] <- '70-79'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=80 & input$LE_MSZ[ww] < 89] <- '80-89'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=90 & input$LE_MSZ[ww] < 99] <- '90-99'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=100 & input$LE_MSZ[ww] < 119] <- '100-119'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=120] <- '>120'
 
-pass <- input[input$FISHERY_TYPE %in% c('unknown','passive'),]
-print(dim(pass))
-
-mesh_cat<-rep(NA,length(pass[,1]))
-
-mesh_cat[pass$LE_MSZ >=1 & pass$LE_MSZ < 31] <- '10-30'
-mesh_cat[pass$LE_MSZ >=31 & pass$LE_MSZ < 50] <- '31-49'
-mesh_cat[pass$LE_MSZ >=50 & pass$LE_MSZ < 60] <- '50-59'
-mesh_cat[pass$LE_MSZ >=60 & pass$LE_MSZ < 70] <- '60-69'
-mesh_cat[pass$LE_MSZ >=70 & pass$LE_MSZ < 80] <- '70-79'
-mesh_cat[pass$LE_MSZ >=80 & pass$LE_MSZ < 90] <- '80-89'
-mesh_cat[pass$LE_MSZ >=90 & pass$LE_MSZ < 100] <- '90-99'
-mesh_cat[pass$LE_MSZ >=100 & pass$LE_MSZ < 110] <- '100-109'
-mesh_cat[pass$LE_MSZ >=110 & pass$LE_MSZ < 150] <- '110-149'
-mesh_cat[pass$LE_MSZ >=150 & pass$LE_MSZ < 219] <- '150-219'
-mesh_cat[pass$LE_MSZ >=220] <- '>=220'
-pass$MESH_SIZE_RANGE <- mesh_cat
-
-out <- rbind(mob,pass)
-print(dim(out))
-
+print(length(ww))
 }
 
-out
+input
 }
