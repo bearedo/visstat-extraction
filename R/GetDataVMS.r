@@ -31,10 +31,10 @@ GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop, flag_nations=flag_nations,whi
   
   #Get date-time string
 
-vms$ntim <- ReformatTime(vms$RGN_LOCAL_TIME)
-vms$date <- as.POSIXct(paste(vms$RGN_LOCAL_DATE,vms$ntim),tz="CET")
+vms$ntim <- ReformatTime(vms$RGN_UTC_TIME,which.lib=which.lib)
+vms$date <- as.POSIXct(paste(vms$RGN_UTC_DATE,vms$ntim),tz="CET")
 
-#Put on the platform id 
+
 
 #Make sure vms data are ordered in time
 oo <- order(vms$date)
@@ -45,4 +45,6 @@ vms <- vms[oo,]
 
 #Example: extract all vms data for January 2010
 
-#  vms <- GetDataVMS(Cstart="01-jan-2010",Cstop="31-jan-2010",flag_nations=c("nld"),which.lib="DBI")
+#  vms <- GetDataVMS(Cstart="01-jan-2010",Cstop="10-jan-2010",flag_nations=c("nld"),which.lib="DBI")
+
+# vms <- GetDataVMS(Cstart="01-jan-2010",Cstop="31-jan-2010",flag_nations=c("nld"),which.lib="RODBC")
