@@ -18,7 +18,6 @@ print('Got VMS data')
 #Reformat time
 
 vms$RGN_LOCAL_TIME <- ReformatTime(vms$RGN_LOCAL_TIME,which.lib=which.lib)
-vms$RGN_LOCAL_TIME <- ReformatTime(vms$RGN_LOCAL_TIME,which.lib=which.lib)
 
 #Tacsat wants a '/' in the data rather than a '-'
 #So reformat date strings
