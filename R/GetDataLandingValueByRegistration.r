@@ -2,23 +2,23 @@
 #Cstop  <- "31-jan-2010"
 
 
-GetDataLandingValueByRegistration <- function(Cstart=Cstart,Cstop=Cstop) {
+GetDataLandingValueByRegistration <- function(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib) {
 
 # This function gets the value of each component of the landings
 
 # Get the total days at sea by trip:
 
-dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart=Cstart,Cstop=Cstop)
+dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib)
 
 print ("Got days at sea by trip")
 
 # Get the price data
 
-prices <- GetDataPrice(Cstart=Cstart,Cstop=Cstop)
+prices <- GetDataPrice(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib)
 
 #Fudge: if there are no price data use 2009
 
-if(dim(prices)[[1]] ==0){ print("No price data"); prices <- GetDataPrice(Cstart='01-Jan-2009',Cstop='31-Dec-2009')}
+if(dim(prices)[[1]] ==0){ print("No price data"); prices <- GetDataPrice(Cstart='01-Jan-2009',Cstop='31-Dec-2009',which.lib=which.lib)}
 
 print ("Got prices")
 
