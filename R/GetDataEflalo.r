@@ -3,22 +3,22 @@
 #flag_nations <- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
 
 
-GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = flag_nations) 
+GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = flag_nations,which.lib=which.lib) 
 {
 # Get data 
  memory.size(4000)
  
-valuebyreg <- GetDataLandingValueByRegistration(Cstart=Cstart, Cstop=Cstop)
+valuebyreg <- GetDataLandingValueByRegistration(Cstart=Cstart, Cstop=Cstop,which.lib=which.lib)
 
 #Reformat time strings
 
-valuebyreg$ARRIVEL_TIME <- ReformatTime(valuebyreg$ARRIVEL_TIME)
-valuebyreg$DEPARTURE_TIME <- ReformatTime(valuebyreg$DEPARTURE_TIME)
+valuebyreg$ARRIVEL_TIME <- ReformatTime(valuebyreg$ARRIVEL_TIME,which.lib=which.lib)
+valuebyreg$DEPARTURE_TIME <- ReformatTime(valuebyreg$DEPARTURE_TIME,which.lib=which.lib)
 
 #Reformat date strings
 
-valuebyreg$ARRIVEL_DATE <- ReformatDate( valuebyreg$ARRIVEL_DATE)
-valuebyreg$DEPARTURE_DATE <- ReformatDate( valuebyreg$DEPARTURE_DATE)
+valuebyreg$ARRIVEL_DATE <- ReformatDate( valuebyreg$ARRIVEL_DATE,which.lib=which.lib)
+valuebyreg$DEPARTURE_DATE <- ReformatDate( valuebyreg$DEPARTURE_DATE,which.lib=which.lib)
 
 #Select flag nations
 
@@ -164,7 +164,7 @@ eflalo2 <- cbind(ef3,ef4[,32:dim(ef4)[2]])
 
 #Get the metier data from the database
 
-metiers <- sqlQuery(dBConnect("visstat"),"SELECT * from METIERS WHERE CODE = 'DCF';")
+metiers <- sqlQuery(dBConnect("visstat",which.lib=which.lib),"SELECT * from METIERS WHERE CODE = 'DCF';")
 
 #Get rid of the \r
 metiers$METIER <- as.character(metiers$METIER)
