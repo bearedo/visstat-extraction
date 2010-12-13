@@ -13,7 +13,7 @@ dBConnect<-function(which.lib = "RODBC", which.database="visstat"){
   }
   }
   if(which.lib=="DBI"){
-  library(DBI);library(ROracle)
+  library(DBI);library(ROracle)                    
   if(which.database=="visstat"){
   drv <- dbDriver("Oracle")
   conn<-dbConnect(drv,user="doug",password="oneover",db="visstatp")
