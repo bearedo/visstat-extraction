@@ -7,12 +7,14 @@ ReformatDate<- function(datestring=datestring,which.lib=which.lib)
 #datestring <- vms$RGN_UTC_DATE
 datestring <- format(datestring)
 if(which.lib=="RODBC"){
+print(which.lib)
 yr  <-substr(datestring,1,4)
 mon <-substr(datestring,6,7)
 day <-substr(datestring,9,10)                                    
 ndate <- paste(day,mon,yr,sep="/")
 }
 if(which.lib=="DBI"){
+print(which.lib)
 yr  <-substr(datestring,7,10)
 mon <-substr(datestring,4,5)
 day <-substr(datestring,1,2)
