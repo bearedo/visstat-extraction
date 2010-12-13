@@ -38,7 +38,7 @@ tacsat
 ############Example############
 
 
-#  tacsat <- GetDataTacsat(Cstart='01-jan-2006',Cstop='31-Dec-2006')
+#  tacsat <- GetDataTacsat(Cstart='01-jan-2008',Cstop='31-Dec-2008',flag_nations=c('nld'),which.lib="DBI")
 
 #Create a vector of dates to loop over
 
