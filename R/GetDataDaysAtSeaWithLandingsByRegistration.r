@@ -1,14 +1,14 @@
   
 #Cstart="01-jan-2006";Cstop="30-dec-2006"  
   
-GetDataDaysAtSeaWithLandingsByRegistration <- function(Cstart=Cstart,Cstop=Cstop) {
+GetDataDaysAtSeaWithLandingsByRegistration <- function(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib) {
 
 # This function extracts landings and effort (days at sea, kw days at sea) 
 # data from VISSTAT by species, time interval and mesh size range.
 # If meshes are null or void you get -1 in the output file
 
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
-  visstat <- dBConnect(which.database="visstat")
+  visstat <- dBConnect(which.lib=which.lib,which.database="visstat")
 
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)
@@ -72,8 +72,13 @@ WHERE  catches.rgn_trp_arrivel_date between ",Cstart," and ",Cstop,"
 
 
 #AND catches.RGN_TRP_PPY_PLM_CNY_CODE IN ('nld')
+  if(which.lib=="RODBC"){
+  dasbyreg <- sqlQuery(visstat,query) 
+  }
+  if(which.lib=="DBI"){
+  dasbyreg <- dbGetQuery(visstat,query)
+  }
 
-dasbyreg <-sqlQuery(visstat,query);
 
 print(table(dasbyreg$RGN_TRP_PPY_PLM_CNY_CODE))
 print(Cstart);print(Cstop);  
@@ -132,7 +137,7 @@ dasbyreg
 ###############################################################################
 
 
-#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart="01-jan-2010",Cstop="31-jan-2010")
+#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart="01-jan-2010",Cstop="31-jan-2010",which.lib="RODBC")
 #
 ##Add on approximate lats and longs
 #
