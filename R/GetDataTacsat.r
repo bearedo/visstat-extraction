@@ -17,18 +17,18 @@ print('Got VMS data')
 
 #Reformat time
 
-vms$RGN_UTC_TIME <- ReformatTime(vms$RGN_UTC_TIME,which.lib=which.lib)
+vms$RGN_LOCAL_TIME <- ReformatTime(vms$RGN_LOCAL_TIME,which.lib=which.lib)
 vms$RGN_LOCAL_TIME <- ReformatTime(vms$RGN_LOCAL_TIME,which.lib=which.lib)
 
 #Tacsat wants a '/' in the data rather than a '-'
 #So reformat date strings
 
-vms$RGN_UTC_DATE <- ReformatDate(vms$RGN_UTC_DATE,which.lib=which.lib)
+vms$RGN_LOCAL_DATE <- ReformatDate(vms$RGN_LOCAL_DATE,which.lib=which.lib)
 
 #Read in platform properties to get a more anonymous ID for the TACSAT table
 
 tacsat <- data.frame(VE_COU=vms$PPY_PLM_CNY_CODE,VE_REF=paste(vms$PPY_PLM_CODE,vms$PPY_ID,sep=":"),SI_LATI=vms$LATITUDE,SI_LONG=vms$LONGITUDE,
-SI_DATE=vms$RGN_UTC_DATE,SI_TIME=vms$RGN_UTC_TIME,SI_SP = vms$SPEED,SI_HE=vms$HEADING)
+SI_DATE=vms$RGN_LOCAL_DATE,SI_TIME=vms$RGN_LOCAL_TIME,SI_SP = vms$SPEED,SI_HE=vms$HEADING)
 
 print(head(tacsat))
 
