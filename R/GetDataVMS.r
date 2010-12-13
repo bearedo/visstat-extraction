@@ -31,8 +31,8 @@ GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop, flag_nations=flag_nations,whi
   
   #Get date-time string
 
-vms$ntim <- ReformatTime(vms$RGN_UTC_TIME,which.lib=which.lib)
-vms$date <- as.POSIXct(paste(vms$RGN_UTC_DATE,vms$ntim),tz="CET")
+vms$ntim <- ReformatTime(vms$RGN_LOCAL_TIME,which.lib=which.lib)
+vms$date <- as.POSIXct(paste(vms$RGN_LOCAL_DATE,vms$ntim),tz="CET")
 
 
 
