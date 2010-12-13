@@ -29,22 +29,12 @@ GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop, flag_nations=flag_nations,whi
   
   vms <- vms[vms$PPY_PLM_CNY_CODE %in% flag_nations,]
   
-  #Get date-time string
-
-vms$ntim <- ReformatTime(vms$RGN_LOCAL_TIME,which.lib=which.lib)
-vms$date <- as.POSIXct(paste(vms$RGN_LOCAL_DATE,vms$ntim),tz="CET")
-
-
-
-#Make sure vms data are ordered in time
-oo <- order(vms$date)
-vms <- vms[oo,]
-
+ 
   vms
   }
 
 #Example: extract all vms data for January 2010
 
-#  vms <- GetDataVMS(Cstart="01-jan-2010",Cstop="10-jan-2010",flag_nations=c("nld"),which.lib="DBI")
+#  vms <- GetDataVMS(Cstart="01-jan-2008",Cstop="10-jan-2008",flag_nations=c("nld"),which.lib="DBI")
 
-# vms <- GetDataVMS(Cstart="01-jan-2010",Cstop="31-jan-2010",flag_nations=c("nld"),which.lib="RODBC")
+# vms <- GetDataVMS(Cstart="01-jan-2008",Cstop="10-jan-2008",flag_nations=c("nld"),which.lib="RODBC")
