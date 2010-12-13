@@ -1,5 +1,5 @@
 
-GetDataPrice <- function(Cstart=Cstart, Cstop=Cstop) {
+GetDataPrice <- function(Cstart=Cstart, Cstop=Cstop, which.lib=which.lib) {
 
 # This function extracts landings data from VISSTAT by species, time interval and mesh size range.
 # If meshes are null or void you get -1 in the output file
@@ -8,7 +8,7 @@ GetDataPrice <- function(Cstart=Cstart, Cstop=Cstop) {
   library(reshape)
 
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
-  visstat <- dBConnect(which.database="visstat")
+  visstat <- dBConnect(which.lib=which.lib, which.database="visstat")
 
 
 
@@ -38,7 +38,16 @@ query <-paste("
   WHERE unload_date between ",Cstart," and ",Cstop,"
 ")
 
-value <-sqlQuery(visstat,query);
+
+  if(which.lib=="RODBC"){
+  value <- sqlQuery(visstat,query) 
+  }
+  if(which.lib=="DBI"){
+  value <- dbGetQuery(visstat,query)
+  }
+
+
+
 
 }
 
