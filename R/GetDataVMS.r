@@ -1,5 +1,5 @@
 
-#Cstart="01-jan-2010";Cstop="15-jan-2010"  
+#Cstart="01-jan-2008";Cstop="15-jan-2008"  
 #flag_nations <- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
 
 GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop, flag_nations=flag_nations,which.lib=which.lib) 
@@ -26,7 +26,6 @@ GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop, flag_nations=flag_nations,whi
   vms <- dbGetQuery(visstat,query)
   }
   
-  
   vms <- vms[vms$PPY_PLM_CNY_CODE %in% flag_nations,]
   
  
@@ -35,6 +34,6 @@ GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop, flag_nations=flag_nations,whi
 
 #Example: extract all vms data for January 2010
 
-#  vms <- GetDataVMS(Cstart="01-jan-2008",Cstop="10-jan-2008",flag_nations=c("nld"),which.lib="DBI")
+# vms <- GetDataVMS(Cstart="01-jan-2008",Cstop="10-jan-2008",flag_nations=c("nld"),which.lib="DBI")
 
 # vms <- GetDataVMS(Cstart="01-jan-2008",Cstop="10-jan-2008",flag_nations=c("nld"),which.lib="RODBC")
