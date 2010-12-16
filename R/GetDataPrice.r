@@ -46,7 +46,7 @@ query <-paste("
   value <- dbGetQuery(visstat,query)
   }
 
-
+value
 
 
 }
