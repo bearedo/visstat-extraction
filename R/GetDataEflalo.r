@@ -6,7 +6,7 @@
 GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = flag_nations,which.lib=which.lib) 
 {
 # Get data 
- memory.size(4000)
+#memory.size(4000)
  
 valuebyreg <- GetDataLandingValueByRegistration(Cstart=Cstart, Cstop=Cstop,which.lib=which.lib)
 
