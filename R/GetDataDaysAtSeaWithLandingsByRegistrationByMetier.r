@@ -72,7 +72,6 @@ WHERE  catches.rgn_trp_arrivel_date between ",Cstart," and ",Cstop,"
        
 ")
 
-
 #AND catches.RGN_TRP_PPY_PLM_CNY_CODE IN ('nld')
 
 dasbyreg <-sqlQuery(visstat,query);
