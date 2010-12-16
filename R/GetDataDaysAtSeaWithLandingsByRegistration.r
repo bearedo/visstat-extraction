@@ -1,5 +1,5 @@
   
-#Cstart="01-jan-2006";Cstop="30-dec-2006"  
+#Cstart="01-jan-2004";Cstop="30-dec-2004"  
   
 GetDataDaysAtSeaWithLandingsByRegistration <- function(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib) {
 
@@ -80,7 +80,7 @@ WHERE  catches.rgn_trp_arrivel_date between ",Cstart," and ",Cstop,"
   }
 
 
-print(table(dasbyreg$RGN_TRP_PPY_PLM_CNY_CODE))
+#print(table(dasbyreg$RGN_TRP_PPY_PLM_CNY_CODE))
 print(Cstart);print(Cstop);  
 
 dasbyreg$COARSE_DAS <- ifelse(dasbyreg$COARSE_DAS==0,1,dasbyreg$COARSE_DAS)
@@ -126,6 +126,7 @@ dasbyreg$KWDAS <- dasbyreg$POWER*dasbyreg$DAS;
 #dasbyreg$PRT_CNY_CODE_DEPARTED_FROM <- countries$new[match(dasbyreg$PRT_CNY_CODE_DEPARTED_FROM,countries$old)]
 ##dasbyreg$RGN_TRP_PPY_PLM_CNY_CODE <- countries$new[match(dasbyreg$RGN_TRP_PPY_PLM_CNY_CODE,countries$old)]
 #
+
 dasbyreg
 
 }
@@ -137,7 +138,7 @@ dasbyreg
 ###############################################################################
 
 
-#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart="01-jan-2010",Cstop="31-jan-2010",which.lib="RODBC")
+#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart="01-jan-2004",Cstop="31-jan-2004",which.lib="DBI")
 #
 ##Add on approximate lats and longs
 #
