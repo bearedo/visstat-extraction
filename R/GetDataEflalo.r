@@ -1,7 +1,7 @@
 
-#Cstart="01-jan-2010";Cstop="31-jan-2010"  
+Cstart="01-jan-2009";Cstop="31-jan-2009"  
 #flag_nations <- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
-
+#which.lib = 'RODBC'
 
 GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = flag_nations,which.lib=which.lib) 
 {
@@ -22,9 +22,7 @@ valuebyreg$DEPARTURE_DATE <- ReformatDate( valuebyreg$DEPARTURE_DATE,which.lib=w
 
 #Select flag nations
 
-
 valuebyreg <- valuebyreg[valuebyreg$RGN_TRP_PPY_PLM_CNY_CODE %in% flag_nations,]
-
 
 # Transform the data frame into the crappy 'matrix' format required by eflalo.
 
@@ -85,9 +83,9 @@ for(i in 32:dim(ef3)[2]){ ef3[,i] <- ifelse(is.na(ef3[,i]),0,ef3[,i])  }
 
 dimnames(ef3)[[2]][32:dim(ef3)[2]]<-paste("LE_KG_",dimnames(ef3)[[2]][32:dim(ef3)[2]],sep="")
 
-ef3$LE_EFF <- as.numeric(as.vector(ef3$LE_EFF))
-ef3$VE_LEN <- as.numeric(as.vector(ef3$VE_LEN))
-ef3$VE_KW  <- as.numeric(as.vector(ef3$VE_KW))
+ef3$LE_EFF <- as.numeric(as.character(ef3$LE_EFF))
+ef3$VE_LEN <- as.numeric(as.character(ef3$VE_LEN))
+ef3$VE_KW  <- as.numeric(as.character(ef3$VE_KW))
 
 
 ############################
@@ -130,9 +128,9 @@ for(i in 32:dim(ef4)[2]){ ef4[,i] <- ifelse(is.na(ef4[,i]),0,ef4[,i])  }
 
 dimnames(ef4)[[2]][32:dim(ef4)[2]]<-paste("LE_EURO_",dimnames(ef4)[[2]][32:dim(ef4)[2]],sep="")
 
-ef4$LE_EFF <- as.numeric(as.vector(ef4$LE_EFF))
-ef4$VE_LEN <- as.numeric(as.vector(ef4$VE_LEN))
-ef4$VE_KW  <- as.numeric(as.vector(ef4$VE_KW))
+ef4$LE_EFF <- as.numeric(as.character(ef4$LE_EFF))
+ef4$VE_LEN <- as.numeric(as.character(ef4$VE_LEN))
+ef4$VE_KW  <- as.numeric(as.character(ef4$VE_KW))
 
 #Get original dimensions of ef4
 
@@ -142,18 +140,18 @@ dd <- dim(ef4)
 
 ctotals<-apply(ef4[32:dim(ef4)[2]],1,sum.na)
 
-ptab <- tapply(ctotals,list(as.factor(ef4$LE_RECT), as.factor(ef4$FT_REF)),sum.na);
+ptab <- tapply(ctotals,list(as.character(ef4$LE_RECT), as.character(ef4$FT_REF)),sum.na);
 
-ptab[is.na(ptab)] <- 0;
+#ptab[is.na(ptab)] <- 0;
 
 ptab <- vectorise(prop.table(ptab,margin=2));
 dimnames(ptab)[[2]] <- c("P","LE_RECT","FT_REF")
 
-ef4<-merge(ef4,ptab,all.x=T)
+ef5<-merge(ef4,ptab,all.x=T)
 
 ef4$LE_EFF <- ef4$LE_EFF * ef4$P
 
-ef4<- ef4[,1:dd[2]]
+#ef4<- ef4[,1:dd[2]]
 
 
 #Combine the weights and values into a single dataframe
@@ -209,7 +207,7 @@ eflalo2
 # Quick way to load a load of r-files in a directory 
 
 # lapply(list.files(),source)
-# #eflalo2.10 <- GetDataEflalo(Cstart='01-jan-2010',Cstop='31-aug-2010')
+# #eflalo2.10 <- GetDataEflalo(Cstart='01-jan-2010',Cstop='31-aug-2010',flag_nations=c('nld'),which.lib="RODBC")
 # eflalo2 <-    GetDataEflalo(Cstart='01-jan-2009',Cstop='15-jan-2009',flag_nations=c('nld'))
   #Just Dutch data
   
