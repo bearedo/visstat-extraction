@@ -1,8 +1,8 @@
 
-Cstart="01-jan-2006";Cstop="31-jan-2006"  
-flag_nations <- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
-which.lib = 'RODBC'
-flag_nations <- c('nld')
+#Cstart="01-jan-2006";Cstop="31-jan-2006"  
+#flag_nations <- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
+#which.lib = 'RODBC'
+##flag_nations <- c('nld')
 
 GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = flag_nations,which.lib=which.lib) 
 {
@@ -151,10 +151,9 @@ ptab <- ptab[!is.na(ptab$P),]
 
 ef5<-merge(ef4,ptab,all.x=T)
 
-ef5$LE_EFF <- ef5$LE_EFF * ef5$P
+ef3$LE_EFF <- ef3$LE_EFF * ef5$P
 
 #ef5<- ef5[,1:dd[2]]
-
 
 #Combine the weights and values into a single dataframe
 
