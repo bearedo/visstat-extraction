@@ -13,8 +13,7 @@ GetDataDaysAtSeaWithLandingsByRegistration <- function(Cstart=Cstart,Cstop=Cstop
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)
 
-query <-paste("SELECT \
-    trips.trip_number
+query <-paste("SELECT trips.trip_number
 ,   trips.prt_code
 ,   trips.prt_code_departed_from 
 ,   trips.prt_cny_code
@@ -32,7 +31,6 @@ query <-paste("SELECT \
 ,   registrations.GPY_code
 ,   registrations.MESHSIZE
 ,   registrations.trp_ppy_plm_code
-,   registrations.trp_ppy_id as vessel_id1
 ,   registrations.sre_code
 ,   registrations.TRP_PPY_PLM_CNY_CODE 
 ,   nvl(Quadrant_properties.ICES_QUADRANT,'UNKNOWN') AS quadrant
