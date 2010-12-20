@@ -16,7 +16,7 @@ GetDataDaysAtSeaByRegistration <- function(Cstart=Cstart,Cstop=Cstop) {
  
   query <-paste("
 SELECT trips.trip_number,trips.prt_code,trips.prt_code_departed_from,trips.prt_cny_code,trips.prt_cny_code_departed_from,trips.arrivel_date,trips.arrivel_time
-,trips.departure_date,trips.departure_time,registrations.GPY_code,registrations.MESHSIZE,registrations.trp_ppy_plm_code,registrations.trp_ppy_id as vessel_id1
+,trips.departure_date,trips.departure_time,registrations.GPY_code,registrations.MESHSIZE,registrations.trp_ppy_plm_code
 ,registrations.sre_code,registrations.TRP_PPY_PLM_CNY_CODE ,platform_properties.length,platform_properties.power,platform_properties.id as vessel_id2,metiers.metier
 ,ROUND(to_date(to_char(arrivel_date,'yyyy.mm.dd')||' '||substr(to_char(arrivel_time,'0999'),2,2)||'.'||substr(to_char(arrivel_time,'0999'),4,2),'yyyy.mm.dd hh24.mi') -
 to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time,'0999'),2,2)||'.'||substr(to_char(departure_time,'0999'),4,2),'yyyy.mm.dd hh24.mi'),2) AS das
