@@ -1,7 +1,8 @@
 
-Cstart="01-jan-2009";Cstop="31-jan-2009"  
-#flag_nations <- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
-#which.lib = 'RODBC'
+Cstart="01-jan-2006";Cstop="31-jan-2006"  
+flag_nations <- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
+which.lib = 'RODBC'
+flag_nations <- c('nld')
 
 GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = flag_nations,which.lib=which.lib) 
 {
@@ -26,14 +27,14 @@ valuebyreg <- valuebyreg[valuebyreg$RGN_TRP_PPY_PLM_CNY_CODE %in% flag_nations,]
 
 # Transform the data frame into the crappy 'matrix' format required by eflalo.
 
-mm<-paste(valuebyreg$TRIP_NUMBER,valuebyreg$TRP_PPY_PLM_CODE,valuebyreg$VESSEL_ID2,
+mm<-paste(valuebyreg$TRIP_NUMBER,valuebyreg$VESSEL_ID2,
 valuebyreg$LEVEL5,valuebyreg$RGN_TRP_PPY_PLM_CNY_CODE,valuebyreg$PRT_CNY_CODE,
 valuebyreg$PRT_CNY_CODE_DEPARTED_FROM,
 valuebyreg$GPY_CODE,valuebyreg$MESHSIZE,valuebyreg$QUADRANT,
 valuebyreg$PRT_CODE_DEPARTED_FROM,valuebyreg$PRT_CODE,valuebyreg$DEPARTURE_DATE,valuebyreg$DEPARTURE_TIME,
 valuebyreg$ARRIVEL_DATE,valuebyreg$ARRIVEL_TIME,valuebyreg$ICES_SUBAREA,valuebyreg$POWER,valuebyreg$LENGTH,valuebyreg$KWDAS,sep=",")
 
-col.labels<-c("TRIP_NUMBER","TRP_PPY_PLM_CODE","VESSEL_ID2","LEVEL5","RGN_TRP_PPY_PLM_CNY_CODE","PRT_CNY_CODE",
+col.labels<-c("TRIP_NUMBER","VESSEL_ID2","LEVEL5","RGN_TRP_PPY_PLM_CNY_CODE","PRT_CNY_CODE",
 "PRT_CNY_CODE_DEPARTED_FROM",
 "GPY_CODE","MESHSIZE","QUADRANT",
 "PRT_CODE_DEPARTED_FROM","PRT_CODE","DEPARTURE_DATE","DEPARTURE_TIME",
@@ -57,7 +58,7 @@ dimnames(ef1)[[1]]<-1:dim(ef1)[1]
 dimnames(ef1)[[2]][1:ll]<-col.labels
 
 
-ef2 <- data.frame(VE_REF=paste(ef1[,"TRP_PPY_PLM_CODE"],ef1[,"VESSEL_ID2"],sep=":"),VE_FLT=ef1[,"LEVEL5"],VE_COU = ef1[,"RGN_TRP_PPY_PLM_CNY_CODE"], VE_LEN = ef1[,"LENGTH"], 
+ef2 <- data.frame(VE_REF=ef1[,"VESSEL_ID2"],VE_FLT=ef1[,"LEVEL5"],VE_COU = ef1[,"RGN_TRP_PPY_PLM_CNY_CODE"], VE_LEN = ef1[,"LENGTH"], 
 VE_KW= ef1[,"POWER"],VE_TON=rep(NA,dim(ef1)[1]),
 FT_REF=ef1[,"TRIP_NUMBER"],FT_DCOU=ef1[,"PRT_CNY_CODE_DEPARTED_FROM"],FT_DHAR=ef1[,"PRT_CODE_DEPARTED_FROM"],
 FT_DDAT=ef1[,"DEPARTURE_DATE"],FT_DTIME=ef1[,"DEPARTURE_TIME"],FT_LCOU = ef1[,"PRT_CNY_CODE"],
@@ -103,7 +104,7 @@ ef1<-matrix(unlist(strsplit(mm1,",")),ncol=ll,byrow=T)
 dimnames(ef1)[[1]]<-1:dim(ef1)[1]
 dimnames(ef1)[[2]][1:ll]<-col.labels
 
-ef2 <- data.frame(VE_REF=paste(ef1[,"TRP_PPY_PLM_CODE"],ef1[,"VESSEL_ID2"],sep=":"),VE_FLT=ef1[,"LEVEL5"],VE_COU = ef1[,"RGN_TRP_PPY_PLM_CNY_CODE"], VE_LEN = ef1[,"LENGTH"], 
+ef2 <- data.frame(VE_REF=ef1[,"VESSEL_ID2"],VE_FLT=ef1[,"LEVEL5"],VE_COU = ef1[,"RGN_TRP_PPY_PLM_CNY_CODE"], VE_LEN = ef1[,"LENGTH"], 
 VE_KW= ef1[,"POWER"],VE_TON=rep(NA,dim(ef1)[1]),
 FT_REF=ef1[,"TRIP_NUMBER"],FT_DCOU=ef1[,"PRT_CNY_CODE_DEPARTED_FROM"],FT_DHAR=ef1[,"PRT_CODE_DEPARTED_FROM"],
 FT_DDAT=ef1[,"DEPARTURE_DATE"],FT_DTIME=ef1[,"DEPARTURE_TIME"],FT_LCOU = ef1[,"PRT_CNY_CODE"],
@@ -142,27 +143,35 @@ ctotals<-apply(ef4[32:dim(ef4)[2]],1,sum.na)
 
 ptab <- tapply(ctotals,list(as.character(ef4$LE_RECT), as.character(ef4$FT_REF)),sum.na);
 
-#ptab[is.na(ptab)] <- 0;
+ptab[is.na(ptab)] <- 0;
 
 ptab <- vectorise(prop.table(ptab,margin=2));
 dimnames(ptab)[[2]] <- c("P","LE_RECT","FT_REF")
+ptab <- ptab[!is.na(ptab$P),]
 
 ef5<-merge(ef4,ptab,all.x=T)
 
-ef4$LE_EFF <- ef4$LE_EFF * ef4$P
+ef5$LE_EFF <- ef5$LE_EFF * ef5$P
 
-#ef4<- ef4[,1:dd[2]]
+#ef5<- ef5[,1:dd[2]]
 
 
 #Combine the weights and values into a single dataframe
 
-eflalo2 <- cbind(ef3,ef4[,32:dim(ef4)[2]])
+eflalo2 <- cbind(ef3,ef5[,32:dim(ef4)[2]])
 
 #Put on the metier
 
 #Get the metier data from the database
 
-metiers <- sqlQuery(dBConnect("visstat",which.lib=which.lib),"SELECT * from METIERS WHERE CODE = 'DCF';")
+ if(which.lib=="RODBC"){
+  #dasbyreg <- sqlQuery(visstat,query) 
+   metiers <- sqlQuery(dBConnect("visstat",which.lib=which.lib),"SELECT * from METIERS WHERE CODE = 'DCF';")
+
+  }
+  if(which.lib=="DBI"){
+  metiers <-  dbGetQuery(dBConnect("visstat",which.lib=which.lib),"SELECT * from METIERS WHERE CODE = 'DCF';")
+   }
 
 #Get rid of the \r
 metiers$METIER <- as.character(metiers$METIER)
@@ -194,8 +203,6 @@ eflalo2$LE_CDAT <- paste(d,m,y,sep="/")
 countries <- data.frame(old=c('bel','deu','dnk','eng','irl','fra','gbr','nld','scd','swe','nor','fro','ltu'),new=c("BEL","DEU","DNK","GBR","IRL","FRA","GBR","NLD","GBR","SWE","NOR","FRO","LTU"))
 
 eflalo2$VE_COU <- as.character(countries$new[match(eflalo2$VE_COU,countries$old)])
-
-
 
 eflalo2
 
