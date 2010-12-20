@@ -1,7 +1,6 @@
 #Cstart <- "01-jan-2010"
 #Cstop  <- "31-jan-2010"
 
-
 GetDataLandingValueByRegistration <- function(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib) {
 
 # This function gets the value of each component of the landings
@@ -74,5 +73,5 @@ valuebyregistration <- merge(dasbyreg,sp1,all.x=T)
 ###############################################################################
 
  
-# valuebyregistration <- GetDataLandingValueByRegistration(Cstart="01-jan-2009",Cstop="31-jan-2009")
+#valuebyregistration <- GetDataLandingValueByRegistration(Cstart="01-jan-2006",Cstop="31-dec-2010",which.lib='RODBC')
 #xx
