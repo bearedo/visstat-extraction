@@ -95,25 +95,15 @@ dasbyreg$POWER[!is.na(dasbyreg$POWER) & dasbyreg$POWER == 0] <- NA
 
 ll <- log(dasbyreg$LENGTH)
 lp <- log(dasbyreg$POWER)
-df <- data.frame(lp=lp,ll=ll)
-df <- df[df$lp!='NaN',]
-df <- df[df$ll!='NaN',]
-df <- df[!is.na(df$lp),]
-df <- df[!is.na(df$ll),]
 
-m1 <- lm(ll ~ lp,na.action='na.omit',data=df)
+m1 <- lm(ll ~ lp,na.action='na.omit')
 
 dasbyreg$LENGTH[is.na(dasbyreg$LENGTH)] <- exp(coef(m1)[1]+coef(m1)[2]*log(dasbyreg$POWER[is.na(dasbyreg$LENGTH) ]))
 
 ll <- log(dasbyreg$LENGTH)
 lp <- log(dasbyreg$POWER)
-df <- data.frame(lp=lp,ll=ll)
-df <- df[df$lp!='NaN',]
-df <- df[df$ll!='NaN',]
-df <- df[!is.na(df$lp),]
-df <- df[!is.na(df$ll),]
 
-m2 <- lm(lp ~ ll,na.action='na.omit',data=df)
+m2 <- lm(lp ~ ll,na.action='na.omit')
 
 dasbyreg$POWER[is.na(dasbyreg$POWER)] <- exp(coef(m2)[1]+coef(m2)[2]*log(dasbyreg$POWER[is.na(dasbyreg$POWER) ]))
 
