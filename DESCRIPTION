@@ -1,11 +1,11 @@
 Package: visstatExtraction
 Title: For generic code to extract data from the visstat database
-Version: 0.12
-Date: 2010-12-16
+Version: 0.13
+Date: 2010-12-28
 Author: Stijn Bierman (stijn.bierman@wur.nl), Tessa van der Hammen (tessa.vanderhammen@wur.nl), Doug Beare  (douglas.beare@wur.nl)
 Maintainer: Doug Beare <douglas.beare@wur.nl>
 Description: To enable standardised analysis and extractions of the Visstat database at IMARES
 License: GPL (>= 2)
-Depends: R (>= 2.9.1) 
+Depends: R (>= 2.9.1) DBI, ade4, amap, cluster, doBy, data.table, FactoMineR, foreign, maptools, MASS, RODBC, sp, SOAR
 Suggests: mapdata
 LazyLoad: Yes
