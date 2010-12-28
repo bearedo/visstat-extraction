@@ -6,6 +6,6 @@ Author: Stijn Bierman (stijn.bierman@wur.nl), Tessa van der Hammen (tessa.vander
 Maintainer: Doug Beare <douglas.beare@wur.nl>
 Description: To enable standardised analysis and extractions of the Visstat database at IMARES
 License: GPL (>= 2)
-Depends: R (>= 2.9.1) DBI, ade4, amap, cluster, doBy, data.table, FactoMineR, foreign, maptools, MASS, RODBC, sp, SOAR
+Depends: R (>= 2.9.1), DBI, ade4, amap, cluster, doBy, data.table, FactoMineR, foreign, maptools, MASS, RODBC, sp, SOAR
 Suggests: mapdata
 LazyLoad: Yes
