@@ -12,8 +12,11 @@ GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop, flag_nations=flag_nations,whi
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)
 #Set up the Query
-  
-   query <- paste("SELECT vms.* FROM vms WHERE vms.rgn_local_date BETWEEN ",Cstart," and ",Cstop,"")
+
+#query <- paste("SELECT vms.* FROM vms WHERE QPY_ICES_QUADRANT IN ('35F4','35F5','35F6','35F7','36F4','36F5','36F6','36F7')
+#AND vms.rgn_local_date BETWEEN ",Cstart," and ",Cstop,"")
+
+query <- paste("SELECT vms.* FROM vms WHERE vms.rgn_local_date BETWEEN ",Cstart," and ",Cstop,"")
   
  
   #WHERE vms.RGN_LOCAL_DATE between platform_properties.START_DATE AND nvl(platform_properties.END_DATE,sysdate))
