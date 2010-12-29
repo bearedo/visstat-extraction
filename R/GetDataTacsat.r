@@ -26,7 +26,7 @@ vms$RGN_LOCAL_DATE <- ReformatDate(vms$RGN_LOCAL_DATE,which.lib=which.lib)
 
 #Read in platform properties to get a more anonymous ID for the TACSAT table
 
-tacsat <- data.frame(VE_COU=vms$PPY_PLM_CNY_CODE,VE_REF=paste(vms$PPY_PLM_CODE,vms$PPY_ID,sep=":"),SI_LATI=vms$LATITUDE,SI_LONG=vms$LONGITUDE,
+tacsat <- data.frame(VE_COU=vms$PPY_PLM_CNY_CODE,VE_REF=vms$PPY_ID,SI_LATI=vms$LATITUDE,SI_LONG=vms$LONGITUDE,
 SI_DATE=vms$RGN_LOCAL_DATE,SI_TIME=vms$RGN_LOCAL_TIME,SI_SP = vms$SPEED,SI_HE=vms$HEADING)
 
 print(head(tacsat))
