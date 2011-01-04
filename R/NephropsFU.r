@@ -2,7 +2,7 @@
 Nephrops.FU <- function (data=data) {
 
 data$NEPFU <- rep(NA,length(data[,1]))
-data$NEPFUName <- rep(NA,length(data[1,]))
+data$NEPFUName <- rep(NA,length(data[,1]))
 
 
 data$NEPFU[data$QUADRANT %in% c('36F1','36F2','36F3','36F4','37F1','37F2','37F3','37F4','35F2','35F3')]<- "5"
@@ -26,10 +26,6 @@ data$NEPFUName[data$QUADRANT %in% c(paste(44:52,'F2',sep=""),paste(44:52,'F3',se
 ,paste(44:52,'F5',sep="") ,paste(44:52,'F6',sep=""),'43F5','43F6','43F7')] <- "NorwegianDeeps"
 data$NEPFUName[data$QUADRANT %in% c(paste(39:41,'F4',sep=""),paste(39:41,'F5',sep=""))]<- "OffHornsReef"
 data$NEPFUName[is.na(data$NEPFUName)] <- "OTH"
-
-
-
-
 
 data
 }
