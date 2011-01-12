@@ -65,9 +65,13 @@ WHERE  catches.rgn_trp_arrivel_date BETWEEN ",Cstart," and ",Cstop,"")
 #AND catches.RGN_TRP_PPY_PLM_CNY_CODE IN ('nld')
   if(which.lib=="RODBC"){
   dasbyreg <- sqlQuery(visstat,query) 
+  print(which.lib)
+  print(dasbyreg[1,])
   }
   if(which.lib=="DBI"){
   dasbyreg <- dbGetQuery(visstat,query)
+  print(which.lib)
+  print(dasbyreg[1,])
   }
 
 
@@ -131,7 +135,7 @@ dasbyreg
 ###############################################################################
 
 
-#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart="01-jan-2004",Cstop="31-jan-2004",which.lib="DBI")
+#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart="01-jan-2009",Cstop="28-feb-2009",which.lib="DBI")
 #
 ##Add on approximate lats and longs
 #
