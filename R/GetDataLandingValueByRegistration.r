@@ -1,5 +1,5 @@
-#Cstart <- "01-jan-2010"
-#Cstop  <- "31-jan-2010"
+#Cstart <- "01-jan-2008"
+#Cstop  <- "31-dec-2008"
 
 GetDataLandingValueByRegistration <- function(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib) {
 
@@ -15,7 +15,7 @@ print ("Got days at sea by trip")
 
 prices <- GetDataPrice(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib)
 
-#Fudge: if there are no price data use 2009
+#Fudge: if there are no price data use 2009 (Note: this is not compatible with the DBI library on Unix.
 
 if(dim(prices)[[1]] ==0){ print("No price data"); prices <- GetDataPrice(Cstart='01-Jan-2009',Cstop='31-Dec-2009',which.lib=which.lib)}
 
@@ -73,5 +73,5 @@ valuebyregistration <- merge(dasbyreg,sp1,all.x=T)
 ###############################################################################
 
  
-#valuebyregistration <- GetDataLandingValueByRegistration(Cstart="01-jan-2006",Cstop="31-dec-2010",which.lib='RODBC')
+#valuebyregistration <- GetDataLandingValueByRegistration(Cstart="01-jan-2009",Cstop="28-feb-2009",which.lib='DBI')
 #xx
