@@ -3,7 +3,7 @@
 
 GetDataLandings <- function(Cspec=species,Cstart=Cstart, Cstop=Cstop, Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size) {
 
-# This function extracts landings data from VISSTAT by species, time interval and mesh size range. 
+# This function extracts landings data from VISSTAT by species and time interval. 
 # If meshes are null or void you get -1 in the output file
 
 # Load required R libraries 
@@ -51,8 +51,11 @@ GetDataLandings <- function(Cspec=species,Cstart=Cstart, Cstop=Cstop, Cmeshmin=m
              and trips.ppy_plm_code = registrations.trp_ppy_plm_code
              and trips.prt_code = registrations.trp_prt_code)
     INNER JOIN metiers ON (trips.trip_number = metiers.trip_number)       
-    LEFT OUTER JOIN platform_properties ON (platform_properties.id = trips.ppy_id
-    and trips.ARRIVEL_DATE between platform_properties.START_DATE
+    LEFT OUTER JOIN platform_properties ON (platform_properties.PLM_CODE = trips.PPY_PLM_CODE
+    AND platform_properties.PLM_CNY_CODE = trips.PPY_PLM_CNY_CODE
+    
+
+AND trips.ARRIVEL_DATE between platform_properties.START_DATE
     and nvl(platform_properties.END_DATE,sysdate))
     WHERE catches.txn_ices_code IN ",Cspec," 
        and registrations.trp_arrivel_date between ",Cstart," and ",Cstop,"
@@ -71,8 +74,7 @@ GetDataLandings <- function(Cspec=species,Cstart=Cstart, Cstop=Cstop, Cmeshmin=m
 ###############################################################################
 
 
-#landings <- GetDataLandings(Cspec=c("PLE"),Cstart="01-jan-2008",
- #          Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
+#landings <- GetDataLandings(Cspec=c("PLE","SOL"),Cstart="01-jan-2008",Cstop="31-jan-2008",Cmeshmin= -1, Cmeshmax= 200)
  
 
 
