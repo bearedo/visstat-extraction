@@ -45,6 +45,13 @@ qtr <- paste("select * FROM TRIPS WHERE rownum < 5")
  
  print("TRIPS")  
 
+#Get TAXONS
+
+qtx <- paste("select * FROM TAXONS WHERE rownum < 5")
+ 
+ print(sqlQuery(visstat,qtx))  
+ 
+ print("TAXONS")  
   
 } 
   
