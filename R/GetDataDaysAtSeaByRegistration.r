@@ -15,15 +15,19 @@ GetDataDaysAtSeaByRegistration <- function(Cstart=Cstart,Cstop=Cstop) {
 
  
   query <-paste("
-SELECT trips.trip_number,trips.prt_code,trips.prt_code_departed_from,trips.prt_cny_code,trips.prt_cny_code_departed_from,trips.arrivel_date,trips.arrivel_time
+SELECT trips.trip_number,trips.prt_code,trips.prt_code_departed_from,trips.prt_cny_code,trips.prt_cny_code_departed_from,trips.arrivel_date,
+trips.arrivel_time
 ,trips.departure_date,trips.departure_time,registrations.GPY_code,registrations.MESHSIZE,registrations.trp_ppy_plm_code
-,registrations.sre_code,registrations.TRP_PPY_PLM_CNY_CODE ,platform_properties.length,platform_properties.power,platform_properties.id as vessel_id2,metiers.metier
+,registrations.sre_code,registrations.TRP_PPY_PLM_CNY_CODE ,platform_properties.length,
+platform_properties.power,platform_properties.id as vessel_id2,metiers.metier
 ,ROUND(to_date(to_char(arrivel_date,'yyyy.mm.dd')||' '||substr(to_char(arrivel_time,'0999'),2,2)||'.'||substr(to_char(arrivel_time,'0999'),4,2),'yyyy.mm.dd hh24.mi') -
 to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time,'0999'),2,2)||'.'||substr(to_char(departure_time,'0999'),4,2),'yyyy.mm.dd hh24.mi'),2) AS das
 ,arrivel_date - departure_date AS coarse_das
 FROM registrations
 LEFT OUTER JOIN platform_properties ON (platform_properties.PLM_CODE = registrations.trp_ppy_plm_code
+     AND platform_properties.PLM_CNY_CODE = registrations.PPY_PLM_CNY_CODE 
     AND registrations.TRP_ARRIVEL_DATE between platform_properties.START_DATE  AND nvl(platform_properties.END_DATE,sysdate))
+
 INNER JOIN trips ON (trips.arrivel_date = registrations.trp_arrivel_date
      AND trips.arrivel_time = registrations.trp_arrivel_time
      AND trips.ppy_plm_code = registrations.trp_ppy_plm_code
@@ -40,10 +44,6 @@ INNER JOIN trips ON (trips.arrivel_date = registrations.trp_arrivel_date
   if(which.lib=="DBI"){
   dasbyreg <- dbGetQuery(visstat,query)
   }
-
-
-
-
 
 dasbyreg$COARSE_DAS <- ifelse(dasbyreg$COARSE_DAS==0,1,dasbyreg$COARSE_DAS)
 
