@@ -44,6 +44,7 @@ to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time
 ,   arrivel_date - departure_date AS coarse_das
 FROM registrations
     LEFT OUTER JOIN platform_properties ON (platform_properties.PLM_CODE = registrations.trp_ppy_plm_code
+    AND platform_properties.PLM_CNY_CODE = registrations.PPY_PLM_CNY_CODE
     and registrations.TRP_ARRIVEL_DATE between platform_properties.START_DATE and nvl(platform_properties.END_DATE,sysdate))
     INNER JOIN catches ON (registrations.sre_code  = catches.rgn_sre_code
              and registrations.trp_ppy_plm_cny_code = catches.rgn_trp_ppy_plm_cny_code
