@@ -1,5 +1,6 @@
+#Cstart <- "01-jan-2008"
+#Cstop  <- "31-dec-2008"
   
-#Cstart="01-jan-2006";Cstop="31-dec-2006"  
   
 GetDataDaysAtSeaWithLandingsByRegistration <- function(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib) {
 
@@ -44,7 +45,7 @@ to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time
 ,   arrivel_date - departure_date AS coarse_das
 FROM registrations
     LEFT OUTER JOIN platform_properties ON (platform_properties.PLM_CODE = registrations.trp_ppy_plm_code
-    AND platform_properties.PLM_CNY_CODE = registrations.PPY_PLM_CNY_CODE
+    AND platform_properties.PLM_CNY_CODE = registrations.TRP_PPY_PLM_CNY_CODE
     and registrations.TRP_ARRIVEL_DATE between platform_properties.START_DATE and nvl(platform_properties.END_DATE,sysdate))
     INNER JOIN catches ON (registrations.sre_code  = catches.rgn_sre_code
              and registrations.trp_ppy_plm_cny_code = catches.rgn_trp_ppy_plm_cny_code
@@ -60,10 +61,10 @@ FROM registrations
              and trips.ppy_plm_code = registrations.trp_ppy_plm_code
              and trips.prt_code = registrations.trp_prt_code)
     LEFT OUTER join Quadrant_properties ON (registrations.QPY_ICES_QUADRANT = Quadrant_properties.ICES_QUADRANT)
-WHERE  catches.rgn_trp_arrivel_date BETWEEN ",Cstart," and ",Cstop,"")
+WHERE catches.rgn_trp_arrivel_date BETWEEN ",Cstart," and ",Cstop,"")
 
+#AND catches.RGN_TRP_PPY_PLM_CNY_CODE IN ('nld') AND catches.txn_ices_code IN ('SOL','PLE')
 
-#AND catches.RGN_TRP_PPY_PLM_CNY_CODE IN ('nld')
   if(which.lib=="RODBC"){
   dasbyreg <- sqlQuery(visstat,query) 
   print(which.lib)
@@ -74,6 +75,8 @@ WHERE  catches.rgn_trp_arrivel_date BETWEEN ",Cstart," and ",Cstop,"")
   print(which.lib)
   print(dasbyreg[1,])
   }
+
+
 
 
 #print(table(dasbyreg$RGN_TRP_PPY_PLM_CNY_CODE))
@@ -136,7 +139,7 @@ dasbyreg
 ###############################################################################
 
 
-#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart="01-jan-2009",Cstop="28-feb-2009",which.lib="DBI")
+#dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cspec=c("SOL","PLE"),Cstart="01-jan-2009",Cstop="28-feb-2009",which.lib="RODBC")
 #
 ##Add on approximate lats and longs
 #
