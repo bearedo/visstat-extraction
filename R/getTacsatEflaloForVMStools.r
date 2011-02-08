@@ -88,12 +88,10 @@ setwd("D:\\bearedo\\Projects\\vmstools\\vmstools\\data")
 selectEflalo  <-  selectEflalo[,c(1:183)]
 selectTacsat <- selectTacsat[,c(1:8)]
 
- 
-  #-Make sure formats are right
+ #-Make sure formats are right
 
 selectEflalo        <- formatEflalo(selectEflalo)
 selectTacsat        <- formatTacsat(selectTacsat)
-
 
  #- write out data
  
