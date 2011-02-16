@@ -203,8 +203,11 @@ selectTacsat        <- formatTacsat(selectTacsat)
 
  #- write out data
  
-save(selectEflalo,file='eflalo.rda',compress=T)
-save(selectTacsat,file='tacsat.rda',compress=T) 
+ eflalo <- selectEflalo
+ tacsat <- selectTacsat
+ 
+save(eflalo,file='eflalo.rda',compress=T)
+save(tacsat,file='tacsat.rda',compress=T) 
   
   
   
