@@ -21,7 +21,7 @@ input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=70 & input$MESHSIZE[ww] < 79] <- 
 input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=80 & input$MESHSIZE[ww] < 89] <- '80-89'
 input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=90 & input$MESHSIZE[ww] < 99] <- '90-99'
 input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=100 & input$MESHSIZE[ww] < 119] <- '100-119'
-input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=120] <- '>120'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=120] <- '>=120'
 
 print(length(ww))
 
@@ -37,7 +37,7 @@ input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=90 & input$MESHSIZE[ww] <= 99] <-
 input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=100 & input$MESHSIZE[ww] <= 109] <- '100-109'
 input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=110 & input$MESHSIZE[ww] <= 149] <- '110-149'
 input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=150 & input$MESHSIZE[ww] <= 219] <- '150-219'
-input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=220] <- '>220'
+input$MESH_SIZE_RANGE[ww][input$MESHSIZE[ww] >=220] <- '>=220'
 
 print(length(ww))
 
@@ -56,7 +56,7 @@ input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=70 & input$LE_MSZ[ww] < 79] <- '70-
 input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=80 & input$LE_MSZ[ww] < 89] <- '80-89'
 input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=90 & input$LE_MSZ[ww] < 99] <- '90-99'
 input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=100 & input$LE_MSZ[ww] < 119] <- '100-119'
-input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=120] <- '>120'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=120] <- '>=120'
 
 print(length(ww))
 
@@ -72,7 +72,7 @@ input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=90 & input$LE_MSZ[ww] <= 99] <- '90
 input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=100 & input$LE_MSZ[ww] <= 109] <- '100-109'
 input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=110 & input$LE_MSZ[ww] <= 149] <- '110-149'
 input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=150 & input$LE_MSZ[ww] <= 219] <- '150-219'
-input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=220] <- '>220'
+input$MESH_SIZE_RANGE[ww][input$LE_MSZ[ww] >=220] <- '>=220'
 
 print(length(ww))
 }
