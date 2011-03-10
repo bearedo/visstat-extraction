@@ -19,13 +19,13 @@ query <-paste("SELECT trips.trip_number
 ,   trips.prt_code_departed_from 
 ,   trips.prt_cny_code
 ,   trips.prt_cny_code_departed_from
-,   trips.arrivel_date
-,   trips.arrivel_time
+,   trips.arrival_date
+,   trips.arrival_time
 ,   trips.departure_date
 ,   trips.departure_time
-,   TO_CHAR(catches.rgn_trp_arrivel_date,'J') AS julianday
-,   TO_CHAR(catches.rgn_trp_arrivel_date,'WW') AS week
-,   TO_CHAR(catches.rgn_trp_arrivel_date,'MM') AS month
+,   TO_CHAR(catches.rgn_trp_arrival_date,'J') AS julianday
+,   TO_CHAR(catches.rgn_trp_arrival_date,'WW') AS week
+,   TO_CHAR(catches.rgn_trp_arrival_date,'MM') AS month
 ,   catches.txn_ices_code
 ,   catches.weight
 ,   catches.rgn_trp_ppy_plm_cny_code
@@ -40,28 +40,28 @@ query <-paste("SELECT trips.trip_number
 ,   platform_properties.length
 ,   platform_properties.power
 ,   platform_properties.id as vessel_id2
-,   ROUND(to_date(to_char(arrivel_date,'yyyy.mm.dd')||' '||substr(to_char(arrivel_time,'0999'),2,2)||'.'||substr(to_char(arrivel_time,'0999'),4,2),'yyyy.mm.dd hh24.mi') -
+,   ROUND(to_date(to_char(arrival_date,'yyyy.mm.dd')||' '||substr(to_char(arrival_time,'0999'),2,2)||'.'||substr(to_char(arrival_time,'0999'),4,2),'yyyy.mm.dd hh24.mi') -
 to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time,'0999'),2,2)||'.'||substr(to_char(departure_time,'0999'),4,2),'yyyy.mm.dd hh24.mi'),2) AS das
-,   arrivel_date - departure_date AS coarse_das
+,   arrival_date - departure_date AS coarse_das
 FROM registrations
     LEFT OUTER JOIN platform_properties ON (platform_properties.PLM_CODE = registrations.trp_ppy_plm_code
     AND platform_properties.PLM_CNY_CODE = registrations.TRP_PPY_PLM_CNY_CODE
-    and registrations.TRP_ARRIVEL_DATE between platform_properties.START_DATE and nvl(platform_properties.END_DATE,sysdate))
+    and registrations.TRP_ARRIVAL_DATE between platform_properties.START_DATE and nvl(platform_properties.END_DATE,sysdate))
     INNER JOIN catches ON (registrations.sre_code  = catches.rgn_sre_code
              and registrations.trp_ppy_plm_cny_code = catches.rgn_trp_ppy_plm_cny_code
              and registrations.trp_prt_code = catches.rgn_trp_prt_code
              and registrations.trp_prt_cny_code = catches.rgn_trp_prt_cny_code
-             and registrations.trp_arrivel_date = catches.rgn_trp_arrivel_date
-             and registrations.trp_arrivel_time = catches.rgn_trp_arrivel_time
+             and registrations.trp_arrival_date = catches.rgn_trp_arrival_date
+             and registrations.trp_arrival_time = catches.rgn_trp_arrival_time
              and registrations.trp_ppy_id = catches.rgn_trp_ppy_id
              and registrations.trp_ppy_plm_code = catches.rgn_trp_ppy_plm_code
              and registrations.rgn_date = catches.rgn_rgn_date )
-    INNER JOIN trips ON (trips.arrivel_date = registrations.trp_arrivel_date
-             and trips.arrivel_time = registrations.trp_arrivel_time
+    INNER JOIN trips ON (trips.arrival_date = registrations.trp_arrival_date
+             and trips.arrival_time = registrations.trp_arrival_time
              and trips.ppy_plm_code = registrations.trp_ppy_plm_code
              and trips.prt_code = registrations.trp_prt_code)
     LEFT OUTER join Quadrant_properties ON (registrations.QPY_ICES_QUADRANT = Quadrant_properties.ICES_QUADRANT)
-WHERE catches.rgn_trp_arrivel_date BETWEEN ",Cstart," and ",Cstop,"")
+WHERE catches.rgn_trp_arrival_date BETWEEN ",Cstart," and ",Cstop,"")
 
 #AND catches.RGN_TRP_PPY_PLM_CNY_CODE IN ('nld') AND catches.txn_ices_code IN ('SOL','PLE')
 
@@ -165,5 +165,5 @@ dasbyreg
 #tapply(xx$KWDAS,list(xx$REG_GEAR),sum.na)
 
 
-#sqlQuery(visstat,"SELECT RGN_TRP_PPY_PLM_CNY_CODE, count(RGN_TRP_PPY_PLM_CNY_CODE) from catches WHERE catches.rgn_trp_arrivel_date > '31-dec-2005' AND 
-#catches.rgn_trp_arrivel_date < '01-jan-2007' GROUP BY RGN_TRP_PPY_PLM_CNY_CODE;")
+#sqlQuery(visstat,"SELECT RGN_TRP_PPY_PLM_CNY_CODE, count(RGN_TRP_PPY_PLM_CNY_CODE) from catches WHERE catches.rgn_trp_arrival_date > '31-dec-2005' AND
+#catches.rgn_trp_arrival_date < '01-jan-2007' GROUP BY RGN_TRP_PPY_PLM_CNY_CODE;")

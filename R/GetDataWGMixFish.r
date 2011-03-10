@@ -18,7 +18,7 @@ data <- data[data$TXN_ICES_CODE   %in% c('COD','SOL','HAD','PLE','POK','WHG','NE
 
 #Add on year
 
-data$YEAR <- format(data$ARRIVEL_DATE,"%Y")
+data$YEAR <- format(data$ARRIVAL_DATE,"%Y")
 
 #Add on quarter
 

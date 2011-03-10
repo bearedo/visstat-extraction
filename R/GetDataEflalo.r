@@ -13,12 +13,12 @@ valuebyreg <- GetDataLandingValueByRegistration(Cstart=Cstart, Cstop=Cstop,which
 
 #Reformat time strings
 
-valuebyreg$ARRIVEL_TIME <- ReformatTime(valuebyreg$ARRIVEL_TIME,which.lib=which.lib)
+valuebyreg$ARRIVAL_TIME <- ReformatTime(valuebyreg$ARRIVAL_TIME,which.lib=which.lib)
 valuebyreg$DEPARTURE_TIME <- ReformatTime(valuebyreg$DEPARTURE_TIME,which.lib=which.lib)
 
 #Reformat date strings
 
-valuebyreg$ARRIVEL_DATE <- ReformatDate( valuebyreg$ARRIVEL_DATE,which.lib=which.lib)
+valuebyreg$ARRIVAL_DATE <- ReformatDate( valuebyreg$ARRIVAL_DATE,which.lib=which.lib)
 valuebyreg$DEPARTURE_DATE <- ReformatDate( valuebyreg$DEPARTURE_DATE,which.lib=which.lib)
 
 #Select flag nations
@@ -32,13 +32,13 @@ valuebyreg$LEVEL5,valuebyreg$RGN_TRP_PPY_PLM_CNY_CODE,valuebyreg$PRT_CNY_CODE,
 valuebyreg$PRT_CNY_CODE_DEPARTED_FROM,
 valuebyreg$GPY_CODE,valuebyreg$MESHSIZE,valuebyreg$QUADRANT,
 valuebyreg$PRT_CODE_DEPARTED_FROM,valuebyreg$PRT_CODE,valuebyreg$DEPARTURE_DATE,valuebyreg$DEPARTURE_TIME,
-valuebyreg$ARRIVEL_DATE,valuebyreg$ARRIVEL_TIME,valuebyreg$ICES_SUBAREA,valuebyreg$POWER,valuebyreg$LENGTH,valuebyreg$KWDAS,sep=",")
+valuebyreg$ARRIVAL_DATE,valuebyreg$ARRIVAL_TIME,valuebyreg$ICES_SUBAREA,valuebyreg$POWER,valuebyreg$LENGTH,valuebyreg$KWDAS,sep=",")
 
 col.labels<-c("TRIP_NUMBER","VESSEL_ID2","LEVEL5","RGN_TRP_PPY_PLM_CNY_CODE","PRT_CNY_CODE",
 "PRT_CNY_CODE_DEPARTED_FROM",
 "GPY_CODE","MESHSIZE","QUADRANT",
 "PRT_CODE_DEPARTED_FROM","PRT_CODE","DEPARTURE_DATE","DEPARTURE_TIME",
-"ARRIVEL_DATE","ARRIVEL_TIME","ICES_SUBAREA","POWER","LENGTH","KWDAS")
+"ARRIVAL_DATE","ARRIVAL_TIME","ICES_SUBAREA","POWER","LENGTH","KWDAS")
 
 sum.na <- function(x) { x<-sum(x[!is.na(x)]);x}
 
@@ -62,7 +62,7 @@ ef2 <- data.frame(VE_REF=ef1[,"VESSEL_ID2"],VE_FLT=ef1[,"LEVEL5"],VE_COU = ef1[,
 VE_KW= ef1[,"POWER"],VE_TON=rep(NA,dim(ef1)[1]),
 FT_REF=ef1[,"TRIP_NUMBER"],FT_DCOU=ef1[,"PRT_CNY_CODE_DEPARTED_FROM"],FT_DHAR=ef1[,"PRT_CODE_DEPARTED_FROM"],
 FT_DDAT=ef1[,"DEPARTURE_DATE"],FT_DTIME=ef1[,"DEPARTURE_TIME"],FT_LCOU = ef1[,"PRT_CNY_CODE"],
-FT_LHAR = ef1[,"PRT_CODE"], FT_LDAT = ef1[,"ARRIVEL_DATE"], FT_LTIME=ef1[,"ARRIVEL_TIME"],
+FT_LHAR = ef1[,"PRT_CODE"], FT_LDAT = ef1[,"ARRIVAL_DATE"], FT_LTIME=ef1[,"ARRIVAL_TIME"],
 LE_ID = paste(ef1[,"TRIP_NUMBER"],ef1[,"GPY_CODE"],ef1[,"QUADRANT"],sep="-"),
 LE_CDAT=rep(NA,dim(ef1)[1]),
 LE_STIME=rep(NA,dim(ef1)[1]), 
@@ -108,7 +108,7 @@ ef2 <- data.frame(VE_REF=ef1[,"VESSEL_ID2"],VE_FLT=ef1[,"LEVEL5"],VE_COU = ef1[,
 VE_KW= ef1[,"POWER"],VE_TON=rep(NA,dim(ef1)[1]),
 FT_REF=ef1[,"TRIP_NUMBER"],FT_DCOU=ef1[,"PRT_CNY_CODE_DEPARTED_FROM"],FT_DHAR=ef1[,"PRT_CODE_DEPARTED_FROM"],
 FT_DDAT=ef1[,"DEPARTURE_DATE"],FT_DTIME=ef1[,"DEPARTURE_TIME"],FT_LCOU = ef1[,"PRT_CNY_CODE"],
-FT_LHAR = ef1[,"PRT_CODE"], FT_LDAT = ef1[,"ARRIVEL_DATE"], FT_LTIME=ef1[,"ARRIVEL_TIME"],
+FT_LHAR = ef1[,"PRT_CODE"], FT_LDAT = ef1[,"ARRIVAL_DATE"], FT_LTIME=ef1[,"ARRIVAL_TIME"],
 LE_ID = paste(ef1[,"TRIP_NUMBER"],ef1[,"GPY_CODE"],ef1[,"QUADRANT"],sep="-"),
 LE_CDAT=rep(NA,dim(ef1)[1]),
 LE_STIME=rep(NA,dim(ef1)[1]), 

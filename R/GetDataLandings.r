@@ -40,14 +40,14 @@ GetDataLandings <- function(Cspec=species,Cstart=Cstart, Cstop=Cstop, Cmeshmin=m
        and registrations.trp_prt_code = catches.rgn_trp_prt_code
        and registrations.trp_prt_cny_code = catches.rgn_trp_prt_cny_code
        and registrations.trp_arrival_date = catches.rgn_trp_arrival_date
-       and registrations.trp_arrivel_time = catches.rgn_trp_arrivel_time
+       and registrations.trp_arrival_time = catches.rgn_trp_arrival_time
        and registrations.trp_ppy_id = catches.rgn_trp_ppy_id
        and registrations.trp_ppy_plm_code = catches.rgn_trp_ppy_plm_code
        and registrations.rgn_date = catches.rgn_rgn_date )
     LEFT OUTER join Quadrant_properties ON (registrations.QPY_ICES_QUADRANT =
        Quadrant_properties.ICES_QUADRANT)
     INNER JOIN trips ON (trips.arrival_date = registrations.trp_arrival_date
-             and trips.arrivel_time = registrations.trp_arrivel_time
+             and trips.arrival_time = registrations.trp_arrival_time
              and trips.ppy_plm_code = registrations.trp_ppy_plm_code
              and trips.prt_code = registrations.trp_prt_code)
     INNER JOIN metiers ON (trips.trip_number = metiers.trip_number)       
