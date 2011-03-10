@@ -27,7 +27,7 @@ SELECT
 ,   platform_properties.length
 ,   platform_properties.power
 ,   platform_properties.id as vessel_id2
-,   ROUND(to_date(to_char(arrivel_date,'yyyy.mm.dd')||' '||substr(to_char(arrivel_time,'0999'),2,2)||'.'||substr(to_char(arrivel_time,'0999'),4,2),'yyyy.mm.dd hh24.mi') -
+,   ROUND(to_date(to_char(arrival_date,'yyyy.mm.dd')||' '||substr(to_char(arrivel_time,'0999'),2,2)||'.'||substr(to_char(arrivel_time,'0999'),4,2),'yyyy.mm.dd hh24.mi') -
 to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time,'0999'),2,2)||'.'||substr(to_char(departure_time,'0999'),4,2),'yyyy.mm.dd hh24.mi'),2) AS das
 ,   vms.latitude
 ,   vms.longitude
@@ -44,8 +44,8 @@ to_date(to_char(departure_date,'yyyy.mm.dd')||' '||substr(to_char(departure_time
 FROM registrations
     LEFT OUTER JOIN platform_properties ON 
     (platform_properties.PLM_CODE = registrations.trp_ppy_plm_code
-    and registrations.TRP_ARRIVEL_DATE between platform_properties.START_DATE and nvl(platform_properties.END_DATE,sysdate))
-    INNER JOIN trips ON (trips.arrivel_date = registrations.trp_arrivel_date
+    and registrations.TRP_ARRIVAL_DATE between platform_properties.START_DATE and nvl(platform_properties.END_DATE,sysdate))
+    INNER JOIN trips ON (trips.arrival_date = registrations.trp_arrival_date
              and trips.arrivel_time = registrations.trp_arrivel_time
              and trips.ppy_plm_code = registrations.trp_ppy_plm_code
              and trips.prt_code = registrations.trp_prt_code)

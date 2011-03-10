@@ -68,10 +68,16 @@ colnames(df2)<-d2
 for(i in 1:length(m2)){df2[,m2[i]] <- eflalo2[,i] }
 colnames(df2) <- d
 
-eflalo <- rbind(df1,df2)
+eflalo    <- rbind(df1,df2)
+kg        <- function(x){return(c(grep("KG",x)))}
+eur       <- function(x){return(c(grep("EURO",x)))}
+idxst     <- which(!seq(1,dim(eflalo)[2],1) %in% c(kg(colnames(eflalo)),eur(colnames(eflalo))))
+idxkg     <- kg(colnames(eflalo))
+idxeu     <- eur(colnames(eflalo))
+eflalo    <- eflalo[,c(idxst,idxkg,idxeu)]
 
 
-eflalo              <- formatEflalo(eflalo)
+eflalo    <- formatEflalo(eflalo)
 
   #-Look at distribution of vessels and gears by month
   
@@ -154,8 +160,8 @@ selectEflalo$VE_COU <- 'Atlantis'
 
 selectTacsat$SI_LATI <- jitter(selectTacsat$SI_LATI,0.25)
 selectTacsat$SI_LONG <- jitter(selectTacsat$SI_LONG,5)
-#range(selectTacsat2$SI_LATI - selectTacsat$SI_LATI)[2]*60*1852 #should equal approx 500
-#range(selectTacsat2$SI_LONG - selectTacsat$SI_LONG)[2]*30*1852 #should equal approx 500
+#range(jitter(selectTacsat$SI_LATI,0.25) - selectTacsat$SI_LATI)[2]*60*1852 #should equal approx 500
+#range(jitter(selectTacsat$SI_LONG,5) - selectTacsat$SI_LONG)[2]*30*1852 #should equal approx 500
 
  #- Replace NAs with Zeros
 
@@ -187,14 +193,15 @@ selectEflalo$LE_CDAT <- gsub('2004','1801',selectEflalo$LE_CDAT)
  
   #- Remove extra dates
 
-selectEflalo <- selectEflalo[,1:length(d)]
+selectEflalo <- selectEflalo[,-grep("DATIM",colnames(selectEflalo))]
+selectTacsat <- selectTacsat[,-grep("DATIM",colnames(selectTacsat))]
+
 
    #- set up location to dump data
 
 setwd("/media/n/Projecten/bearedo/Projects/vmstoolstestdatasets")
+setwd("N:/Projecten/VMS tools/9 Repository/VMS_tools/vmstools/data/")
 
-selectEflalo  <-  selectEflalo[,c(1:189)]
-selectTacsat <- selectTacsat[,c(1:8)]
 
  #-Make sure formats are right
 

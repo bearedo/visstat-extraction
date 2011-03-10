@@ -18,10 +18,10 @@ GetDataLandings <- function(Cspec=species,Cstart=Cstart, Cstop=Cstop, Cmeshmin=m
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)
 
-    query<-paste("SELECT catches.rgn_trp_arrivel_date arr_date,
-       TO_CHAR(catches.rgn_trp_arrivel_date,'Q') quarter,
-       TO_CHAR(catches.rgn_trp_arrivel_date,'YYYY') year,
-       TO_CHAR(catches.rgn_trp_arrivel_date,'MM') month,
+    query<-paste("SELECT catches.rgn_trp_arrival_date arr_date,
+       TO_CHAR(catches.rgn_trp_arrival_date,'Q') quarter,
+       TO_CHAR(catches.rgn_trp_arrival_date,'YYYY') year,
+       TO_CHAR(catches.rgn_trp_arrival_date,'MM') month,
        catches.txn_ices_code species,
        catches.weight,
        registrations.GPY_code gear,
@@ -39,14 +39,14 @@ GetDataLandings <- function(Cspec=species,Cstart=Cstart, Cstop=Cstop, Cmeshmin=m
        and registrations.trp_ppy_plm_cny_code = catches.rgn_trp_ppy_plm_cny_code
        and registrations.trp_prt_code = catches.rgn_trp_prt_code
        and registrations.trp_prt_cny_code = catches.rgn_trp_prt_cny_code
-       and registrations.trp_arrivel_date = catches.rgn_trp_arrivel_date
+       and registrations.trp_arrival_date = catches.rgn_trp_arrival_date
        and registrations.trp_arrivel_time = catches.rgn_trp_arrivel_time
        and registrations.trp_ppy_id = catches.rgn_trp_ppy_id
        and registrations.trp_ppy_plm_code = catches.rgn_trp_ppy_plm_code
        and registrations.rgn_date = catches.rgn_rgn_date )
     LEFT OUTER join Quadrant_properties ON (registrations.QPY_ICES_QUADRANT =
        Quadrant_properties.ICES_QUADRANT)
-    INNER JOIN trips ON (trips.arrivel_date = registrations.trp_arrivel_date
+    INNER JOIN trips ON (trips.arrival_date = registrations.trp_arrival_date
              and trips.arrivel_time = registrations.trp_arrivel_time
              and trips.ppy_plm_code = registrations.trp_ppy_plm_code
              and trips.prt_code = registrations.trp_prt_code)
@@ -55,10 +55,10 @@ GetDataLandings <- function(Cspec=species,Cstart=Cstart, Cstop=Cstop, Cmeshmin=m
     AND platform_properties.PLM_CNY_CODE = trips.PPY_PLM_CNY_CODE
     
 
-AND trips.ARRIVEL_DATE between platform_properties.START_DATE
+AND trips.ARRIVAL_DATE between platform_properties.START_DATE
     and nvl(platform_properties.END_DATE,sysdate))
     WHERE catches.txn_ices_code IN ",Cspec," 
-       and registrations.trp_arrivel_date between ",Cstart," and ",Cstop,"
+       and registrations.trp_arrival_date between ",Cstart," and ",Cstop,"
        and nvl(registrations.MESHSIZE,-1) BETWEEN ",Cmeshmin," AND ",Cmeshmax,"
        
        ")
