@@ -2,7 +2,7 @@
 
 #1. Install libraries and maximum memory
 
-detach(package:vmstools)
+#detach(package:vmstools)
 
 install.packages("visstatExtraction_0.15.tar.gz",repos=NULL)                                             # from nemo
 
