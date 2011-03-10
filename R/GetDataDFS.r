@@ -56,4 +56,4 @@ qstvp <- paste("select VIS_STATIONS.*,VIS_POSITIONS.* FROM VIS_STATIONS, VIS_POS
  }
  
  
-dfs <- GetDataDFS(Cstart="01-jan-2007",Cstop="31-dec-2007",species=c("'DAB'")) 
+#dfs <- GetDataDFS(Cstart="01-jan-2007",Cstop="31-dec-2007",species=c("'DAB'"))
