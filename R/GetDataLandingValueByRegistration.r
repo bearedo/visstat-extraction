@@ -1,5 +1,5 @@
-#Cstart <- "01-jan-2008"
-#Cstop  <- "31-dec-2008"
+Cstart <- "01-jan-2009"
+Cstop  <- "31-dec-2009"
 
 GetDataLandingValueByRegistration <- function(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib) {
 
@@ -28,7 +28,7 @@ sp <- sv/sw;
 
 
 # table with total landings by week
-CTAB <- tapply(dasbyreg$WEIGHT,list(as.factor(dasbyreg$WEEK),as.factor(dasbyreg$TXN_ICES_CODE)),sum);
+CTAB <- tapply(dasbyreg$WEIGHT,list(as.factor(dasbyreg$WEEK),as.factor(dasbyreg$TXN_ICES_CODE)),sum,na.rm=T);
 # replace the NAs with zeros
 CTAB[is.na(CTAB)] <- 0;
 
