@@ -1,15 +1,18 @@
 
-GetDataWGMixFish <- function(syear=2003,eyear=2009){
+GetDataWGMixFish <- function(syear=2003,eyear=2010){
 
  ##Create a vector of dates to loop over
 #
 dats <- data.frame(start.date=paste('1','Jan',syear:eyear,sep="-"), end.date= paste('31','Dec',syear:eyear,sep="-"))
 #
 #
-for (i in 1:7) {
+#for (i in 1:7) {   # 2003 :2009
 
-print(dats$start.date[i])
-data <- GetDataLandingValueByRegistration(Cstart=dats$start.date[i],Cstop=dats$end.date[i])
+for (i in 8) {     # 2010
+
+
+print(dats[i,])
+data <- GetDataLandingValueByRegistration(Cstart=dats$start.date[i],Cstop=dats$end.date[i],which.lib='RODBC')
 
 #Just species required
 
@@ -26,11 +29,11 @@ data <- qtr.f(data)
 
 #Add on gear category
 
-data <- DCFGearCodes(data=data,data.type="visstat")
+data <- DCFGearCodes(input=data,data.type="visstat")
 
 #Pasive or static?
 
-data <- PassiveOrStatic(data)
+data <- PassiveOrStatic(input=data)
 
 #Vessel length category
 
@@ -38,7 +41,7 @@ data <- WGMixFishLengthCats(data)
 
 #Mesh size category
 
-data <- DCFMeshCategory(data,data.type="visstat")
+data <- DCFMeshCategory(input=data,data.type="visstat")
 
 #Nephrops function groups
 
@@ -72,7 +75,7 @@ data$narea[data$narea %in% 'UNK'] <- NA
 
 #Take out Dutch boats
 
-data<-data[data$RGN_TRP_PPY_PLM_CNY_CODE=='NLD',]
+data<-data[data$RGN_TRP_PPY_PLM_CNY_CODE=='nld',]
 
 #Put on new country code
 
@@ -82,8 +85,8 @@ data$RGN_TRP_PPY_PLM_CNY_CODE <- 'NED'
 #Table A.
 
 lst <- list(data$YEAR,data$QUARTER,data$VESSEL_LENGTH,data$GEAR,data$MESH_SIZE_RANGE,data$narea,data$species)
-tC <- vectorise(tapply(data$WEIGHT,lst,sum.na))
-tV <- vectorise(tapply(data$VALUE,lst,sum.na))
+tC <- vectorise(tapply(data$WEIGHT,lst,sum,na.rm=T))
+tV <- vectorise(tapply(data$VALUE,lst,sum,na.rm=T))
 tC$VALUE<-tV$value
 
 id <- paste(tC$V2,tC$V3,tC$V4,tC$V5,tC$V6,tC$V7,tC$V8,sep='|')
@@ -106,8 +109,8 @@ data1$DAYS_AT_SEA_EFFORT <- as.numeric(as.vector(data1$X7))
 data1$KW_DAYS_EFFORT <- as.numeric(as.vector(data1$X8))
 
 lst <- list(data1$X1,data1$X2,data1$X3,data1$X4,data1$X5,data1$X6)
-tkwd <- vectorise(tapply(data1$KW_DAYS_EFFORT,lst,sum.na))
-tdas <- vectorise(tapply(data1$DAYS_AT_SEA_EFFORT,lst,sum.na))
+tkwd <- vectorise(tapply(data1$KW_DAYS_EFFORT,lst,sum,na.rm=T))
+tdas <- vectorise(tapply(data1$DAYS_AT_SEA_EFFORT,lst,sum,na.rm=T))
 tkwd$das<-tdas$value
 
 id <- paste(tkwd$V2,tkwd$V3,tkwd$V4,tkwd$V5,tkwd$V6,tkwd$V7,sep='|')
@@ -138,7 +141,7 @@ else {
 # EOF
 }
 
-
+ GetDataWGMixFish(syear=2003,eyear=2010)
 
 
   #save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat.rda",compress=T)
