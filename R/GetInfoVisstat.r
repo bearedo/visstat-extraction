@@ -52,6 +52,13 @@ qtx <- paste("select * FROM TAXONS WHERE rownum < 5")
  print(sqlQuery(visstat,qtx))  
  
  print("TAXONS")  
+ 
+ qtp <- paste("select * FROM QUADRANT_PROPERTIES WHERE rownum < 5")
+ 
+ print(sqlQuery(visstat,qtp))  
+ 
+ print("TAXONS")  
+
   
 } 
   
