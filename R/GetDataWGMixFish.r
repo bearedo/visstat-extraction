@@ -103,7 +103,6 @@ tabA<-tabA[!is.na(tabA$LANDINGS),]
 
 data1  <- unique(paste(data$YEAR,data$QUARTER,data$VESSEL_LENGTH,data$GEAR,data$MESH_SIZE_RANGE,data$narea,data$COARSE_DAS,data$KWDAS,sep="|"))
 
-
 data1  <- data.frame(matrix(unlist(strsplit(data1,"\\|")),ncol=8,byrow=T))
 data1$DAYS_AT_SEA_EFFORT <- as.numeric(as.vector(data1$X7))
 data1$KW_DAYS_EFFORT <- as.numeric(as.vector(data1$X8))
@@ -116,7 +115,8 @@ tkwd$das<-tdas$value
 id <- paste(tkwd$V2,tkwd$V3,tkwd$V4,tkwd$V5,tkwd$V6,tkwd$V7,sep='|')
 
 tabB <- data.frame(ID=id,
-COUNTRY=rep('NED',length(tkwd[,1])),YEAR =  tkwd$V2, QUARTER= tkwd$V3, VESSEL_LENGTH = tkwd$V4, GEAR = tkwd$V5, MESH_SIZE_RANGE = tkwd$V6, AREA = tkwd$V7, KW_DAYS_EFFORT = tkwd$value, DAYS_AT_SEA_EFFORT=tkwd$das, NO_VESSELS = '-1')
+COUNTRY=rep('NED',length(tkwd[,1])),YEAR =  tkwd$V2, QUARTER= tkwd$V3, 
+VESSEL_LENGTH = tkwd$V4, GEAR = tkwd$V5, MESH_SIZE_RANGE = tkwd$V6, AREA = tkwd$V7, KW_DAYS_EFFORT = tkwd$value, DAYS_AT_SEA_EFFORT=tkwd$das, NO_VESSELS = '-1')
 
 tabB<-tabB[!is.na(tabB$KW_DAYS_EFFORT),]
 
@@ -141,11 +141,43 @@ else {
 # EOF
 }
 
- GetDataWGMixFish(syear=2003,eyear=2010)
+ #GetDataWGMixFish(syear=2003,eyear=2010)
 
-
-  #save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat.rda",compress=T)
-
-
-
-
+#
+#  ##save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat.rda",compress=T)
+#
+#setwd("D:/bearedo/WorkingGroups/WGMIXFISH")
+#
+#tabA <- read.table('tabA.csv',sep=',',header=T)
+#tabB <- read.table('tabB.csv',sep=',',header=T)
+#tabB <- tabB[!is.na(tabB$YEAR),]
+#
+#bt2 <- tabB[tabB$GEAR == 'BEAM' & tabB$MESH_SIZE_RANGE == '80-89',]
+#
+#tapply(bt2$KW_DAYS_EFFORT,list(bt2$GEAR,bt2$YEAR),sum)
+#
+# ##Just the 2010 data
+#
+#write.table(tabA[tabA$YEAR == 2010,], file='tabA.2010.csv',sep=',',row.names=F)
+#write.table(tabB[tabB$YEAR == 2010,], file='tabB.2010.csv',sep=',',row.names=F)
+#
+# ## Check numbers against eflalo 
+# 
+# load("N:/Projecten/Cod-Closures-2011/eflalo.10.rda")
+#
+# library(visstatExtraction)
+# 
+#  eflalo.10 <- DCFGearCodes(input=eflalo.10,data.type="eflalo")
+#  test <- eflalo.10[,c(1:31,506)]
+#
+#  test <- PassiveOrStatic(input=test)
+#
+#
+#   ##  Mesh size category
+#
+#test <- DCFMeshCategory(input=test,data.type="eflalo")
+#
+#bt2e <- test[test$GEAR == 'BEAM' & test$MESH_SIZE_RANGE == '80-89',]
+#
+#tapply(bt2e$LE_EFF,list(bt2e$GEAR),sum,na.rm=T)
+#
