@@ -1,7 +1,7 @@
   
 #Cstart="01-jan-2009";Cstop="31-dec-2009"  
   
-GetDataDaysAtSeaByRegistration <- function(Cstart=Cstart,Cstop=Cstop) {
+GetDataDaysAtSeaByRegistration <- function(Cstart=Cstart,Cstop=Cstop,which.lib='RODBC') {
 
 # This function extracts effort (days at sea, kw days at sea) data from VISSTAT by trip.
 # Some trips have different gears used on the trip which is why sometimes you get the data repeated.
