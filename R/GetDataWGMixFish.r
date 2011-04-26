@@ -5,23 +5,21 @@ GetDataWGMixFish <- function(syear=2003,eyear=2010){
 #
 dats <- data.frame(start.date=paste('1','Jan',syear:eyear,sep="-"), end.date= paste('31','Dec',syear:eyear,sep="-"))
 #
-#
-#for (i in 1:7) {   # 2003 :2009
 
-for (i in 8) {     # 2010
+#Attach libraries
+library(visstatExtraction)
+library(vmstools)
 
+for (i in 1:8)  {     # 2010
 
 print(dats[i,])
 data <- GetDataLandingValueByRegistration(Cstart=dats$start.date[i],Cstop=dats$end.date[i],which.lib='RODBC')
 
-#Just species required
-
-data <- data[data$TXN_ICES_CODE   %in% c('COD','SOL','HAD','PLE','POK','WHG','NEP') ,]
-
-
 #Add on year
 
 data$YEAR <- format(data$ARRIVAL_DATE,"%Y")
+
+curyear <- as.numeric(unique(data$YEAR))
 
 #Add on quarter
 
@@ -43,16 +41,7 @@ data <- WGMixFishLengthCats(data)
 
 data <- DCFMeshCategory(input=data,data.type="visstat")
 
-#Nephrops function groups
-
-data <- Nephrops.FU(data)
-
-#New species coding
-
-data$species <- as.character(data$TXN_ICES_CODE)
-ww <- grep('NEP',as.character(data$species))
-data$species[ww] <- paste(data$species[ww],as.character(data$NEPFU[ww]),sep="")
-
+#Areas in format required
 
 data$narea <- as.character(data$ICES_SUBAREA)
 
@@ -81,12 +70,30 @@ data<-data[data$RGN_TRP_PPY_PLM_CNY_CODE=='nld',]
 
 data$RGN_TRP_PPY_PLM_CNY_CODE <- 'NED'
 
+#Nephrops function groups
+
+data <- Nephrops.FU(data)
+
+
+### LANDINGS ###
+
+#Extract species required  for this call
+
+data.l <- data[data$TXN_ICES_CODE   %in% c('COD','SOL','HAD','PLE','POK','WHG','NEP') ,]
+
+#New species coding
+
+data.l$species <- as.character(data.l$TXN_ICES_CODE)
+ww <- grep('NEP',as.character(data.l$species))
+data.l$species[ww] <- paste(data.l$species[ww],as.character(data.l$NEPFU[ww]),sep="")
+
+
 #Sum over year, quarter, country etc.
 #Table A.
 
-lst <- list(data$YEAR,data$QUARTER,data$VESSEL_LENGTH,data$GEAR,data$MESH_SIZE_RANGE,data$narea,data$species)
-tC <- vectorise(tapply(data$WEIGHT,lst,sum,na.rm=T))
-tV <- vectorise(tapply(data$VALUE,lst,sum,na.rm=T))
+lst <- list(data.l$YEAR,data.l$QUARTER,data.l$VESSEL_LENGTH,data.l$GEAR,data.l$MESH_SIZE_RANGE,data.l$narea,data.l$species)
+tC <- vectorise(tapply(data.l$WEIGHT,lst,sum,na.rm=T))
+tV <- vectorise(tapply(data.l$VALUE,lst,sum,na.rm=T))
 tC$VALUE<-tV$value
 
 id <- paste(tC$V2,tC$V3,tC$V4,tC$V5,tC$V6,tC$V7,tC$V8,sep='|')
@@ -99,17 +106,24 @@ SPECIES = tC$V8, LANDINGS = tC$value, DISCARDS=rep(NA,length(tC[,1])), VALUE = t
 
 tabA<-tabA[!is.na(tabA$LANDINGS),]
 
-#Make Table B (effort)
+#Check 
 
-data1  <- unique(paste(data$YEAR,data$QUARTER,data$VESSEL_LENGTH,data$GEAR,data$MESH_SIZE_RANGE,data$narea,data$COARSE_DAS,data$KWDAS,sep="|"))
+print(tapply(tabA$LANDINGS,list(tabA$SPECIES,tabA$YEAR),sum,na.rm=T)/1000)
 
-data1  <- data.frame(matrix(unlist(strsplit(data1,"\\|")),ncol=8,byrow=T))
-data1$DAYS_AT_SEA_EFFORT <- as.numeric(as.vector(data1$X7))
-data1$KW_DAYS_EFFORT <- as.numeric(as.vector(data1$X8))
 
-lst <- list(data1$X1,data1$X2,data1$X3,data1$X4,data1$X5,data1$X6)
-tkwd <- vectorise(tapply(data1$KW_DAYS_EFFORT,lst,sum,na.rm=T))
-tdas <- vectorise(tapply(data1$DAYS_AT_SEA_EFFORT,lst,sum,na.rm=T))
+
+###### Make Table B (effort) ##########
+
+data.e    <- data[!duplicated(data$TRIP_NUMBER),]; #Extract unique trips
+
+#Check numbers look ok
+
+print(tapply(data.e$KWDAS,list(data.e$GEAR),sum,na.rm=T))     
+
+lst <- list(data.e$YEAR,data.e$QUARTER,data.e$VESSEL_LENGTH,data.e$GEAR,data.e$MESH_SIZE_RANGE,data.e$narea)
+
+tkwd <- vectorise(tapply(data.e$KWDAS,lst,sum,na.rm=T))
+tdas <- vectorise(tapply(data.e$DAS,lst,sum,na.rm=T))
 tkwd$das<-tdas$value
 
 id <- paste(tkwd$V2,tkwd$V3,tkwd$V4,tkwd$V5,tkwd$V6,tkwd$V7,sep='|')
@@ -119,6 +133,11 @@ COUNTRY=rep('NED',length(tkwd[,1])),YEAR =  tkwd$V2, QUARTER= tkwd$V3,
 VESSEL_LENGTH = tkwd$V4, GEAR = tkwd$V5, MESH_SIZE_RANGE = tkwd$V6, AREA = tkwd$V7, KW_DAYS_EFFORT = tkwd$value, DAYS_AT_SEA_EFFORT=tkwd$das, NO_VESSELS = '-1')
 
 tabB<-tabB[!is.na(tabB$KW_DAYS_EFFORT),]
+
+#Check 
+
+print(tapply(tabB$KW_DAYS_EFFORT,list(tabB$GEAR),sum,na.rm=T))
+
 
 setwd("D:/bearedo/WorkingGroups/WGMIXFISH")
 
@@ -135,49 +154,171 @@ else {
   write.table (tabB, file = 'tabB.csv', col.names=FALSE, sep=",", row.names =F,append=T)
 
   }
-
-}
-
 # EOF
 }
+}
+ 
+#GetDataWGMixFish(syear=2003,eyear=2010)
 
- #GetDataWGMixFish(syear=2003,eyear=2010)
 
+##########  Add on DISCARD estimates available ######### 
 #
-#  ##save(tacsat,file="D://bearedo//Projects//visstat-raising//visstat-extraction//data//tacsat.rda",compress=T)
+#library(vmstools)
+#
+#curyear <- 2010
+#
+#
+#print(paste('Doing discard data',curyear)) #Only have the raising data for 2010 but this can be improved
+#
+#discard <- read.table('W:/IMARES/IJmuiden/WOT/WOT Discards demersaal/4 Rapportage/resultaten/STECF/discard/n_disc_trip.csv',sep=',',header=T)
+#
+###### Effort data needed for the raising #######
+#
+#effort.fleet <- read.table("W:/IMARES/IJmuiden/WOT/WOT Discards demersaal/4 Rapportage/resultaten/VanHelmond_2010/Effort/effort_fleet.csv",sep=",",header=T)
+#effort.trip  <- read.table("W:/IMARES/IJmuiden/WOT/WOT Discards demersaal/4 Rapportage/resultaten/VanHelmond_2010/Effort/effort_trip.csv",sep=",",header=T)
+#
+##Add on 3-letter species code from the database
+#
+#visstat <- odbcConnect(dsn="visstatp", uid="doug",pwd="oneover");
+#frisbe  <- odbcConnect(dsn="frisbep", uid="doug",pwd="ninethirty");
+#
+#taxons1 <- sqlQuery(visstat,"SELECT * from TAXONS")
+#taxons2 <- sqlQuery(frisbe,"SELECT * from VIS_TAXONS")
+#
+#discard$SPECIES <- taxons2$ICES_CODE[match(discard$SCIENTIFIC_NAME,taxons2$SCIENTIFIC_NAME)]
+#
+##Extract data with a 3 letter code available
+#
+#discard <- discard[!is.na(discard$SPECIES),]
+#
+#####  Get weights per hour instead of numbers per hour ####
+#
+#lwt <- read.table('W:/IMARES/IJmuiden/WOT/WOT Discards demersaal/4 Rapportage/resultaten/STECF/discard/lwrel.csv',sep=',',header=T)
+#
+##Put on A & B
+#
+#x <- tolower(discard$SCIENTIFIC_NAME) 
+#y <- tolower(lwt$SPEC)
+#
+#discard$a <- lwt$LWA[match(x,y)]
+#discard$b <- lwt$LWB[match(x,y)]
+#
+##Chuck out things that don't match (mostly invertebrates)
+#
+#discard <- discard [!is.na(discard$a),]
+#
+## Apply non-linear model parameters, eg. W = aL^b
+#
+#discard$wt_total_trip <- (discard$a*(discard$class_length^discard$b) * discard$n_total_trip) /1000 #kilos
+#
+##Sum over species 
+#
+#discard.sums <- aggregate(list(dwt = discard$wt_total_trip), 
+#list(SHIP = discard$SHIP, week = discard$week, SCIENTIFIC_NAME = discard$SCIENTIFIC_NAME,year = discard$year,QUARTER = discard$quar),sum,na.rm=T)
+#
+#discard.sums <- discard.sums[discard.sums$year == curyear,]
+#
+##Put the hpeffort on d1
+#
+#discard.sums$hpeffort <- effort.trip$hpeffort[match(paste(discard.sums$SHIP,discard.sums$week),paste(effort.trip$SHIP,effort.trip$week))]
+#
+##Put the fleet effort on
+#
+#dimnames(effort.fleet)[[2]][2] <- 'QUARTER'
+#
+#effort.fleet <- effort.fleet[effort.fleet$hpsegment2 == 'Groot' & effort.fleet$meshsegment2 == '80-99mm',]
+#
+#
+##Aggregate over QUARTER and species 
+#
+#discard.sums2 <- aggregate (list(dwt=discard.sums$dwt,hpeffort= discard.sums$hpeffort), 
+#list(SCIENTIFIC_NAME = discard.sums$SCIENTIFIC_NAME,QUARTER = discard.sums$QUARTER),sum,na.rm=T)
+#
+#discard.sums2$fleet.hpeffort <- effort.fleet$hpeffort[match(discard.sums2$QUARTER,effort.fleet$QUARTER)]
+#
+#discard.sums2$discards <- (discard.sums2$fleet.hpeffort/discard.sums2$hpeffort)*discard.sums2$dwt
+#
+#discard.sums2$discards <- round(discard.sums2$discards/1000)
+#
+## Add on the 3-letter codes 
+#
+#discard.sums2$SPECIES <- ac(taxons2$ICES_CODE[match(discard.sums2$SCIENTIFIC_NAME,taxons2$SCIENTIFIC_NAME)] )
+#
+## JAX is the code for horse mackerel, ANF for Lophius piscatorius and FLX for flounders.
+#
+#discard.sums2$species[discard.sums2$SPECIES == 'HOM'] <- 'JAX'
+#discard.sums2$species[discard.sums2$SPECIES == 'FLE'] <- 'FLX'
+#discard.sums2$species[discard.sums2$SPECIES == 'MON'] <- 'ANF'
+#
+##Put on gear codes for large beam trawlers
+#discard.sums2$COUNTRY <- 'NED';
+#discard.sums2$YEAR <- curyear;
+#discard.sums2$VESSEL_LENGTH <- 'o40m'
+#discard.sums2$GEAR <- 'BEAM';
+#discard.sums2$MESH_SIZE_RANGE <- '80-89';
+#discard.sums2$AREA <- '4';
+#discard.sums2$DISCARDS <- discard.sums2$discards * 1000 # put data into kilos
+#
+#discard.sums3 <- data.frame(COUNTRY=discard.sums2$COUNTRY,YEAR=discard.sums2$YEAR,QUARTER = discard.sums2$QUARTER,
+#VESSEL_LENGTH = discard.sums2$VESSEL_LENGTH, GEAR = discard.sums2$GEAR,
+#MESH_SIZE_RANGE = discard.sums2$MESH_SIZE_RANGE,AREA = discard.sums2$AREA,SPECIES = discard.sums2$SPECIES,DISCARDS = discard.sums2$DISCARDS)
+#
+##Match in the discard data 
+#
+##Read in table A
+#
+#tabA <- read.table("D:/bearedo/WorkingGroups/WGMIXFISH/tabA.csv",sep=",",header=T)
+#
+##tabA <- tabA[tabA$YEAR == 2010,]
+#
+#idl <- paste(tabA$YEAR,tabA$QUARTER,tabA$AREA,tabA$SPECIES,tabA$GEAR,tabA$VESSEL_LENGTH,tabA$MESH_SIZE_RANGE)
+#idd <- paste(discard.sums3$YEAR,discard.sums3$QUARTER,discard.sums3$AREA,discard.sums3$SPECIES,discard.sums3$GEAR,discard.sums3$VESSEL_LENGTH,discard.sums3$MESH_SIZE_RANGE)
+#
+#tabA$DISCARDS <- discard.sums3$DISCARDS[match(idl,idd)]
+#
+##Check discards have gone in at the right place
+#
+#tabA[tabA$YEAR == 2010 & tabA$GEAR == 'BEAM' & tabA$AREA == '4' & tabA$VESSEL_LENGTH == 'o40m' & tabA$MESH_SIZE_RANGE == '80-89', ]
 #
 #setwd("D:/bearedo/WorkingGroups/WGMIXFISH")
-#
-#tabA <- read.table('tabA.csv',sep=',',header=T)
+##
+
 #tabB <- read.table('tabB.csv',sep=',',header=T)
 #tabB <- tabB[!is.na(tabB$YEAR),]
+##
 #
-#bt2 <- tabB[tabB$GEAR == 'BEAM' & tabB$MESH_SIZE_RANGE == '80-89',]
-#
-#tapply(bt2$KW_DAYS_EFFORT,list(bt2$GEAR,bt2$YEAR),sum)
-#
-# ##Just the 2010 data
+#bt2 <- tabB[tabB$AREA == '4' & tabB$MESH_SIZE_RANGE %in% c('80-89','90-99','100-109','>=120'),]
+##
+#round(tapply(bt2$KW_DAYS_EFFORT,list(bt2$GEAR,bt2$YEAR),sum)*1.34)
+##
+##
+##### Write out the data with discards 
+#  
+#  write.table(tabA, file='tabA.csv',sep=',',row.names=F)
+#  write.table(tabB, file='tabB.csv',sep=',',row.names=F)
+#  
+##### Just the 2010 data
 #
 #write.table(tabA[tabA$YEAR == 2010,], file='tabA.2010.csv',sep=',',row.names=F)
 #write.table(tabB[tabB$YEAR == 2010,], file='tabB.2010.csv',sep=',',row.names=F)
-#
-# ## Check numbers against eflalo 
-# 
-# load("N:/Projecten/Cod-Closures-2011/eflalo.10.rda")
-#
-# library(visstatExtraction)
-# 
-#  eflalo.10 <- DCFGearCodes(input=eflalo.10,data.type="eflalo")
-#  test <- eflalo.10[,c(1:31,506)]
-#
-#  test <- PassiveOrStatic(input=test)
-#
-#
-#   ##  Mesh size category
-#
-#test <- DCFMeshCategory(input=test,data.type="eflalo")
-#
-#bt2e <- test[test$GEAR == 'BEAM' & test$MESH_SIZE_RANGE == '80-89',]
-#
-#tapply(bt2e$LE_EFF,list(bt2e$GEAR),sum,na.rm=T)
-#
+##
+## ## Check numbers against eflalo 
+## 
+## load("N:/Projecten/Cod-Closures-2011/eflalo.10.rda")
+##
+## library(visstatExtraction)
+## 
+##  eflalo.10 <- DCFGearCodes(input=eflalo.10,data.type="eflalo")
+##  test <- eflalo.10[,c(1:31,506)]
+##
+##  test <- PassiveOrStatic(input=test)
+##
+###
+###   ##  Mesh size category
+###
+##test <- DCFMeshCategory(input=test,data.type="eflalo")
+###
+##bt2e <- test[test$GEAR == 'BEAM',]
+###
+##tapply(bt2e$LE_EFF,list(bt2e$GEAR),sum,na.rm=T)
+###
