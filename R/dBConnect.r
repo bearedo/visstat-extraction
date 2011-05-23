@@ -1,4 +1,4 @@
-dBConnect<-function(which.lib = "RODBC", which.database="visstat"){
+dBConnect<-function(which.lib = "DBI", which.database="visstat"){
 	
   #Options for libraries are RODBC and DBI (DBI is set up to work on raja and RODBC usually on a windoze box
   if(which.lib=="RODBC"){
