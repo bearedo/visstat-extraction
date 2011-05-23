@@ -47,8 +47,6 @@ write("##########################", file=Rfile, append=TRUE);
 
 print("opened files for writing");
 
-
-
 # imares conversiefactor gedeeld door wettelijke (LNV) conversiefactor
 if ( spec == "'PLE'") { totalweight <- totalweight*(1.11/1.07); 
 
