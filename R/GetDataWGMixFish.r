@@ -160,13 +160,13 @@ else {
  
 #GetDataWGMixFish(syear=2003,eyear=2010)
 
-
-##########  Add on DISCARD estimates available ######### 
+################################################################
+###########  Add on DISCARD estimates available ################ 
+################################################################
 #
 #library(vmstools)
 #
 #curyear <- 2010
-#
 #
 #print(paste('Doing discard data',curyear)) #Only have the raising data for 2010 but this can be improved
 #
@@ -214,13 +214,16 @@ else {
 ##Sum over species 
 #
 #discard.sums <- aggregate(list(dwt = discard$wt_total_trip), 
-#list(SHIP = discard$SHIP, week = discard$week, SCIENTIFIC_NAME = discard$SCIENTIFIC_NAME,year = discard$year,QUARTER = discard$quar),sum,na.rm=T)
+#list(SHIP = discard$SHIP, week = discard$week, 
+#SCIENTIFIC_NAME = discard$SCIENTIFIC_NAME,year = discard$year,QUARTER = discard$quar),sum,na.rm=T)
 #
-#discard.sums <- discard.sums[discard.sums$year == curyear,]
+#d1 <- discard.sums[discard.sums$year == curyear,]
+#
+#d1[d1$SCIENTIFIC_NAME == "Pleuronectes platessa",]
 #
 ##Put the hpeffort on d1
 #
-#discard.sums$hpeffort <- effort.trip$hpeffort[match(paste(discard.sums$SHIP,discard.sums$week),paste(effort.trip$SHIP,effort.trip$week))]
+##discard.sums$hpeffort <- effort.trip$hpeffort[match(paste(discard.sums$SHIP,discard.sums$week),paste(effort.trip$SHIP,effort.trip$week))]
 #
 ##Put the fleet effort on
 #
@@ -228,40 +231,46 @@ else {
 #
 #effort.fleet <- effort.fleet[effort.fleet$hpsegment2 == 'Groot' & effort.fleet$meshsegment2 == '80-99mm',]
 #
-#
 ##Aggregate over QUARTER and species 
 #
-#discard.sums2 <- aggregate (list(dwt=discard.sums$dwt,hpeffort= discard.sums$hpeffort), 
-#list(SCIENTIFIC_NAME = discard.sums$SCIENTIFIC_NAME,QUARTER = discard.sums$QUARTER),sum,na.rm=T)
+#d2 <- aggregate (list(dwt=d1$dwt), list(SCIENTIFIC_NAME = d1$SCIENTIFIC_NAME,QUARTER = d1$QUARTER),sum,na.rm=T)
+#e2 <- aggregate (list(hpeffort=effort.trip$hpeffort), list(QUARTER = effort.trip$qtr),sum,na.rm=T)
 #
-#discard.sums2$fleet.hpeffort <- effort.fleet$hpeffort[match(discard.sums2$QUARTER,effort.fleet$QUARTER)]
+#d2$trip.hpeffort <- e2$hpeffort[match(d2$QUARTER,e2$QUARTER)]
+#d2$fleet.hpeffort <- effort.fleet$hpeffort[match(d2$QUARTER,effort.fleet$QUARTER)]
 #
-#discard.sums2$discards <- (discard.sums2$fleet.hpeffort/discard.sums2$hpeffort)*discard.sums2$dwt
+#d2$discards <- (d2$fleet.hpeffort/d2$trip.hpeffort)*d2$dwt
 #
-#discard.sums2$discards <- round(discard.sums2$discards/1000)
+#d2$discards <- round(d2$discards/1000)
+#
+# d2[d2$SCIENTIFIC_NAME == "Pleuronectes platessa",]
+# d2[d2$SCIENTIFIC_NAME == "Gadus morhua",]
+# d2[d2$SCIENTIFIC_NAME == "Gadus morhua",]
+#
+#
 #
 ## Add on the 3-letter codes 
 #
-#discard.sums2$SPECIES <- ac(taxons2$ICES_CODE[match(discard.sums2$SCIENTIFIC_NAME,taxons2$SCIENTIFIC_NAME)] )
+#d2$SPECIES <- ac(taxons2$ICES_CODE[match(d2$SCIENTIFIC_NAME,taxons2$SCIENTIFIC_NAME)] )
 #
 ## JAX is the code for horse mackerel, ANF for Lophius piscatorius and FLX for flounders.
 #
-#discard.sums2$species[discard.sums2$SPECIES == 'HOM'] <- 'JAX'
-#discard.sums2$species[discard.sums2$SPECIES == 'FLE'] <- 'FLX'
-#discard.sums2$species[discard.sums2$SPECIES == 'MON'] <- 'ANF'
+#d2$species[d2$SPECIES == 'HOM'] <- 'JAX'
+#d2$species[d2$SPECIES == 'FLE'] <- 'FLX'
+#d2$species[d2$SPECIES == 'MON'] <- 'ANF'
 #
 ##Put on gear codes for large beam trawlers
-#discard.sums2$COUNTRY <- 'NED';
-#discard.sums2$YEAR <- curyear;
-#discard.sums2$VESSEL_LENGTH <- 'o40m'
-#discard.sums2$GEAR <- 'BEAM';
-#discard.sums2$MESH_SIZE_RANGE <- '80-89';
-#discard.sums2$AREA <- '4';
-#discard.sums2$DISCARDS <- discard.sums2$discards * 1000 # put data into kilos
+#d2$COUNTRY <- 'NED';
+#d2$YEAR <- curyear;
+#d2$VESSEL_LENGTH <- 'o40m'
+#d2$GEAR <- 'BEAM';
+#d2$MESH_SIZE_RANGE <- '80-89';
+#d2$AREA <- '4';
+#d2$DISCARDS <- d2$discards * 1000 # put data into kilos
 #
-#discard.sums3 <- data.frame(COUNTRY=discard.sums2$COUNTRY,YEAR=discard.sums2$YEAR,QUARTER = discard.sums2$QUARTER,
-#VESSEL_LENGTH = discard.sums2$VESSEL_LENGTH, GEAR = discard.sums2$GEAR,
-#MESH_SIZE_RANGE = discard.sums2$MESH_SIZE_RANGE,AREA = discard.sums2$AREA,SPECIES = discard.sums2$SPECIES,DISCARDS = discard.sums2$DISCARDS)
+#discard.sums3 <- data.frame(COUNTRY=d2$COUNTRY,YEAR=d2$YEAR,QUARTER = d2$QUARTER,
+#VESSEL_LENGTH = d2$VESSEL_LENGTH, GEAR = d2$GEAR,
+#MESH_SIZE_RANGE = d2$MESH_SIZE_RANGE,AREA = d2$AREA,SPECIES = d2$SPECIES,DISCARDS = d2$DISCARDS)
 #
 ##Match in the discard data 
 #
@@ -282,7 +291,7 @@ else {
 #
 #setwd("D:/bearedo/WorkingGroups/WGMIXFISH")
 ##
-
+#
 #tabB <- read.table('tabB.csv',sep=',',header=T)
 #tabB <- tabB[!is.na(tabB$YEAR),]
 ##
@@ -320,5 +329,5 @@ else {
 ###
 ##bt2e <- test[test$GEAR == 'BEAM',]
 ###
-##tapply(bt2e$LE_EFF,list(bt2e$GEAR),sum,na.rm=T)
-###
+###tapply(bt2e$LE_EFF,list(bt2e$GEAR),sum,na.rm=T)
+####
