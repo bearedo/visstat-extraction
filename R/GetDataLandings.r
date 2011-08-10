@@ -1,14 +1,14 @@
 
 
 
-GetDataLandings <- function(Cspec=species,Cstart=Cstart, Cstop=Cstop, Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size) {
+GetDataLandings <- function(Cspec=species,Cstart=Cstart, Cstop=Cstop, Cmeshmin=min_mesh_size, Cmeshmax=max_mesh_size,which.lib='RODBC') {
 
 # This function extracts landings data from VISSTAT by species and time interval. 
 # If meshes are null or void you get -1 in the output file
 
 # Load required R libraries 
 
-  library(reshape)
+  #library(reshape)
 
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
   visstat <- dBConnect(which.database="visstat")
