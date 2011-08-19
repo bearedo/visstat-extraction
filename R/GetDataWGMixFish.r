@@ -1,5 +1,5 @@
 
-GetDataWGMixFish <- function(syear=2003,eyear=2010){
+GetDataWGMixFish <- function(syear=2003,eyear=2010,which.lib='RODBC'){
 
  ##Create a vector of dates to loop over
 #
@@ -70,7 +70,7 @@ data<-data[data$RGN_TRP_PPY_PLM_CNY_CODE=='nld',]
 
 data$RGN_TRP_PPY_PLM_CNY_CODE <- 'NED'
 
-#Nephrops function groups
+#Nephrops functional groups
 
 data <- Nephrops.FU(data)
 
@@ -139,7 +139,6 @@ tabB<-tabB[!is.na(tabB$KW_DAYS_EFFORT),]
 print(tapply(tabB$KW_DAYS_EFFORT,list(tabB$GEAR),sum,na.rm=T))
 
 
-setwd("D:/bearedo/WorkingGroups/WGMIXFISH")
 
 
 if (i == 1){
@@ -158,11 +157,38 @@ else {
 }
 }
  
-#GetDataWGMixFish(syear=2003,eyear=2010)
+ 
+setwd('/media/n/Projecten/ICES WG/WKMIXFISH/2010')        #On nemo
+
+GetDataWGMixFish(syear=2003,eyear=2010)
 
 ################################################################
 ###########  Add on DISCARD estimates available ################ 
 ################################################################
+
+### Use the discard data supplied to the STECF effort meeting ###
+
+library(gdata)
+dat <- read.xls("/media/n/Projecten/STECF/EWG-11-06/Datacall-2011/Input/DataSent/EWG-11-06_A.new.discards.xls")
+
+discards <- dat[dat$DISCARDS != -1,]
+discards <- discards[,c(1:13)]
+discards$VESSEL_LENGTH <- 'o40m'
+discards$ID <- paste(discards$YEAR,discards$QUARTER,discards$VESSEL_LENGTH,discards$GEAR,discards$MESH_SIZE_RANGE,discards$AREA,discards$SPECIES,sep='|')
+
+#Read in the landings component
+
+landings <- read.table('/media/n/Projecten/ICES WG/WKMIXFISH/2010/tabA.csv',sep=",",header=T)
+landings <- landings[landings$YEAR == '2010',]
+
+landings$DISCARDS <- discards$DISCARDS[match(landings$ID,discards$ID)]
+
+landings$LANDINGS <- round(landings$LANDINGS/1000)
+
+landings[!is.na(landings$DISCARDS),]
+
+
+
 #
 #library(vmstools)
 #
@@ -308,8 +334,10 @@ else {
 #  
 ##### Just the 2010 data
 #
-#write.table(tabA[tabA$YEAR == 2010,], file='tabA.2010.csv',sep=',',row.names=F)
-#write.table(tabB[tabB$YEAR == 2010,], file='tabB.2010.csv',sep=',',row.names=F)
+write.table(landings, file='tabA.2010.csv',sep=',',row.names=F)
+
+
+write.table(tabB[tabB$YEAR == 2010,], file='tabB.2010.csv',sep=',',row.names=F)
 ##
 ## ## Check numbers against eflalo 
 ## 
