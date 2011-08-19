@@ -50,6 +50,10 @@ qstvp <- paste("select VIS_STATIONS.*,VIS_POSITIONS.* FROM VIS_STATIONS, VIS_POS
  dfs <- merge(vis_chrons[-mm,],dfs,all=T)
  
  dfs$QUANTITY.1[is.na(dfs$QUANTITY.1)] <- 0
+ 
+ subfact <- dfs$TOTAL_UNITS/dfs$USED_UNITS
+ dfs$QUANTITY.1  <- subfact*dfs$QUANTITY.1 
+ 
    
  dfs
  
