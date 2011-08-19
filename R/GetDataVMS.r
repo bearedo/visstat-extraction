@@ -37,6 +37,6 @@ query <- paste("SELECT vms.* FROM vms WHERE vms.rgn_local_date BETWEEN ",Cstart,
 
 #Example: extract all vms data for January 2010
 
-# vms <- GetDataVMS(Cstart="01-jan-2008",Cstop="10-jan-2008",flag_nations=c("nld"),which.lib="DBI")
+#  vms <- GetDataVMS(Cstart="01-jan-2008",Cstop="10-jan-2008",flag_nations=c("nld"),which.lib="DBI")
 
 # vms <- GetDataVMS(Cstart="01-jan-2008",Cstop="10-jan-2008",flag_nations=c("nld"),which.lib="RODBC")
