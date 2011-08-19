@@ -2,7 +2,7 @@
  
 GetInfoFrisbe <- function() {
  
-frisbe <- dBConnect(which.database="frisbe") 
+frisbe <- dBConnect(which.database="frisbe",which.lib='RODBC') 
 
 #Get VIS_STATIONS  
 
