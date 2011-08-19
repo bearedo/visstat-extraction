@@ -16,7 +16,7 @@ GetDataDiscards <- function(Cstart=Cstart,Cstop=Cstop) {
 cl, VIS_TAXONS ta, VIS_POSITIONS vp
   WHERE
   st.STN_DATE BETWEEN ",Cstart," and ",Cstop,"
-  AND st.PGM_CODE IN ('DISOT','DISBT','DISN','DISCRAN')
+  AND st.PGM_CODE IN ('DISOT','DISBT','DISN','DISCRAN','DISGILL','DISP')
   AND st.id=sa.stn_ID AND sa.id = ss.SPE_ID  AND ss.ID = cl.SSE_ID AND cl.TXN_NODC_CODE = ta.NODC_CODE
   AND vp.stn_id = st.id AND vp.seq_no = 0
   ")
@@ -35,7 +35,7 @@ cl, VIS_TAXONS ta, VIS_POSITIONS vp
 qstvp <- paste("select VIS_STATIONS.*,VIS_POSITIONS.* FROM VIS_STATIONS, VIS_POSITIONS
  WHERE VIS_STATIONS.STN_DATE BETWEEN ",Cstart," and ",Cstop,"
    AND
- VIS_STATIONS.PGM_CODE IN ('DISOT','DISBT','DISN','DISCRAN')
+ VIS_STATIONS.PGM_CODE IN ('DISOT','DISBT','DISN','DISCRAN','DISGILL','DISP')
   AND VIS_STATIONS.ID = VIS_POSITIONS.STN_ID AND VIS_POSITIONS.seq_no = 0
  ")
  
@@ -56,4 +56,4 @@ qstvp <- paste("select VIS_STATIONS.*,VIS_POSITIONS.* FROM VIS_STATIONS, VIS_POS
  }
  
  
- xxx <- GetDataDiscards(Cstart='01-JAN-2010',Cstop='31-DEC-2010') 
+ #xxx <- GetDataDiscards(Cstart='01-JAN-2010',Cstop='31-DEC-2010') 
