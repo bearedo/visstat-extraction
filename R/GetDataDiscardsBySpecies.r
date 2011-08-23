@@ -56,4 +56,4 @@ qstvp <- paste("select VIS_STATIONS.*,VIS_POSITIONS.* FROM VIS_STATIONS, VIS_POS
  }
  
  
- GetDataDiscards(Cstart='01-JAN-2010',Cstop='31-DEC-2010',species="'DAB'") 
+#GetDataDiscards(Cstart='01-JAN-2010',Cstop='31-DEC-2010',species="'DAB'") 
