@@ -1,8 +1,9 @@
-#Cstart="01-jan-1900";Cstop="31-dec-2011"
+Cstart="01-jan-1900";Cstop="31-dec-2011"
 
 
 GetDataGIZEggSurvey <- function(Cstart=Cstart,Cstop=Cstop) {
 
+   odbcCloseAll()
    frisbe <- dBConnect(which.database="frisbe")
    
   # Connect to database for which you will need an account and permission from Peter Van der Kamp
@@ -32,7 +33,7 @@ GetDataGIZEggSurvey <- function(Cstart=Cstart,Cstop=Cstop) {
 cl, VIS_TAXONS ta, VIS_POSITIONS vp
   WHERE
   st.STN_DATE BETWEEN ",Cstart," and ",Cstop,"
-  AND st.PGM_CODE IN 'GIZ'
+  AND st.PGM_CODE = 'GIZ'
   AND st.id=sa.stn_ID AND sa.id = ss.SPE_ID  AND ss.ID = cl.SSE_ID AND cl.TXN_NODC_CODE = ta.NODC_CODE
   AND vp.stn_id = st.id AND vp.seq_no = 0
   ")
@@ -41,7 +42,7 @@ cl, VIS_TAXONS ta, VIS_POSITIONS vp
   
    #Take out missing values
   
-  giz <- giz [!is.na(giz$QUANTITY.1),] 
+  #giz <- giz [!is.na(giz$QUANTITY.1),] 
  
  
  
