@@ -1,5 +1,5 @@
-Cstart="01-jan-1900";Cstop="31-dec-2011"
-
+#Cstart="01-jan-1900";Cstop="31-dec-2011"
+ ####
 
 GetDataGIZEggSurvey <- function(Cstart=Cstart,Cstop=Cstop) {
 
@@ -48,15 +48,19 @@ cl, VIS_TAXONS ta, VIS_POSITIONS vp
  
   # Get VIS_STATIONS and POSITIONS
 
-qstvp <- paste("select VIS_STATIONS.*,VIS_POSITIONS.* FROM VIS_STATIONS, VIS_POSITIONS
- WHERE VIS_STATIONS.STN_DATE BETWEEN ",Cstart," and ",Cstop,"
-   AND
- VIS_STATIONS.PGM_CODE IN ('GIZ')
-  AND VIS_STATIONS.ID = VIS_POSITIONS.STN_ID AND VIS_POSITIONS.seq_no = 0
- ")
+
+qstvp <- paste("select VIS_STATIONS.*,VIS_POSITIONS.*, vis_samples.year, vis_ctd_measurements.*, vis_samples.seq_no sample_id FROM VIS_STATIONS, VIS_POSITIONS, vis_samples,vis_ctd_measurements
+  WHERE VIS_STATIONS.STN_DATE BETWEEN ",Cstart," and ",Cstop,"
+    AND
+  VIS_STATIONS.PGM_CODE IN ('GIZ')
+   AND VIS_STATIONS.ID = VIS_POSITIONS.STN_ID AND VIS_POSITIONS.seq_no IN (0,999)
+   and vis_samples.stn_id = vis_stations.id
+   AND vis_ctd_measurements.ptn_id = vis_positions.id")
  
  vis_chrons <- sqlQuery(frisbe,qstvp)  
  
+ vis_chrons<- vis_chrons[vis_chrons$LONGITUDE >0,]
+ vis_chrons<- vis_chrons[vis_chrons$LATITUDE >0,]
  #check 
  
  plot(vis_chrons$LONGITUDE,vis_chrons$LATITUDE)
