@@ -19,4 +19,4 @@ pp
 }
 
 
-pp <- GetPlatformProperties()
+#pp <- GetPlatformProperties()

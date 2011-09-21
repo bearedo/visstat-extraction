@@ -110,8 +110,6 @@ tabA<-tabA[!is.na(tabA$LANDINGS),]
 
 print(tapply(tabA$LANDINGS,list(tabA$SPECIES,tabA$YEAR),sum,na.rm=T)/1000)
 
-
-
 ###### Make Table B (effort) ##########
 
 data.e    <- data[!duplicated(data$TRIP_NUMBER),]; #Extract unique trips
@@ -130,7 +128,8 @@ id <- paste(tkwd$V2,tkwd$V3,tkwd$V4,tkwd$V5,tkwd$V6,tkwd$V7,sep='|')
 
 tabB <- data.frame(ID=id,
 COUNTRY=rep('NED',length(tkwd[,1])),YEAR =  tkwd$V2, QUARTER= tkwd$V3, 
-VESSEL_LENGTH = tkwd$V4, GEAR = tkwd$V5, MESH_SIZE_RANGE = tkwd$V6, AREA = tkwd$V7, KW_DAYS_EFFORT = tkwd$value, DAYS_AT_SEA_EFFORT=tkwd$das, NO_VESSELS = '-1')
+VESSEL_LENGTH = tkwd$V4, GEAR = tkwd$V5, MESH_SIZE_RANGE = tkwd$V6, AREA = tkwd$V7, KW_DAYS_EFFORT = tkwd$value,
+ DAYS_AT_SEA_EFFORT=tkwd$das, NO_VESSELS = '-1')
 
 tabB<-tabB[!is.na(tabB$KW_DAYS_EFFORT),]
 
@@ -158,75 +157,76 @@ else {
 }
  
  
-setwd('/media/n/Projecten/ICES WG/WKMIXFISH/2010')        #On nemo
+#setwd('/media/n/Projecten/ICES WG/WKMIXFISH/2010')        #On nemo
+setwd('d:/bearedo/Projects/') 
 
-GetDataWGMixFish(syear=2003,eyear=2010)
+GetDataWGMixFish(syear=2011,eyear=2011)
 
 ################################################################
 ###########  Add on DISCARD estimates available ################ 
 ################################################################
 
-### Use the discard data supplied to the STECF effort meeting ###
-
-library(gdata)
-dat <- read.xls("/media/n/Projecten/STECF/EWG-11-06/Datacall-2011/Input/DataSent/EWG-11-06_A.new.discards.xls")
-
-discards <- dat[dat$DISCARDS != -1,]
-discards <- discards[,c(1:13)]
-discards$VESSEL_LENGTH <- 'o40m'
-discards$ID <- paste(discards$YEAR,discards$QUARTER,discards$VESSEL_LENGTH,discards$GEAR,discards$MESH_SIZE_RANGE,discards$AREA,discards$SPECIES,sep='|')
-
-#Read in the landings component
-
-landings <- read.table('/media/n/Projecten/ICES WG/WKMIXFISH/2010/tabA.csv',sep=",",header=T)
-landings <- landings[landings$YEAR == '2010',]
-
-landings$DISCARDS <- discards$DISCARDS[match(landings$ID,discards$ID)]
-
-landings$LANDINGS <- round(landings$LANDINGS/1000)
-
-landings[!is.na(landings$DISCARDS),]
-
-
-
+#### Use the discard data supplied to the STECF effort meeting ###
 #
-#library(vmstools)
+#library(gdata)
+#dat <- read.xls("/media/n/Projecten/STECF/EWG-11-06/Datacall-2011/Input/DataSent/EWG-11-06_A.new.discards.xls")
 #
-#curyear <- 2010
+#discards <- dat[dat$DISCARDS != -1,]
+#discards <- discards[,c(1:13)]
+#discards$VESSEL_LENGTH <- 'o40m'
+#discards$ID <- paste(discards$YEAR,discards$QUARTER,discards$VESSEL_LENGTH,discards$GEAR,discards$MESH_SIZE_RANGE,discards$AREA,discards$SPECIES,sep='|')
 #
-#print(paste('Doing discard data',curyear)) #Only have the raising data for 2010 but this can be improved
+##Read in the landings component
 #
-#discard <- read.table('W:/IMARES/IJmuiden/WOT/WOT Discards demersaal/4 Rapportage/resultaten/STECF/discard/n_disc_trip.csv',sep=',',header=T)
+#landings <- read.table('/media/n/Projecten/ICES WG/WKMIXFISH/2010/tabA.csv',sep=",",header=T)
+#landings <- landings[landings$YEAR == '2010',]
 #
-###### Effort data needed for the raising #######
+#landings$DISCARDS <- discards$DISCARDS[match(landings$ID,discards$ID)]
 #
-#effort.fleet <- read.table("W:/IMARES/IJmuiden/WOT/WOT Discards demersaal/4 Rapportage/resultaten/VanHelmond_2010/Effort/effort_fleet.csv",sep=",",header=T)
-#effort.trip  <- read.table("W:/IMARES/IJmuiden/WOT/WOT Discards demersaal/4 Rapportage/resultaten/VanHelmond_2010/Effort/effort_trip.csv",sep=",",header=T)
+#landings$LANDINGS <- round(landings$LANDINGS/1000)
 #
-##Add on 3-letter species code from the database
+#landings[!is.na(landings$DISCARDS),]
 #
-#visstat <- odbcConnect(dsn="visstatp", uid="doug",pwd="oneover");
-#frisbe  <- odbcConnect(dsn="frisbep", uid="doug",pwd="ninethirty");
 #
-#taxons1 <- sqlQuery(visstat,"SELECT * from TAXONS")
-#taxons2 <- sqlQuery(frisbe,"SELECT * from VIS_TAXONS")
 #
-#discard$SPECIES <- taxons2$ICES_CODE[match(discard$SCIENTIFIC_NAME,taxons2$SCIENTIFIC_NAME)]
-#
-##Extract data with a 3 letter code available
-#
-#discard <- discard[!is.na(discard$SPECIES),]
-#
-#####  Get weights per hour instead of numbers per hour ####
-#
-#lwt <- read.table('W:/IMARES/IJmuiden/WOT/WOT Discards demersaal/4 Rapportage/resultaten/STECF/discard/lwrel.csv',sep=',',header=T)
-#
-##Put on A & B
-#
-#x <- tolower(discard$SCIENTIFIC_NAME) 
-#y <- tolower(lwt$SPEC)
-#
-#discard$a <- lwt$LWA[match(x,y)]
+##
+##library(vmstools)
+##
+##curyear <- 2010
+##
+##print(paste('Doing discard data',curyear)) #Only have the raising data for 2010 but this can be improved
+##
+##discard <- read.table('W:/IMARES/IJmuiden/WOT/WOT Discards demersaal/4 Rapportage/resultaten/STECF/discard/n_disc_trip.csv',sep=',',header=T)
+##
+####### Effort data needed for the raising #######
+##
+##effort.fleet <- read.table("W:/IMARES/IJmuiden/WOT/WOT Discards demersaal/4 Rapportage/resultaten/VanHelmond_2010/Effort/effort_fleet.csv",sep=",",header=T)
+##effort.trip  <- read.table("W:/IMARES/IJmuiden/WOT/WOT Discards demersaal/4 Rapportage/resultaten/VanHelmond_2010/Effort/effort_trip.csv",sep=",",header=T)
+##
+###Add on 3-letter species code from the database
+##
+##visstat <- odbcConnect(dsn="visstatp", uid="doug",pwd="oneover");
+##frisbe  <- odbcConnect(dsn="frisbep", uid="doug",pwd="ninethirty");
+##
+##taxons1 <- sqlQuery(visstat,"SELECT * from TAXONS")
+##taxons2 <- sqlQuery(frisbe,"SELECT * from VIS_TAXONS")
+##
+##discard$SPECIES <- taxons2$ICES_CODE[match(discard$SCIENTIFIC_NAME,taxons2$SCIENTIFIC_NAME)]
+##
+###Extract data with a 3 letter code available
+##
+##discard <- discard[!is.na(discard$SPECIES),]
+##
+######  Get weights per hour instead of numbers per hour ####
+##
+##lwt <- read.table('W:/IMARES/IJmuiden/WOT/WOT Discards demersaal/4 Rapportage/resultaten/STECF/discard/lwrel.csv',sep=',',header=T)
+##
+###Put on A & B
+##
+##x <- tolower(discard$SCIENTIFIC_NAME) 
+##y <- tolower(lwt$SPEC)
+##
+##discard$a <- lwt$LWA[match(x,y)]
 #discard$b <- lwt$LWB[match(x,y)]
 #
 ##Chuck out things that don't match (mostly invertebrates)
@@ -334,10 +334,10 @@ landings[!is.na(landings$DISCARDS),]
 #  
 ##### Just the 2010 data
 #
-write.table(landings, file='tabA.2010.csv',sep=',',row.names=F)
+#write.table(landings, file='tabA.2010.csv',sep=',',row.names=F)
 
 
-write.table(tabB[tabB$YEAR == 2010,], file='tabB.2010.csv',sep=',',row.names=F)
+#write.table(tabB[tabB$YEAR == 2010,], file='tabB.2010.csv',sep=',',row.names=F)
 ##
 ## ## Check numbers against eflalo 
 ## 
