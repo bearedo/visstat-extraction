@@ -53,6 +53,11 @@ qstvp <- paste("select VIS_STATIONS.*,VIS_POSITIONS.* FROM VIS_STATIONS, VIS_POS
    
  discards
  
+ out <- list(dis=dis,vis_chrons=vis_chrons)
+ 
+ out
+ 
+ 
  }
  
  
