@@ -6,10 +6,10 @@ dBConnect<-function(which.lib = "RODBC", which.database="visstat"){
   odbcCloseAll()
   
 	if(which.database=="visstat"){
-   conn <- odbcConnect(dsn="visstatp", uid="doug",pwd="oneover")
+   conn <- odbcConnect(dsn="visstatp", uid="doug",pwd="oneover",believeNRows=F)
    }
   if(which.database=="frisbe"){
-  conn<-odbcConnect(dsn="frisbep",uid="doug",pwd="ninethirty")
+  conn<-odbcConnect(dsn="frisbep",uid="doug",pwd="ninethirty",believeNRows=F)
   }
   }
   if(which.lib=="DBI"){
