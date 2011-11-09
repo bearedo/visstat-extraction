@@ -158,8 +158,9 @@ else {
  
  
 #setwd('/media/n/Projecten/ICES WG/WKMIXFISH/2010')        #On nemo
-#setwd('d:/bearedo/Projects/')
+#setwd('d:/bearedo/Projects/') 
 
+#GetDataWGMixFish(syear=2011,eyear=2011)
 #GetDataWGMixFish(syear=2011,eyear=2011)
 
 ################################################################
