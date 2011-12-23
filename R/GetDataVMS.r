@@ -2,12 +2,12 @@
 #Cstart="01-jan-2008";Cstop="15-jan-2008"  
 #flag_nations <- c('bel','deu','dnk','eng','fra','fro','gbr','irl','ltu','nld','nor','sco') 
 
-GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop, flag_nations=flag_nations,which.lib=which.lib) 
+GetDataVMS <- function(Cstart=Cstart, Cstop=Cstop, flag_nations=flag_nations,which.lib=which.lib,user,passwd)
 {
 
 # This function extracts all raw VMS data from VISSTAT by time interval.
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
-  visstat <- dBConnect(which.lib=which.lib,which.database="visstat")
+  visstat <- dBConnect(which.lib=which.lib,which.database="visstat",user,passwd)
 # Format the time strings
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)

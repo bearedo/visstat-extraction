@@ -1,14 +1,14 @@
   
 #       Cstart="01-jan-2006";Cstop="31-jan-2006"  
   
-GetDataDaysAtSeaWithLandingsByRegistrationByMetier <- function(Cstart=Cstart,Cstop=Cstop, which.trip=which.trip) {
+GetDataDaysAtSeaWithLandingsByRegistrationByMetier <- function(Cstart=Cstart,Cstop=Cstop, which.trip=which.trip,user=user,passwd=passwd) {
 
 # This function extracts landings and effort (days at sea, kw days at sea) 
 # data from VISSTAT by species, time interval and mesh size range.
 # If meshes are null or void you get -1 in the output file
 
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
-  visstat <- dBConnect(which.database="visstat")
+  visstat <- dBConnect(which.database="visstat",user=user,passwd=passwd)
 
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)

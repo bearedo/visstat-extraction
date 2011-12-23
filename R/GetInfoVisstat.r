@@ -1,9 +1,9 @@
 
  
-GetInfoVisstat <- function() 
+GetInfoVisstat <- function(user=user,passwd=passwd)
 {
  
-visstat <- dBConnect(which.database="visstat") 
+visstat <- dBConnect(which.database="visstat",user=user,passwd=passwd)
 
 #Get CATCHES  
 

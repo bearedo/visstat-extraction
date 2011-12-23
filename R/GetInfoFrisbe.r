@@ -1,8 +1,8 @@
 
  
-GetInfoFrisbe <- function() {
+GetInfoFrisbe <- function(user=user,passwd=passwd) {
  
-frisbe <- dBConnect(which.database="frisbe",which.lib='RODBC') 
+frisbe <- dBConnect(which.database="frisbe",which.lib='RODBC',user=user,passwd=passwd)
 
 #Get VIS_STATIONS  
 

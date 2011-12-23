@@ -1,9 +1,9 @@
 #Cstart="01-jan-2008";Cstop="31-mar-2008"
 
 
-GetDataDFS <- function(Cstart=Cstart,Cstop=Cstop,species="'DAB'",which.lib=which.lib) {
+GetDataDFS <- function(Cstart=Cstart,Cstop=Cstop,species="'DAB'",which.lib=which.lib,user=user,passwd=passwd) {
 
-   frisbe <- dBConnect(which.lib = "RODBC",which.database="frisbe")
+   frisbe <- dBConnect(which.lib = "RODBC",which.database="frisbe",user=user,passwd=passwd)
    
   # Connect to database for which you will need an account and permission from Peter Van der Kamp
   

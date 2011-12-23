@@ -1,9 +1,9 @@
 #Cstart="01-jan-2008";Cstop="31-mar-2008"
 
 
-GetDataBTSAllLfsAndChrons <- function(Cstart=Cstart,Cstop=Cstop) {
+GetDataBTSAllLfsAndChrons <- function(Cstart=Cstart,Cstop=Cstop,user=user,passwd=passwd) {
 
-   frisbe <- dBConnect(which.database="frisbe")
+   frisbe <- dBConnect(which.database="frisbe",user=user,passwd=passwd)
    
   # Connect to database for which you will need an account and permission from Peter Van der Kamp
   

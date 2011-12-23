@@ -1,10 +1,10 @@
 #Cstart="01-jan-1900";Cstop="31-dec-2011"
  ####
 
-GetDataGIZEggSurvey <- function(Cstart=Cstart,Cstop=Cstop) {
+GetDataGIZEggSurvey <- function(Cstart=Cstart,Cstop=Cstop,user=user,passwd=passwd) {
 
    odbcCloseAll()
-   frisbe <- dBConnect(which.database="frisbe")
+   frisbe <- dBConnect(which.database="frisbe",user=user,passwd=passwd)
    
   # Connect to database for which you will need an account and permission from Peter Van der Kamp
   

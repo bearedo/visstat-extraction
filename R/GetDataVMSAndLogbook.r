@@ -1,12 +1,12 @@
 
 
-GetDataVMSAndLogbook <- function(Cstart=Cstart, Cstop=Cstop, flag_nations = c('nld')) {
+GetDataVMSAndLogbook <- function(Cstart=Cstart, Cstop=Cstop, flag_nations = c('nld'),user=user,passwd=passwd) {
 
 # This function extracts all raw VMS data from VISSTAT by time interval and matches the VMS with some useful
 # information in the logbook data
 
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
-  visstat <- dBConnect(which.database="visstat")
+  visstat <- dBConnect(which.database="visstat",user=user,passwd=passwd)
 
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)

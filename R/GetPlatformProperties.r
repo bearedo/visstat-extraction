@@ -1,9 +1,9 @@
 
 
-GetPlatformProperties<-function(which.database='frisbe'){
+GetPlatformProperties<-function(which.database='frisbe',user=user,passwd=passwd){
 
 if(which.database=='visstat'){
-visstat <- dBConnect(which.lib='RODBC',which.database="visstat")
+visstat <- dBConnect(which.lib='RODBC',which.database="visstat",user=user,passwd=passwd)
 pp   <- sqlQuery(visstat,"SELECT * from platform_properties;")   #on windoze
 pp$ID <- as.character(pp$ID)
 pp$PLM_CODE <- as.character(pp$PLM_CODE)  }

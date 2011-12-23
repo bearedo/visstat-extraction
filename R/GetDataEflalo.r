@@ -4,7 +4,7 @@
 #which.lib = 'RODBC'
 ##flag_nations <- c('nld')
 
-GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = flag_nations,which.lib=which.lib) 
+GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = flag_nations,which.lib=which.lib,user=user,passwd=passwd)
 {
 # Get data 
 #memory.size(4000)
@@ -165,11 +165,11 @@ eflalo2 <- cbind(ef3,ef5[,32:dim(ef4)[2]])
 
  if(which.lib=="RODBC"){
   #dasbyreg <- sqlQuery(visstat,query) 
-   metiers <- sqlQuery(dBConnect("visstat",which.lib=which.lib),"SELECT * from METIERS WHERE CODE = 'DCF';")
+   metiers <- sqlQuery(dBConnect("visstat",which.lib=which.lib,user=user,passwd=passwd),"SELECT * from METIERS WHERE CODE = 'DCF';")
 
   }
   if(which.lib=="DBI"){
-  metiers <-  dbGetQuery(dBConnect("visstat",which.lib=which.lib),"SELECT * from METIERS WHERE CODE = 'DCF';")
+  metiers <-  dbGetQuery(dBConnect("visstat",which.lib=which.lib,user=user,passwd=passwd),"SELECT * from METIERS WHERE CODE = 'DCF';")
    }
 
 #Get rid of the \r

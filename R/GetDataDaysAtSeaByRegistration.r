@@ -1,14 +1,14 @@
   
 #Cstart="01-jan-2009";Cstop="31-dec-2009"  
   
-GetDataDaysAtSeaByRegistration <- function(Cstart=Cstart,Cstop=Cstop,which.lib='RODBC') {
+GetDataDaysAtSeaByRegistration <- function(Cstart=Cstart,Cstop=Cstop,which.lib='RODBC',user=user,passwd=passwd) {
 
 # This function extracts effort (days at sea, kw days at sea) data from VISSTAT by trip.
 # Some trips have different gears used on the trip which is why sometimes you get the data repeated.
 # If meshes are null or void you get -1 in the output file
 
 # Connect to database for which you will need an account and permission from Peter Van der Kamp
-  visstat <- dBConnect(which.database="visstat",which.lib=which.lib)
+  visstat <- dBConnect(which.database="visstat",which.lib=which.lib,user=user,passwd=passwd)
 
   Cstop  <-WriteSQLString(Cstop)
   Cstart <-WriteSQLString(Cstart)

@@ -1,10 +1,10 @@
 #Cstart="01-nov-2010";Cstop="30-jan-2011"
 
 
-GetDataHALAEggSurvey <- function(Cstart=Cstart,Cstop=Cstop) {
+GetDataHALAEggSurvey <- function(Cstart=Cstart,Cstop=Cstop,user=user,passwd=passwd) {
 
    odbcCloseAll()
-   frisbe <- dBConnect(which.database="frisbe")
+   frisbe <- dBConnect(which.database="frisbe",user=user,passwd=passwd)
    
   # Connect to database for which you will need an account and permission from Peter Van der Kamp
   #Cstart="01-nov-2010";Cstop="02-feb-2011";

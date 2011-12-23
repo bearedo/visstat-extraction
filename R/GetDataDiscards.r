@@ -1,9 +1,9 @@
 #Cstart="01-jan-2010";Cstop="31-mar-2010"
 
 
-GetDataDiscards <- function(Cstart=Cstart,Cstop=Cstop) {
+GetDataDiscards <- function(Cstart=Cstart,Cstop=Cstop,user=user,passwd=passwd) {
 
-   frisbe <- dBConnect(which.database="frisbe",which.lib='RODBC')
+   frisbe <- dBConnect(which.database="frisbe",which.lib='RODBC',user=user,passwd=passwd)
    
   # Connect to database for which you will need an account and permission from Peter Van der Kamp
   
