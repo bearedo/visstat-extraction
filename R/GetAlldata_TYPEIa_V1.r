@@ -31,7 +31,7 @@ GetAllData <- function(GNC=NC, GearOption=FALSE, gear=geartype, Catcharea=catcha
                         meshmin=min_mesh_size, meshmax=max_mesh_size,
                     tstart=startdate, tstop=enddate, tcuryear=curyear, tplusgroupage=plusgroupage,
                     SnijMonsterList=FrisbeOption1, FRISBEautoselect=FrisbeOption2,
-                    snijmonsterforcein=FrisbeOption3, ICESAreas=ICESshapefile, ICESAreadat=Areadat, Rfile=QRaisingFile, Wfile=QWarningsFile, Mfile=QMapFile, totalweight=FeedLandOpt, FeedSizeComp=FALSE,,user=user,passwd=passwd) {
+                    snijmonsterforcein=FrisbeOption3, ICESAreas=ICESshapefile, ICESAreadat=Areadat, Rfile=QRaisingFile, Wfile=QWarningsFile, Mfile=QMapFile, totalweight=FeedLandOpt, FeedSizeComp=FALSE,user=user,passwd=passwd) {
 
 ###
 # Open files for writing
