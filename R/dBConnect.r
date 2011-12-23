@@ -1,7 +1,7 @@
 dBConnect<-function(which.lib = "RODBC", which.database="visstat",user=user,passwd=passwd){
 	
 	if(missing(user)) stop("Must specify 'user'")
-	if(missing(password)) stop("Must specify 'password'")
+	if(missing(passwd)) stop("Must specify 'password'")
 	
   #Options for libraries are RODBC and DBI (DBI is set up to work on raja and RODBC usually on a windoze box
   if(which.lib=="RODBC"){
