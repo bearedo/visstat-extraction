@@ -1,5 +1,5 @@
 
-GetDataWGMixFish <- function(syear=2003,eyear=2010,which.lib='RODBC'){
+GetDataWGMixFish <- function(syear=2003,eyear=2010,which.lib='RODBC',user=user,passwd=passwd){
 
  ##Create a vector of dates to loop over
 #
@@ -13,7 +13,7 @@ library(vmstools)
 for (i in 1:8)  {     # 2010
 
 print(dats[i,])
-data <- GetDataLandingValueByRegistration(Cstart=dats$start.date[i],Cstop=dats$end.date[i],which.lib='RODBC')
+data <- GetDataLandingValueByRegistration(Cstart=dats$start.date[i],Cstop=dats$end.date[i],which.lib='RODBC',user=user,passwd=passwd)
 
 #Add on year
 

@@ -1,13 +1,13 @@
 Cstart <- "01-jan-2009"
 Cstop  <- "31-dec-2009"
 
-GetDataLandingValueByRegistration <- function(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib) {
+GetDataLandingValueByRegistration <- function(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib,user=user,passwd=passwd) {
 
 # This function gets the value of each component of the landings
 
 # Get the total days at sea by trip:
 
-dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib)
+dasbyreg <- GetDataDaysAtSeaWithLandingsByRegistration(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib,user=user,passwd=passwd)
 
 print ("Got days at sea by trip")
 

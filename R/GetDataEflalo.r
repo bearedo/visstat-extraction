@@ -9,7 +9,7 @@ GetDataEflalo <- function(Cstart=Cstart,Cstop=Cstop,flag_nations = flag_nations,
 # Get data 
 #memory.size(4000)
  
-valuebyreg <- GetDataLandingValueByRegistration(Cstart=Cstart, Cstop=Cstop,which.lib=which.lib)
+valuebyreg <- GetDataLandingValueByRegistration(Cstart=Cstart, Cstop=Cstop,which.lib=which.lib,user=user,passwd=passwd)
 
 #Reformat time strings
 

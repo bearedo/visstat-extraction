@@ -31,7 +31,7 @@ GetAllData <- function(GNC=NC, GearOption=FALSE, gear=geartype, Catcharea=catcha
                         meshmin=min_mesh_size, meshmax=max_mesh_size,
                     tstart=startdate, tstop=enddate, tcuryear=curyear, tplusgroupage=plusgroupage,
                     SnijMonsterList=FrisbeOption1, FRISBEautoselect=FrisbeOption2,
-                    snijmonsterforcein=FrisbeOption3, ICESAreas=ICESshapefile, ICESAreadat=Areadat, Rfile=QRaisingFile, Wfile=QWarningsFile, Mfile=QMapFile, totalweight=FeedLandOpt, FeedSizeComp=FALSE) {
+                    snijmonsterforcein=FrisbeOption3, ICESAreas=ICESshapefile, ICESAreadat=Areadat, Rfile=QRaisingFile, Wfile=QWarningsFile, Mfile=QMapFile, totalweight=FeedLandOpt, FeedSizeComp=FALSE,,user=user,passwd=passwd) {
 
 ###
 # Open files for writing
@@ -75,7 +75,7 @@ if (FeedSizeComp[1]==FALSE) {
 
   if ( spec %in% c("'PLE'","'SOL'","'TUR'","'BLL'","'RJC'","'RJH'","'RJM'","'RJN'") ) {
     tab_W_c <- GetDataSizeClasses(SCNC=GNC, SCgearselect=GearOption, SCgear=gear, SCmeshmin=meshmin, SCmeshmax=meshmax,
-                      SCCatcharea=Catcharea, SCspec=spec, SCstart=tstart, SCstop=tstop, SWarningsFile=Wfile);
+                      SCCatcharea=Catcharea, SCspec=spec, SCstart=tstart, SCstop=tstop, SWarningsFile=Wfile,user=user,passwd=passwd);
 
     print("obtained market category composition of landings from VISSTAT Size-Classes table");
   };
