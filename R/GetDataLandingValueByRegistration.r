@@ -13,11 +13,11 @@ print ("Got days at sea by trip")
 
 # Get the price data
 
-prices <- GetDataPrice(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib)
+prices <- GetDataPrice(Cstart=Cstart,Cstop=Cstop,which.lib=which.lib,user=user,passwd=passwd)
 
 #Fudge: if there are no price data use 2009 (Note: this is not compatible with the DBI library on Unix.
 
-if(dim(prices)[[1]] ==0){ print("No price data"); prices <- GetDataPrice(Cstart='01-Jan-2009',Cstop='31-Dec-2009',which.lib=which.lib)}
+if(dim(prices)[[1]] ==0){ print("No price data"); prices <- GetDataPrice(Cstart='01-Jan-2009',Cstop='31-Dec-2009',which.lib=which.lib,user=user,passwd=passwd)}
 
 print ("Got prices")
 
