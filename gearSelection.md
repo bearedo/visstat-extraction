@@ -1,0 +1,4 @@
+# Extract specific gear type from VMS #
+VMS itself does not contain gear characteristics. Neither does it contain information on the composition of the catch made during a fishing trip. To obtain this information, VMS and Logbook data can be combined.
+
+It is highly recommended not to combine these data sources straight from VISSTAT, as in general, the VMS and logbook data contain too many errors to create a reliable dataset. Hence, procedures have been written to clean up the VMS (tacsat) and logbook (eflalo) data and combine them within the software program R. The [VMStools library](http://code.google.com/p/vmstools) contains a list of functions to do exactly this job.
